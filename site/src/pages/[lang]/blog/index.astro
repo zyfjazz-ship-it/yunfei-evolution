@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import BlogCard from "../../../components/BlogCard.astro";
+import { copy, type Language } from "../../../config/site";
+
+export function getStaticPaths() {
+  return ["zh", "en"].map((lang) => ({ params: { lang }, props: { lang } }));
+}
+
+const { lang } = Astro.props as { lang: Language };
+const posts = (await getCollection("blog", ({ data }) => data.lang === lang && !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const base = import.meta.env.BASE_URL;
+const languagePrefix = `${lang}/`;
+const hrefFor = (id: string) => `${base}${lang}/blog/${id.replace(languagePrefix, "")}/`;
+---
+
+<BaseLayout lang={lang} title={copy[lang].allPosts} alternatePath="/blog/">
+  <header class="page-heading shell">
+    <p class="eyebrow">{copy[lang].blog}</p>
+    <h1>{copy[lang].allPosts}</h1>
+  </header>
+
+  <section class="post-list shell">
+    {posts.length === 0 && <p>{copy[lang].noPosts}</p>}
+    {posts.map((post) => (
+      <BlogCard
+        title={post.data.title}
+        description={post.data.description}
+        date={post.data.date}
+        tags={post.data.tags}
+        href={hrefFor(post.id)}
+        readMore={copy[lang].readMore}
+        locale={lang}
+      />
+    ))}
+  </section>
+</BaseLayout>

@@ -1,0 +1,49 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import type { Language } from "../../../config/site";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return posts.map((post) => {
+    const languagePrefix = `${post.data.lang}/`;
+    return {
+      params: { lang: post.data.lang, slug: post.id.replace(languagePrefix, "") },
+      props: { post },
+    };
+  });
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const lang = post.data.lang as Language;
+const otherLang: Language = lang === "zh" ? "en" : "zh";
+const translations = await getCollection("blog", ({ data }) =>
+  data.translationKey === post.data.translationKey && data.lang === otherLang && !data.draft
+);
+const alternatePrefix = `${otherLang}/`;
+const alternatePath = translations.length > 0
+  ? `/blog/${translations[0].id.replace(alternatePrefix, "")}/`
+  : "/blog/";
+const formattedDate = new Intl.DateTimeFormat(lang === "zh" ? "zh-CN" : "en", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+}).format(post.data.date);
+---
+
+<BaseLayout lang={lang} title={post.data.title} description={post.data.description} alternatePath={alternatePath}>
+  <article class="article shell">
+    <header class="article-header">
+      <p class="post-date">{formattedDate}</p>
+      <h1>{post.data.title}</h1>
+      <p class="article-description">{post.data.description}</p>
+      <ul class="tag-list" aria-label="Tags">
+        {post.data.tags.map((tag: string) => <li>#{tag}</li>)}
+      </ul>
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
