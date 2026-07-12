@@ -12,6 +12,10 @@ export const copy = {
     allPosts: "全部文章",
     noPosts: "文章正在准备中。",
     switchLanguage: "English",
+    works: "作品",
+    showcase: "展示",
+    subscribe: "订阅",
+    noWorks: "作品正在准备中。",
   },
   en: {
     blog: "Blog",
@@ -20,6 +24,10 @@ export const copy = {
     allPosts: "All posts",
     noPosts: "Articles are being prepared.",
     switchLanguage: "中文",
+    works: "Works",
+    showcase: "Showcase",
+    subscribe: "Subscribe",
+    noWorks: "Works are being prepared.",
   },
 } as const;
 

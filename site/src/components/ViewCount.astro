@@ -1,0 +1,19 @@
+---
+interface Props {
+  contentId: string;
+  lang: "zh" | "en";
+}
+
+const { contentId, lang } = Astro.props;
+---
+
+<span
+  class="view-count"
+  data-view-count
+  data-content-id={contentId}
+  data-analytics-provider="none"
+  aria-label={lang === "zh" ? "文章阅读量，统计功能尚未启用" : "Article views, analytics not yet enabled"}
+>
+  {lang === "zh" ? "统计中" : "Coming soon"}
+</span>
+

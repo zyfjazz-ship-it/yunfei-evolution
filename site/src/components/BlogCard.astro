@@ -7,9 +7,12 @@ interface Props {
   href: string;
   readMore: string;
   locale: "zh" | "en";
+  base: string;
+  featured?: boolean;
 }
 
-const { title, description, date, tags, href, readMore, locale } = Astro.props;
+const { title, description, date, tags, href, readMore, locale, base, featured = false } = Astro.props;
+import { tagSlug } from "../utils/blog";
 const formattedDate = new Intl.DateTimeFormat(locale === "zh" ? "zh-CN" : "en", {
   year: "numeric",
   month: "long",
@@ -18,11 +21,12 @@ const formattedDate = new Intl.DateTimeFormat(locale === "zh" ? "zh-CN" : "en", 
 ---
 
 <article class="blog-card">
+  {featured && <p class="featured-badge">{locale === "zh" ? "置顶" : "Featured"}</p>}
   <p class="post-date">{formattedDate}</p>
   <h2><a href={href}>{title}</a></h2>
   <p>{description}</p>
   <ul class="tag-list" aria-label="Tags">
-    {tags.map((tag) => <li>#{tag}</li>)}
+    {tags.map((tag) => <li><a href={`${base}${locale}/tags/${tagSlug(tag)}/`}>#{tag}</a></li>)}
   </ul>
   <a class="text-link" href={href}>{readMore} →</a>
 </article>

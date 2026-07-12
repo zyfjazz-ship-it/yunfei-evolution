@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { copy, type Language } from "../../config/site";
+
+export function getStaticPaths() {
+  return ["zh", "en"].map((lang) => ({ params: { lang }, props: { lang } }));
+}
+
+const { lang } = Astro.props as { lang: Language };
+const items = lang === "zh"
+  ? ["个人经历", "创作历程", "项目时间线", "个人成长记录"]
+  : ["Personal experience", "Creative journey", "Project timeline", "Growth notes"];
+---
+
+<BaseLayout lang={lang} title={copy[lang].showcase} alternatePath="/showcase/">
+  <header class="page-heading shell">
+    <p class="eyebrow">Showcase</p>
+    <h1>{copy[lang].showcase}</h1>
+    <p>{lang === "zh" ? "一个用于整理经历、创作与成长轨迹的独立空间。" : "A dedicated space for experience, creative work, and personal growth."}</p>
+  </header>
+  <section class="showcase-shell shell">
+    <ol class="showcase-list">
+      {items.map((item, index) => <li><span>{String(index + 1).padStart(2, "0")}</span><h2>{item}</h2><p>{lang === "zh" ? "内容将在未来逐步补充。" : "Content will be added over time."}</p></li>)}
+    </ol>
+  </section>
+</BaseLayout>
+

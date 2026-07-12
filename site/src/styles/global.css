@@ -38,7 +38,9 @@ a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em
 .header-inner { min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 .brand { font-weight: 700; text-decoration: none; letter-spacing: -0.02em; }
 nav { display: flex; align-items: center; gap: 1.25rem; font-size: 0.94rem; }
-.language-switch { color: var(--accent); font-weight: 650; }
+.language-switch { display: inline-flex; gap: 0.35rem; color: var(--muted); font-weight: 650; }
+.language-switch a { color: var(--muted); text-decoration: none; }
+.language-switch a[aria-current="page"] { color: var(--accent); text-decoration: underline; }
 
 .hero { padding-block: clamp(4.5rem, 10vw, 8rem); max-width: 850px; }
 .eyebrow { color: var(--accent); font-size: 0.76rem; font-weight: 750; letter-spacing: 0.14em; text-transform: uppercase; }
@@ -53,26 +55,80 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.03em; }
 .section-card p, .blog-card p { color: var(--muted); }
 .section-card.muted { background: transparent; }
 .text-link { display: inline-block; margin-top: 0.5rem; color: var(--accent); font-weight: 700; }
+.button-link { display: inline-block; border-radius: 999px; background: var(--accent); color: white; padding: 0.7rem 1.1rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.subscribe-callout { display: flex; align-items: center; justify-content: space-between; gap: 2rem; margin-bottom: 6rem; padding: clamp(1.5rem, 4vw, 2.5rem); border: 1px solid var(--line); border-radius: 18px; background: var(--accent-soft); }
+.subscribe-callout h2 { margin: 0.3rem 0; }
+.subscribe-callout p:last-child { margin-bottom: 0; color: var(--muted); }
 
 .page-heading { padding: 5rem 0 2rem; }
 .page-heading h1 { margin: 0.4rem 0 0; font-size: clamp(2.5rem, 7vw, 4.5rem); }
-.post-list { display: grid; gap: 1rem; padding-bottom: 5rem; max-width: 850px; }
+.post-list { display: grid; gap: 1rem; padding-bottom: 3rem; max-width: 850px; }
+.post-list:last-child { padding-bottom: 5rem; }
+.list-heading { margin: 0.5rem 0 0; font-size: 1.4rem; }
+.featured-badge { display: inline-block; margin: 0 0 0.5rem; border-radius: 999px; background: var(--accent); color: white !important; padding: 0.15rem 0.65rem; font-size: 0.78rem; font-weight: 700; }
 .blog-card h2 a { text-decoration: none; }
 .blog-card h2 a:hover { color: var(--accent); }
 .post-date { margin: 0; color: var(--muted); font-size: 0.88rem; }
 .tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0; margin: 1.1rem 0; list-style: none; }
-.tag-list li { border-radius: 999px; background: var(--accent-soft); color: var(--accent); padding: 0.2rem 0.7rem; font-size: 0.82rem; }
+.tag-list li { border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 0.82rem; }
+.tag-list a { display: block; padding: 0.2rem 0.7rem; text-decoration: none; }
+.tag-list a:hover { text-decoration: underline; }
 
 .article { max-width: 780px; padding-block: 5rem 6rem; }
 .article-header { padding-bottom: 2rem; border-bottom: 1px solid var(--line); }
 .article-header h1 { margin: 0.6rem 0 1rem; font-size: clamp(2.4rem, 7vw, 4.5rem); }
 .article-description { color: var(--muted); font-size: 1.15rem; }
+.article-meta { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; margin: 1.4rem 0 0; color: var(--muted); font-size: 0.9rem; }
+.article-meta div { display: flex; gap: 0.35rem; }
+.article-meta dt { font-weight: 700; color: var(--ink); }
+.article-meta dd { margin: 0; }
+.meta-label { margin: 1.1rem 0 -0.65rem; color: var(--ink); font-size: 0.9rem; font-weight: 700; }
 .prose { padding-top: 2rem; }
 .prose h2 { margin-top: 2.6rem; }
 .prose img { width: 100%; height: auto; border-radius: 14px; }
 .prose code { padding: 0.12rem 0.35rem; border-radius: 4px; background: var(--accent-soft); }
 .video-embed { position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-radius: 14px; background: #111; }
 .video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.article-footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--line); }
+.topic-link { color: var(--accent); font-weight: 700; }
+.post-navigation { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 2rem 0; }
+.post-navigation div { min-height: 100px; padding: 1rem; border: 1px solid var(--line); border-radius: 12px; }
+.post-navigation div:last-child { text-align: right; }
+.post-navigation span { display: block; color: var(--muted); font-size: 0.82rem; }
+.post-navigation a { display: block; margin-top: 0.35rem; font-weight: 700; }
+.related-posts { margin-top: 2.5rem; }
+.related-posts h2 { font-size: 1.35rem; }
+.related-posts ul, .tag-posts ul { padding: 0; list-style: none; }
+.related-posts li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.8rem 0; border-bottom: 1px solid var(--line); }
+.related-posts time, .tag-posts time { flex: 0 0 auto; color: var(--muted); font-size: 0.84rem; }
+.tag-posts { max-width: 850px; padding-bottom: 5rem; }
+.tag-posts li { padding: 1.2rem 0; border-bottom: 1px solid var(--line); }
+.tag-posts h2 { margin: 0.2rem 0 0; font-size: 1.3rem; }
+.tag-posts h2 a { text-decoration: none; }
+.works-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; padding-bottom: 5rem; }
+.empty-state { grid-column: 1 / -1; min-height: 220px; display: grid; place-items: center; border: 1px dashed var(--line); border-radius: 16px; color: var(--muted); }
+.work-card { overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); padding: 1.5rem; }
+.work-card img { width: calc(100% + 3rem); height: 240px; margin: -1.5rem -1.5rem 1.2rem; object-fit: cover; }
+.work-card time { color: var(--muted); font-size: 0.84rem; }
+.work-card h2 { margin: 0.25rem 0; }
+.work-card h2 a { text-decoration: none; }
+.work-cover { width: 100%; max-height: 520px; margin-top: 1.5rem; border-radius: 14px; object-fit: cover; }
+.showcase-shell { padding-bottom: 5rem; }
+.showcase-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; padding: 0; list-style: none; }
+.showcase-list li { padding: 1.5rem; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+.showcase-list span { color: var(--accent); font-size: 0.8rem; font-weight: 750; }
+.showcase-list h2 { margin: 0.35rem 0; }
+.showcase-list p { margin-bottom: 0; color: var(--muted); }
+.subscribe-page { max-width: 720px; padding-block: clamp(4rem, 10vw, 8rem); }
+.subscribe-page h1 { margin: 0.4rem 0 1rem; font-size: clamp(2.5rem, 7vw, 4.5rem); }
+.subscribe-page > p { color: var(--muted); }
+.subscribe-form { margin-top: 2rem; padding: 1.5rem; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+.subscribe-form label { display: block; margin-bottom: 0.5rem; font-weight: 700; }
+.subscribe-form > div { display: flex; gap: 0.6rem; }
+.subscribe-form input { min-width: 0; flex: 1; border: 1px solid var(--line); border-radius: 9px; padding: 0.8rem; font: inherit; }
+.subscribe-form button { border: 0; border-radius: 9px; background: var(--accent); color: white; padding: 0.8rem 1.2rem; font: inherit; font-weight: 700; }
+.subscribe-form :disabled { cursor: not-allowed; opacity: 0.62; }
+.form-note { margin-bottom: 0; color: var(--muted); font-size: 0.84rem; }
 
 .site-footer { border-top: 1px solid var(--line); color: var(--muted); padding-block: 2rem; font-size: 0.9rem; }
 
@@ -84,4 +140,13 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.03em; }
   nav { gap: 0.8rem; }
   .hero { padding-block: 4rem; }
   .article, .page-heading { padding-top: 3.5rem; }
+  .post-navigation { grid-template-columns: 1fr; }
+  .post-navigation div:last-child { text-align: left; }
+  .related-posts li { display: block; }
+  .related-posts time { display: block; margin-top: 0.2rem; }
+  .header-inner { align-items: flex-start; flex-direction: column; padding-block: 0.7rem; }
+  nav { width: 100%; flex-wrap: wrap; }
+  .subscribe-callout { align-items: flex-start; flex-direction: column; }
+  .works-grid, .showcase-list { grid-template-columns: 1fr; }
+  .subscribe-form > div { flex-direction: column; }
 }

@@ -8,6 +8,7 @@ tags:
   - AI Transition
 lang: en
 draft: false
+featured: true
 translationKey: first-post
 ---
 

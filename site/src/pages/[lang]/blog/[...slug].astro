@@ -2,6 +2,9 @@
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import type { Language } from "../../../config/site";
+import { site } from "../../../config/site";
+import { postSlug, sortPosts, tagSlug } from "../../../utils/blog";
+import ViewCount from "../../../components/ViewCount.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog", ({ data }) => !data.draft);
@@ -30,20 +33,52 @@ const formattedDate = new Intl.DateTimeFormat(lang === "zh" ? "zh-CN" : "en", {
   month: "long",
   day: "numeric",
 }).format(post.data.date);
+const base = import.meta.env.BASE_URL;
+const posts = sortPosts(await getCollection("blog", ({ data }) => data.lang === lang && !data.draft));
+const currentIndex = posts.findIndex(({ id }) => id === post.id);
+const newerPost = currentIndex > 0 ? posts[currentIndex - 1] : undefined;
+const olderPost = currentIndex < posts.length - 1 ? posts[currentIndex + 1] : undefined;
+const postHref = (entry: typeof post) => `${base}${lang}/blog/${postSlug(entry)}/`;
+const tagHref = (tag: string) => `${base}${lang}/tags/${tagSlug(tag)}/`;
+const relatedPosts = posts
+  .filter(({ id, data }) => id !== post.id && data.tags.some((tag) => post.data.tags.includes(tag)))
+  .sort((a, b) => {
+    const aScore = a.data.tags.filter((tag) => post.data.tags.includes(tag)).length;
+    const bScore = b.data.tags.filter((tag) => post.data.tags.includes(tag)).length;
+    return bScore - aScore || b.data.date.valueOf() - a.data.date.valueOf();
+  })
+  .slice(0, 3);
+const topicTag = post.data.tags[0];
 ---
 
 <BaseLayout lang={lang} title={post.data.title} description={post.data.description} alternatePath={alternatePath}>
   <article class="article shell">
     <header class="article-header">
-      <p class="post-date">{formattedDate}</p>
       <h1>{post.data.title}</h1>
       <p class="article-description">{post.data.description}</p>
+      <dl class="article-meta">
+        <div><dt>{lang === "zh" ? "作者" : "Author"}</dt><dd>{site.author}</dd></div>
+        <div><dt>{lang === "zh" ? "发布时间" : "Published"}</dt><dd><time datetime={post.data.date.toISOString()}>{formattedDate}</time></dd></div>
+        <div><dt>{lang === "zh" ? "阅读量" : "Views"}</dt><dd><ViewCount contentId={post.id} lang={lang} /></dd></div>
+      </dl>
+      <p class="meta-label">{lang === "zh" ? "标签" : "Tags"}</p>
       <ul class="tag-list" aria-label="Tags">
-        {post.data.tags.map((tag: string) => <li>#{tag}</li>)}
+        {post.data.tags.map((tag: string) => <li><a href={tagHref(tag)}>#{tag}</a></li>)}
       </ul>
     </header>
     <div class="prose">
       <Content />
     </div>
+    <footer class="article-footer">
+      {topicTag && <a class="topic-link" href={tagHref(topicTag)}>← {lang === "zh" ? `返回专题页面：《${topicTag}》` : `Back to topic: ${topicTag}`}</a>}
+      <nav class="post-navigation" aria-label={lang === "zh" ? "文章导航" : "Post navigation"}>
+        <div>{olderPost && <><span>{lang === "zh" ? "上一篇" : "Previous"}</span><a href={postHref(olderPost)}>{olderPost.data.title}</a></>}</div>
+        <div>{newerPost && <><span>{lang === "zh" ? "下一篇" : "Next"}</span><a href={postHref(newerPost)}>{newerPost.data.title}</a></>}</div>
+      </nav>
+      {relatedPosts.length > 0 && <section class="related-posts" aria-labelledby="related-heading">
+        <h2 id="related-heading">{lang === "zh" ? "相关文章" : "Related posts"}</h2>
+        <ul>{relatedPosts.map((related) => <li><a href={postHref(related)}>{related.data.title}</a><time datetime={related.data.date.toISOString()}>{new Intl.DateTimeFormat(lang === "zh" ? "zh-CN" : "en").format(related.data.date)}</time></li>)}</ul>
+      </section>}
+    </footer>
   </article>
 </BaseLayout>

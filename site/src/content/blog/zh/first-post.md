@@ -8,6 +8,7 @@ tags:
   - AI转型
 lang: zh
 draft: false
+featured: true
 translationKey: first-post
 ---
 

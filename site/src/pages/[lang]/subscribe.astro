@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { copy, type Language } from "../../config/site";
+
+export function getStaticPaths() {
+  return ["zh", "en"].map((lang) => ({ params: { lang }, props: { lang } }));
+}
+
+const { lang } = Astro.props as { lang: Language };
+---
+
+<BaseLayout lang={lang} title={copy[lang].subscribe} alternatePath="/subscribe/">
+  <section class="subscribe-page shell">
+    <p class="eyebrow">Newsletter</p>
+    <h1>{lang === "zh" ? "订阅云非的进化论" : "Subscribe to Yunfei's Evolution"}</h1>
+    <p>{lang === "zh" ? "未来可通过邮件接收最新文章、作品与成长记录。当前订阅服务尚未启用。" : "Receive future articles, works, and growth notes by email. The newsletter service is not connected yet."}</p>
+    <form class="subscribe-form" data-newsletter-form data-provider="none">
+      <label for="subscriber-email">{lang === "zh" ? "邮箱地址" : "Email address"}</label>
+      <div>
+        <input id="subscriber-email" name="email" type="email" autocomplete="email" placeholder={lang === "zh" ? "name@example.com" : "name@example.com"} disabled />
+        <button type="button" disabled>{lang === "zh" ? "订阅" : "Subscribe"}</button>
+      </div>
+      <p class="form-note">{lang === "zh" ? "订阅功能即将开放，不会收集或发送当前输入的信息。" : "Subscriptions are coming soon. No information is currently collected or sent."}</p>
+    </form>
+  </section>
+</BaseLayout>
+

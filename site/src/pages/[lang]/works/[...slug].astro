@@ -1,0 +1,42 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import type { Language } from "../../../config/site";
+
+export async function getStaticPaths() {
+  const works = await getCollection("works", ({ data }) => !data.draft);
+  return works.map((work) => ({
+    params: { lang: work.data.lang, slug: work.id.replace(`${work.data.lang}/`, "") },
+    props: { work },
+  }));
+}
+
+const { work } = Astro.props;
+const { Content } = await render(work);
+const lang = work.data.lang as Language;
+const base = import.meta.env.BASE_URL;
+const blogPosts = await getCollection("blog", ({ data }) => data.lang === lang && !data.draft);
+const relatedPosts = work.data.relatedPosts
+  .map((key: string) => blogPosts.find(({ data, id }) => data.translationKey === key || id === key))
+  .filter(Boolean);
+const formattedDate = new Intl.DateTimeFormat(lang === "zh" ? "zh-CN" : "en", {
+  year: "numeric", month: "long", day: "numeric",
+}).format(work.data.createdAt);
+---
+
+<BaseLayout lang={lang} title={work.data.title} description={work.data.description} alternatePath="/works/">
+  <article class="article work-detail shell">
+    <header class="article-header">
+      <p class="eyebrow">{lang === "zh" ? "作品" : "Work"}</p>
+      <h1>{work.data.title}</h1>
+      <p class="article-description">{work.data.description}</p>
+      <p class="post-date">{lang === "zh" ? "创建时间" : "Created"}：<time datetime={work.data.createdAt.toISOString()}>{formattedDate}</time></p>
+      {work.data.cover && <img class="work-cover" src={work.data.cover} alt={work.data.coverAlt ?? ""} />}
+    </header>
+    <div class="prose"><Content /></div>
+    {relatedPosts.length > 0 && <section class="related-posts"><h2>{lang === "zh" ? "相关文章" : "Related posts"}</h2><ul>
+      {relatedPosts.map((post: any) => <li><a href={`${base}${lang}/blog/${post.id.replace(`${lang}/`, "")}/`}>{post.data.title}</a></li>)}
+    </ul></section>}
+  </article>
+</BaseLayout>
+

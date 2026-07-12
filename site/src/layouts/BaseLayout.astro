@@ -15,7 +15,6 @@ const {
   description = site.description,
   alternatePath = "/",
 } = Astro.props;
-const otherLang: Language = lang === "zh" ? "en" : "zh";
 const base = import.meta.env.BASE_URL;
 const path = (value: string) => `${base}${value.replace(/^\//, "")}`;
 ---
@@ -34,7 +33,14 @@ const path = (value: string) => `${base}${value.replace(/^\//, "")}`;
         <a class="brand" href={path(`${lang}/`)}>{site.name}</a>
         <nav aria-label={lang === "zh" ? "主导航" : "Main navigation"}>
           <a href={path(`${lang}/blog/`)}>Blog</a>
-          <a class="language-switch" href={path(`${otherLang}${alternatePath}`)}>{copy[lang].switchLanguage}</a>
+          <a href={path(`${lang}/works/`)}>{copy[lang].works}</a>
+          <a href={path(`${lang}/showcase/`)}>{copy[lang].showcase}</a>
+          <a href={path(`${lang}/subscribe/`)}>{copy[lang].subscribe}</a>
+          <span class="language-switch" aria-label={lang === "zh" ? "选择语言" : "Choose language"}>
+            <a href={path(`zh${lang === "zh" ? Astro.url.pathname.replace(base, "/").replace(/^\/zh/, "") : alternatePath}`)} aria-current={lang === "zh" ? "page" : undefined}>中文</a>
+            <span aria-hidden="true">|</span>
+            <a href={path(`en${lang === "en" ? Astro.url.pathname.replace(base, "/").replace(/^\/en/, "") : alternatePath}`)} aria-current={lang === "en" ? "page" : undefined}>English</a>
+          </span>
         </nav>
       </div>
     </header>

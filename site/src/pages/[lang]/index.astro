@@ -27,9 +27,18 @@ const path = (value: string) => `${base}${value.replace(/^\//, "")}`;
         title={section.title[lang]}
         description={section.description[lang]}
         active={section.active}
-        label={section.id === "blog" ? copy[lang].allPosts : ""}
+        label={section.id === "blog" ? copy[lang].allPosts : lang === "zh" ? "进入查看" : "Explore"}
         href={section.href ? path(`${lang}${section.href}`) : undefined}
       />
     ))}
+  </section>
+
+  <section class="subscribe-callout shell" aria-labelledby="home-subscribe-title">
+    <div>
+      <p class="eyebrow">Newsletter</p>
+      <h2 id="home-subscribe-title">{lang === "zh" ? "订阅云非的进化论" : "Subscribe to Yunfei's Evolution"}</h2>
+      <p>{lang === "zh" ? "订阅入口已经预留，未来可接入 Newsletter 服务。" : "The subscription entry is ready for a future newsletter service."}</p>
+    </div>
+    <a class="button-link" href={path(`${lang}/subscribe/`)}>{lang === "zh" ? "前往订阅" : "Subscribe"} →</a>
   </section>
 </BaseLayout>

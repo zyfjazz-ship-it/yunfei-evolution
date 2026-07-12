@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { copy, type Language } from "../../../config/site";
+
+export function getStaticPaths() {
+  return ["zh", "en"].map((lang) => ({ params: { lang }, props: { lang } }));
+}
+
+const { lang } = Astro.props as { lang: Language };
+const works = (await getCollection("works", ({ data }) => data.lang === lang && !data.draft))
+  .sort((a, b) => b.data.createdAt.valueOf() - a.data.createdAt.valueOf());
+const base = import.meta.env.BASE_URL;
+const prefix = `${lang}/`;
+const formatDate = (date: Date) => new Intl.DateTimeFormat(lang === "zh" ? "zh-CN" : "en", {
+  year: "numeric", month: "long", day: "numeric",
+}).format(date);
+---
+
+<BaseLayout lang={lang} title={copy[lang].works} alternatePath="/works/">
+  <header class="page-heading shell">
+    <p class="eyebrow">Works</p>
+    <h1>{copy[lang].works}</h1>
+    <p>{lang === "zh" ? "这里将展示书籍、技术项目、视频作品与创造成果。" : "A future home for books, technology projects, videos, and creative work."}</p>
+  </header>
+  <section class="works-grid shell" aria-label={copy[lang].works}>
+    {works.length === 0 && <div class="empty-state"><p>{copy[lang].noWorks}</p></div>}
+    {works.map((work) => <article class="work-card">
+      {work.data.cover && <img src={work.data.cover} alt={work.data.coverAlt ?? ""} />}
+      <time datetime={work.data.createdAt.toISOString()}>{formatDate(work.data.createdAt)}</time>
+      <h2><a href={`${base}${lang}/works/${work.id.replace(prefix, "")}/`}>{work.data.title}</a></h2>
+      <p>{work.data.description}</p>
+    </article>)}
+  </section>
+</BaseLayout>
+
