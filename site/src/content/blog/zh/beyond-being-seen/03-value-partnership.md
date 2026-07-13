@@ -8,6 +8,8 @@ tags:
 date: 2026-07-13
 lang: zh
 draft: false
+series: "流量与长期价值"
+series_order: 3
 translationKey: beyond-being-seen-03-value-partnership
 ---
 

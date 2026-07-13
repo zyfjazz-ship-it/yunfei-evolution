@@ -34,10 +34,28 @@ const formattedDate = new Intl.DateTimeFormat(lang === "zh" ? "zh-CN" : "en", {
   day: "numeric",
 }).format(post.data.date);
 const base = import.meta.env.BASE_URL;
-const posts = sortPosts(await getCollection("blog", ({ data }) => data.lang === lang && !data.draft));
+const languagePosts = await getCollection("blog", ({ data }) => data.lang === lang && !data.draft);
+const posts = sortPosts(languagePosts);
 const currentIndex = posts.findIndex(({ id }) => id === post.id);
 const newerPost = currentIndex > 0 ? posts[currentIndex - 1] : undefined;
 const olderPost = currentIndex < posts.length - 1 ? posts[currentIndex + 1] : undefined;
+const seriesPosts = post.data.series
+  ? languagePosts
+      .filter(({ data }) => data.series === post.data.series)
+      .sort((a, b) => {
+        const orderDifference = (a.data.series_order ?? Number.MAX_SAFE_INTEGER)
+          - (b.data.series_order ?? Number.MAX_SAFE_INTEGER);
+        const dateDifference = b.data.date.valueOf() - a.data.date.valueOf();
+        return orderDifference || dateDifference || a.id.localeCompare(b.id);
+      })
+  : [];
+const seriesIndex = seriesPosts.findIndex(({ id }) => id === post.id);
+const previousPost = seriesPosts.length > 0
+  ? (seriesIndex > 0 ? seriesPosts[seriesIndex - 1] : undefined)
+  : olderPost;
+const nextPost = seriesPosts.length > 0
+  ? (seriesIndex < seriesPosts.length - 1 ? seriesPosts[seriesIndex + 1] : undefined)
+  : newerPost;
 const postHref = (entry: typeof post) => `${base}${lang}/blog/${postSlug(entry)}/`;
 const tagHref = (tag: string) => `${base}${lang}/tags/${tagSlug(tag)}/`;
 const relatedPosts = posts
@@ -72,8 +90,8 @@ const topicTag = post.data.tags[0];
     <footer class="article-footer">
       {topicTag && <a class="topic-link" href={tagHref(topicTag)}>← {lang === "zh" ? `返回专题页面：《${topicTag}》` : `Back to topic: ${topicTag}`}</a>}
       <nav class="post-navigation" aria-label={lang === "zh" ? "文章导航" : "Post navigation"}>
-        <div>{olderPost && <><span>{lang === "zh" ? "上一篇" : "Previous"}</span><a href={postHref(olderPost)}>{olderPost.data.title}</a></>}</div>
-        <div>{newerPost && <><span>{lang === "zh" ? "下一篇" : "Next"}</span><a href={postHref(newerPost)}>{newerPost.data.title}</a></>}</div>
+        <div>{previousPost && <><span>{lang === "zh" ? "上一篇" : "Previous"}</span><a href={postHref(previousPost)}>{previousPost.data.title}</a></>}</div>
+        <div>{nextPost && <><span>{lang === "zh" ? "下一篇" : "Next"}</span><a href={postHref(nextPost)}>{nextPost.data.title}</a></>}</div>
       </nav>
       {relatedPosts.length > 0 && <section class="related-posts" aria-labelledby="related-heading">
         <h2 id="related-heading">{lang === "zh" ? "相关文章" : "Related posts"}</h2>
