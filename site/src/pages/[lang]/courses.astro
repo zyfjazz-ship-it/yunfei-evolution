@@ -161,6 +161,32 @@ const pageDescription = isZh
       <button type="button" data-filter="economy" aria-pressed="false">{isZh ? "经济 7" : "Economics 7"}</button>
     </div>
 
+    <section class="course-preface" aria-labelledby="course-preface-title">
+      <div>
+        <p class="course-kicker">Preface</p>
+        <h2 id="course-preface-title">{isZh ? "为什么开始这门公开课" : "Why I began these open courses"}</h2>
+      </div>
+      {isZh ? (
+        <div class="course-preface-copy">
+          <p>这套公开课，最初是因为女儿喜欢画画。</p>
+          <p>我想带她了解世界各地的艺术从何而来。但越往下看，我越意识到：美术史只是历史的一个切面。艺术从来不是孤立产生的，它背后还有地理环境、生产技术、经济关系、社会结构，以及每个时代的人如何理解世界。</p>
+          <p>因此，我想把历史放回完整的文明脉络中学习：不只记住人物和年代，更要理解人类社会为什么会这样发展。</p>
+          <p>而我自己一直喜欢经济，也希望看懂货币、资本、财富与周期背后的底层规律。经济的背后同样不只是数字，还有政治、制度、历史，以及人的欲望与选择。</p>
+          <p>于是，这套自学公开课形成了两条主线：一条通过历史理解人类如何走到今天；一条通过经济理解现代世界如何运转。</p>
+          <p>我始终相信，人应该不断探索和学习。了解历史，也是在了解我们自己；看懂世界，也是为了更清醒地生活在其中。</p>
+        </div>
+      ) : (
+        <div class="course-preface-copy">
+          <p>These open courses began because my daughter loves to draw.</p>
+          <p>I wanted to help her understand where the art of different civilizations came from. The further I looked, the clearer it became that art history is only one slice of history. Art grows from geography, technology, economic relations, social structure, and the ways people in each age understood their world.</p>
+          <p>So I began placing art back inside the larger story of civilization—not simply memorizing names and dates, but asking why human societies developed as they did.</p>
+          <p>I have also long been drawn to economics and want to understand the forces beneath money, capital, wealth, and cycles. Economics is never only about numbers; it is also about politics, institutions, history, desire, and choice.</p>
+          <p>That is why this project follows two lines: history, to understand how humanity arrived here; and economics, to understand how the modern world works.</p>
+          <p>I believe people should keep exploring and learning. To understand history is also to understand ourselves—and to see the world more clearly is to live in it more consciously.</p>
+        </div>
+      )}
+    </section>
+
     <div class="course-grid">
       {allCourses.map((course) => (
         <article class:list={["course-card", course.track]} data-track={course.track}>
@@ -326,6 +352,29 @@ const pageDescription = isZh
   .course-filters button:hover, .course-filters button:focus-visible { border-color: var(--ink); }
   .course-filters button.active { border-color: var(--ink); background: var(--ink); color: white; }
 
+  .course-preface {
+    display: grid;
+    grid-template-columns: minmax(220px, .55fr) minmax(0, 1.45fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    margin: 1rem 0 2.5rem;
+    padding: clamp(1.8rem, 5vw, 3.5rem);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: color-mix(in srgb, var(--surface) 78%, var(--accent-soft));
+  }
+
+  .course-preface h2 {
+    margin: 0;
+    font-family: "Songti SC", "STSong", Georgia, serif;
+    font-size: clamp(2rem, 4.5vw, 3.6rem);
+    font-weight: 500;
+    line-height: 1.15;
+  }
+
+  .course-preface-copy { max-width: 720px; }
+  .course-preface-copy p { margin: 0 0 1rem; }
+  .course-preface-copy p:last-child { margin-bottom: 0; color: var(--accent); font-weight: 700; }
+
   .course-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
   .course-card { display: grid; grid-template-columns: 62px 1fr; gap: 1rem; min-height: 235px; padding: 1.5rem; border: 1px solid var(--line); border-radius: 17px; background: var(--surface); }
   .course-card[hidden] { display: none; }
@@ -365,7 +414,7 @@ const pageDescription = isZh
   .course-note { margin-bottom: 5rem; color: var(--muted); font-size: .8rem; }
 
   @media (max-width: 760px) {
-    .course-hero, .course-section-head, .course-map { grid-template-columns: 1fr; }
+    .course-hero, .course-section-head, .course-preface, .course-map { grid-template-columns: 1fr; }
     .course-grid, .course-next { grid-template-columns: 1fr; }
     .course-stats { grid-template-columns: 1fr; }
     .course-stats div + div { border-top: 1px solid var(--line); border-left: 0; }
