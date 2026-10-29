@@ -1,0 +1,135 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import type { Language } from "../../../../config/site";
+
+export async function getStaticPaths() {
+  const lessons = await getCollection("courses");
+  return lessons.map((lesson) => {
+    const [lang, track, ...slugParts] = lesson.id.split("/");
+    return {
+      params: { lang, track, slug: slugParts.join("/").replace(/\.md$/, "") },
+      props: { lesson },
+    };
+  });
+}
+
+const { lesson } = Astro.props;
+const { Content } = await render(lesson);
+const lang = lesson.data.lang as Language;
+const isZh = lang === "zh";
+const base = import.meta.env.BASE_URL;
+const allLessons = (await getCollection("courses", ({ data }) => data.lang === lang))
+  .sort((a, b) => a.data.track.localeCompare(b.data.track) || a.data.lesson - b.data.lesson);
+const trackLessons = allLessons.filter(({ data }) => data.track === lesson.data.track);
+const currentIndex = trackLessons.findIndex(({ id }) => id === lesson.id);
+const previousLesson = currentIndex > 0 ? trackLessons[currentIndex - 1] : undefined;
+const nextLesson = currentIndex < trackLessons.length - 1 ? trackLessons[currentIndex + 1] : undefined;
+const lessonHref = (entry: typeof lesson) => {
+  const [, track, ...slugParts] = entry.id.split("/");
+  return `${base}${lang}/courses/${track}/${slugParts.join("/").replace(/\.md$/, "")}/`;
+};
+const trackName = lesson.data.track === "history"
+  ? (isZh ? "文明与历史" : "Civilization & history")
+  : (isZh ? "价值迁移与经济" : "Value migration & economics");
+const lessonNumber = String(lesson.data.lesson).padStart(2, "0");
+const imageSrc = lesson.data.image.startsWith("http")
+  ? lesson.data.image
+  : `${base}${lesson.data.image.replace(/^\/+/, "")}`;
+---
+
+<BaseLayout lang={lang} title={lesson.data.title} description={lesson.data.description} alternatePath="/courses/">
+  <article class:list={["course-lesson", lesson.data.track]}>
+    <header class="lesson-header shell">
+      <a class="back-link" href={`${base}${lang}/courses/`}>← {isZh ? "返回公开课目录" : "Back to courses"}</a>
+      <div class="lesson-heading-grid">
+        <div>
+          <p class="lesson-track">{trackName} · {lessonNumber}</p>
+          <h1>{lesson.data.title}</h1>
+          <p class="lesson-description">{lesson.data.description}</p>
+          <ul class="lesson-tags" aria-label={isZh ? "关键词" : "Keywords"}>
+            {lesson.data.tags.map((tag: string) => <li>{tag}</li>)}
+          </ul>
+        </div>
+        <span class="lesson-number" aria-hidden="true">{lessonNumber}</span>
+      </div>
+    </header>
+
+    <figure class="lesson-cover shell">
+      <img src={imageSrc} alt={lesson.data.imageAlt} loading="eager" />
+      <figcaption>
+        {lesson.data.imageCaption}
+        {lesson.data.imageCreditUrl && <a href={lesson.data.imageCreditUrl} target="_blank" rel="noreferrer">{isZh ? "查看图片来源" : "Image source"}</a>}
+      </figcaption>
+    </figure>
+
+    <div class="lesson-body shell">
+      <aside class="lesson-note">
+        <span>{isZh ? "整理说明" : "Editorial note"}</span>
+        <p>{lesson.data.sourceNote}</p>
+      </aside>
+      <div class="prose course-prose">
+        <Content />
+      </div>
+    </div>
+
+    <footer class="lesson-footer shell">
+      <a class="archive-link" href={`${base}${lang}/courses/`}>{isZh ? "查看全部 16 节公开课" : "View all 16 lessons"}</a>
+      <nav class="lesson-navigation" aria-label={isZh ? "课程导航" : "Lesson navigation"}>
+        <div>
+          {previousLesson && <><span>{isZh ? "上一课" : "Previous"}</span><a href={lessonHref(previousLesson)}>{previousLesson.data.title}</a></>}
+        </div>
+        <div>
+          {nextLesson && <><span>{isZh ? "下一课" : "Next"}</span><a href={lessonHref(nextLesson)}>{nextLesson.data.title}</a></>}
+        </div>
+      </nav>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .course-lesson { --track: #9a4b31; --track-soft: #f2dfd6; }
+  .course-lesson.economy { --track: #285f63; --track-soft: #dcebea; }
+  .lesson-header { padding-block: clamp(3.5rem, 8vw, 7rem) clamp(2rem, 5vw, 4rem); }
+  .back-link { color: var(--muted); font-size: .86rem; font-weight: 700; text-decoration: none; }
+  .back-link:hover { color: var(--track); }
+  .lesson-heading-grid { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2rem; align-items: end; margin-top: 2rem; }
+  .lesson-track { margin: 0 0 .8rem; color: var(--track); font-size: .76rem; font-weight: 850; letter-spacing: .14em; text-transform: uppercase; }
+  .lesson-header h1 { max-width: 900px; margin: 0; font-family: "Songti SC", "STSong", Georgia, serif; font-size: clamp(2.8rem, 7vw, 5.8rem); font-weight: 500; line-height: 1.05; }
+  .lesson-description { max-width: 760px; margin: 1.4rem 0 0; color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.3rem); }
+  .lesson-number { color: var(--track-soft); font: 500 clamp(5rem, 14vw, 11rem)/.8 Georgia, serif; }
+  .lesson-tags { display: flex; flex-wrap: wrap; gap: .45rem; padding: 0; margin: 1.5rem 0 0; list-style: none; }
+  .lesson-tags li { border-radius: 999px; background: var(--track-soft); padding: .25rem .72rem; color: var(--track); font-size: .78rem; font-weight: 700; }
+  .lesson-cover { margin-bottom: 0; }
+  .lesson-cover img { display: block; width: 100%; max-height: 680px; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 24px; background: var(--track-soft); }
+  .lesson-cover figcaption { display: flex; justify-content: space-between; gap: 1rem; margin-top: .7rem; color: var(--muted); font-size: .75rem; }
+  .lesson-cover a { flex: 0 0 auto; color: var(--track); }
+  .lesson-body { display: grid; grid-template-columns: 210px minmax(0, 720px); justify-content: center; gap: clamp(2rem, 6vw, 5rem); padding-block: clamp(3rem, 8vw, 6rem); }
+  .lesson-note { align-self: start; position: sticky; top: 100px; border-top: 3px solid var(--track); padding-top: .8rem; color: var(--muted); font-size: .78rem; }
+  .lesson-note span { color: var(--track); font-weight: 850; letter-spacing: .1em; }
+  .lesson-note p { margin: .5rem 0 0; }
+  .course-prose { padding-top: 0; font-family: "Songti SC", "STSong", Georgia, serif; font-size: 1.12rem; line-height: 1.9; }
+  .course-prose :global(h2) { margin: 3.2rem 0 1rem; color: var(--track); font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-size: clamp(1.65rem, 3vw, 2.2rem); }
+  .course-prose :global(h3) { margin-top: 2rem; font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-size: 1.2rem; }
+  .course-prose :global(blockquote) { margin: 2rem 0; border-left: 4px solid var(--track); background: var(--track-soft); padding: 1rem 1.3rem; font-size: 1.2rem; }
+  .course-prose :global(blockquote p) { margin: 0; }
+  .course-prose :global(strong) { color: var(--track); }
+  .course-prose :global(hr) { margin: 3rem 0; border: 0; border-top: 1px solid var(--line); }
+  .lesson-footer { padding-bottom: 6rem; }
+  .archive-link { color: var(--track); font-weight: 800; }
+  .lesson-navigation { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
+  .lesson-navigation div { min-height: 120px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); padding: 1.2rem; }
+  .lesson-navigation div:last-child { text-align: right; }
+  .lesson-navigation span { display: block; color: var(--muted); font-size: .76rem; font-weight: 750; }
+  .lesson-navigation a { display: block; margin-top: .35rem; font-weight: 800; }
+  @media (max-width: 760px) {
+    .lesson-heading-grid { grid-template-columns: 1fr; }
+    .lesson-number { display: none; }
+    .lesson-body { grid-template-columns: 1fr; }
+    .lesson-note { position: static; }
+    .lesson-cover figcaption { display: block; }
+    .lesson-cover a { display: block; margin-top: .25rem; }
+    .lesson-navigation { grid-template-columns: 1fr; }
+    .lesson-navigation div:last-child { text-align: left; }
+  }
+</style>

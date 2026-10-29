@@ -33,4 +33,21 @@ const works = defineCollection({
   }),
 });
 
-export const collections = { blog, works };
+const courses = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/courses" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    lang: z.enum(["zh", "en"]),
+    track: z.enum(["history", "economy"]),
+    lesson: z.number().int().positive(),
+    tags: z.array(z.string()).default([]),
+    image: z.string(),
+    imageAlt: z.string(),
+    imageCaption: z.string(),
+    imageCreditUrl: z.string().url().optional(),
+    sourceNote: z.string().default("根据过往公开课聊天记录整理"),
+  }),
+});
+
+export const collections = { blog, works, courses };

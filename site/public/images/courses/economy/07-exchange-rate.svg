@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">汇率变化会重新分配财富</title><desc id="desc">货币升值让进口购买力增强，却会压缩出口企业换回的本币收入。</desc>
+  <rect width="1200" height="675" fill="#183d42"/><text x="70" y="95" font-family="system-ui" font-size="42" font-weight="800" fill="#eef6f2">货币升值，谁变富了？</text>
+  <path d="M180 430h840" stroke="#d9ede8" stroke-width="16" stroke-linecap="round"/><path d="M600 430l-75 120h150z" fill="#c98c51"/>
+  <circle cx="310" cy="345" r="125" fill="#c98c51"/><text x="310" y="335" text-anchor="middle" font-family="system-ui" font-size="34" font-weight="800" fill="#fff">出口企业</text><text x="310" y="380" text-anchor="middle" font-family="system-ui" font-size="22" fill="#fff2df">换回的本币减少</text>
+  <circle cx="890" cy="345" r="125" fill="#477f76"/><text x="890" y="335" text-anchor="middle" font-family="system-ui" font-size="34" font-weight="800" fill="#fff">进口消费者</text><text x="890" y="380" text-anchor="middle" font-family="system-ui" font-size="22" fill="#d8eee9">购买力增强</text>
+  <text x="600" y="195" text-anchor="middle" font-family="system-ui" font-size="48" font-weight="900" fill="#f0bd75">汇率不是输赢，是再分配</text>
+</svg>

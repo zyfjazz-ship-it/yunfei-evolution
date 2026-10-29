@@ -8,58 +8,68 @@ export function getStaticPaths() {
 
 const { lang } = Astro.props as { lang: Language };
 const isZh = lang === "zh";
+const base = import.meta.env.BASE_URL;
 
 const history = [
   {
     no: "01",
+    slug: "01-mesopotamia-origins",
     title: { zh: "文明为什么会在两河流域出现？", en: "Why did civilization emerge in Mesopotamia?" },
     description: { zh: "从农业、灌溉和剩余出发，看复杂社会为什么率先在大河边形成。", en: "Agriculture, irrigation, and surplus explain why complex societies first formed beside great rivers." },
     tags: { zh: ["两河流域", "农业革命", "剩余"], en: ["Mesopotamia", "Agriculture", "Surplus"] },
   },
   {
     no: "02",
+    slug: "02-sumer-and-cities",
     title: { zh: "苏美尔：人类为什么开始建造城市？", en: "Sumer: Why did people begin building cities?" },
     description: { zh: "乌鲁克不是一群房子的集合，而是灌溉、分工、粮仓和组织能力的共同产物。", en: "Uruk was not just a cluster of houses, but a product of irrigation, specialization, storage, and organization." },
     tags: { zh: ["苏美尔", "乌鲁克", "城市"], en: ["Sumer", "Uruk", "Cities"] },
   },
   {
     no: "03",
+    slug: "03-wealth-faith-and-power",
     title: { zh: "城市如何组织财富、信仰与权力？", en: "How did cities organize wealth, belief, and power?" },
     description: { zh: "神庙、文字和早期王权怎样把分散的人、粮食与承诺组织进同一套秩序。", en: "Temples, writing, and early kingship brought people, grain, and promises into a shared order." },
     tags: { zh: ["神庙", "文字", "王权"], en: ["Temples", "Writing", "Kingship"] },
   },
   {
     no: "04",
+    slug: "04-trade-silver-war-and-gilgamesh",
     title: { zh: "从城邦到帝国：贸易、白银、战争与《吉尔伽美什》", en: "From city-states to empire: Trade, silver, war, and Gilgamesh" },
     description: { zh: "城市为何走向远距离贸易、冲突与帝国，也第一次追问人在权力之外如何面对死亡。", en: "Why cities moved toward long-distance trade, conflict, and empire—and how people began to confront mortality." },
     tags: { zh: ["阿卡德", "白银", "史诗"], en: ["Akkad", "Silver", "Epic"] },
   },
   {
     no: "05",
+    slug: "05-how-the-nile-made-egypt",
     title: { zh: "尼罗河如何“制造”了埃及", en: "How the Nile ‘made’ Egypt" },
     description: { zh: "稳定的洪水、狭长的地理和征收—储存—再分配体系，如何支撑早期统一国家。", en: "Stable floods, a narrow geography, and redistribution supported an early unified state." },
     tags: { zh: ["尼罗河", "法老", "金字塔"], en: ["Nile", "Pharaoh", "Pyramids"] },
   },
   {
     no: "06",
+    slug: "06-why-the-pyramid-age-collapsed",
     title: { zh: "金字塔时代为什么会崩？", en: "Why did the pyramid age collapse?" },
     description: { zh: "地方权力、财政分散与气候压力怎样叠加，让一台强大的国家机器逐渐失速。", en: "Local power, fragmented finances, and climate pressure gradually stalled a powerful state machine." },
     tags: { zh: ["第一中间期", "财政", "国家周期"], en: ["First Intermediate Period", "Fiscal power", "State cycles"] },
   },
   {
     no: "07",
+    slug: "07-egypts-second-unification",
     title: { zh: "古埃及的第二次统一", en: "Ancient Egypt's second unification" },
     description: { zh: "一个崩溃过的国家如何重建秩序，以及混乱如何改变人们对国王、神灵与人生的理解。", en: "How a collapsed state rebuilt order, and how turmoil changed views of kings, gods, and life." },
     tags: { zh: ["中王国", "底比斯", "再统一"], en: ["Middle Kingdom", "Thebes", "Reunification"] },
   },
   {
     no: "08",
+    slug: "08-greece-after-the-collapse",
     title: { zh: "一场崩溃之后，古希腊文明为什么重新诞生？", en: "Why did Greek civilization re-emerge after collapse?" },
     description: { zh: "青铜时代崩溃、迈锡尼宫殿消失与“黑暗时代”，为何反而孕育了城邦的新秩序。", en: "The Bronze Age collapse and the Greek Dark Age became the ground from which the polis emerged." },
     tags: { zh: ["迈锡尼", "青铜时代崩溃", "城邦"], en: ["Mycenae", "Bronze Age collapse", "Polis"] },
   },
   {
     no: "09",
+    slug: "09-the-iliad-and-the-crisis-of-honor",
     title: { zh: "《伊利亚特》：一个英雄的愤怒，为什么能让一支军队陷入危机？", en: "The Iliad: How can one hero's anger endanger an army?" },
     description: { zh: "借阿喀琉斯与阿伽门农的冲突，看荣誉、服从、联盟与权力边界。", en: "Achilles and Agamemnon reveal the tensions among honor, obedience, alliance, and authority." },
     tags: { zh: ["荷马史诗", "特洛伊", "荣誉政治"], en: ["Homer", "Troy", "Honor politics"] },
@@ -69,42 +79,49 @@ const history = [
 const economy = [
   {
     no: "01",
+    slug: "01-the-dollar-world",
     title: { zh: "美元世界：美国凭什么吸引全世界的资本？", en: "The dollar world: Why does the United States attract global capital?" },
     description: { zh: "把美元、美国国债与美国股票拆开，看全球资金为什么愿意进入同一个金融体系。", en: "Separate the dollar, Treasuries, and U.S. equities to understand the system attracting global capital." },
     tags: { zh: ["美元", "美债", "美股"], en: ["Dollar", "Treasuries", "U.S. equities"] },
   },
   {
     no: "02",
+    slug: "02-what-capital-seeks",
     title: { zh: "资本到底在寻找什么？", en: "What is capital really looking for?" },
     description: { zh: "资本并不只追逐涨幅，它同时寻找安全、流动性、收益与对未来财富的索取权。", en: "Capital seeks safety, liquidity, return, and claims on future wealth—not simply rising prices." },
     tags: { zh: ["风险", "回报", "资产"], en: ["Risk", "Return", "Assets"] },
   },
   {
     no: "03",
+    slug: "03-interest-rates-as-gravity",
     title: { zh: "利率：资本世界的“重力”", en: "Interest rates: The gravity of capital" },
     description: { zh: "理解折现、债券价格和资产估值，看到利率怎样改变今天与未来之间的价格。", en: "Discounting, bond prices, and valuation show how rates price the distance between today and tomorrow." },
     tags: { zh: ["利率", "债券", "折现"], en: ["Rates", "Bonds", "Discounting"] },
   },
   {
     no: "04",
+    slug: "04-how-banks-create-money",
     title: { zh: "银行到底在干什么？钱是怎么被创造出来的？", en: "What do banks do, and how is money created?" },
     description: { zh: "商业银行放贷如何同时创造存款，以及信用扩张为何会推高资产，也会在收缩时反噬经济。", en: "Bank lending creates deposits; credit expansion lifts assets and can reverse sharply during contraction." },
     tags: { zh: ["银行", "货币创造", "信用周期"], en: ["Banks", "Money creation", "Credit cycle"] },
   },
   {
     no: "05",
+    slug: "05-ai-and-wealth-distribution",
     title: { zh: "AI时代，普通人怎样参与新增财富的分配？", en: "How can ordinary people share in new wealth created by AI?" },
     description: { zh: "产业增长不等于投资回报；真正要找的是能保留利润并把它转化为股东回报的环节。", en: "Industry growth is not investment return; the key is finding who can retain profit and reward owners." },
     tags: { zh: ["AI", "估值", "财富分配"], en: ["AI", "Valuation", "Wealth distribution"] },
   },
   {
     no: "06",
+    slug: "06-balance-of-payments",
     title: { zh: "国际收支：为什么美国买全球商品，全球资本却又流向美国？", en: "Balance of payments: Why does capital return to the U.S.?" },
     description: { zh: "从一笔跨境交易出发，看贸易逆差、资本流入和全球资产配置如何同时发生。", en: "A cross-border transaction connects trade deficits, capital inflows, and global asset allocation." },
     tags: { zh: ["国际收支", "贸易", "资本流动"], en: ["Balance of payments", "Trade", "Capital flows"] },
   },
   {
     no: "07",
+    slug: "07-exchange-rates-and-wealth",
     title: { zh: "汇率：一国货币升值，究竟是谁变富了？", en: "Exchange rates: Who gets richer when a currency rises?" },
     description: { zh: "同样的升值，对出口企业、进口消费者、海外投资者和国家资产负债表意味着不同结果。", en: "The same appreciation affects exporters, consumers, overseas investors, and national balance sheets differently." },
     tags: { zh: ["汇率", "人民币", "购买力"], en: ["FX", "Renminbi", "Purchasing power"] },
@@ -120,6 +137,8 @@ const pageTitle = isZh ? "公开课" : "Open Courses";
 const pageDescription = isZh
   ? "沿着文明与经济两条主线，整理已经完成的16节公开课。"
   : "Sixteen completed lessons across civilization and economics.";
+const courseHref = (track: "history" | "economy", slug: string) =>
+  `${base}zh/courses/${track}/${slug}/`;
 ---
 
 <BaseLayout lang={lang} title={pageTitle} description={pageDescription} alternatePath="/courses/">
@@ -189,7 +208,7 @@ const pageDescription = isZh
 
     <div class="course-grid">
       {allCourses.map((course) => (
-        <article class:list={["course-card", course.track]} data-track={course.track}>
+        <a class:list={["course-card", course.track]} data-track={course.track} href={courseHref(course.track, course.slug)} aria-label={`${isZh ? "阅读" : "Read"}：${course.title[lang]}`}>
           <div class="course-number">{course.no}</div>
           <div>
             <p class="course-track">{course.track === "history" ? (isZh ? "文明与历史" : "Civilization & history") : (isZh ? "价值迁移与经济" : "Value migration & economics")}</p>
@@ -198,8 +217,9 @@ const pageDescription = isZh
             <ul class="course-tags" aria-label={isZh ? "关键词" : "Keywords"}>
               {course.tags[lang].map((tag) => <li>{tag}</li>)}
             </ul>
+            <span class="course-read">{isZh ? "打开本课" : "Read in Chinese"} <span aria-hidden="true">→</span></span>
           </div>
-        </article>
+        </a>
       ))}
     </div>
   </section>
@@ -376,7 +396,8 @@ const pageDescription = isZh
   .course-preface-copy p:last-child { margin-bottom: 0; color: var(--accent); font-weight: 700; }
 
   .course-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-  .course-card { display: grid; grid-template-columns: 62px 1fr; gap: 1rem; min-height: 235px; padding: 1.5rem; border: 1px solid var(--line); border-radius: 17px; background: var(--surface); }
+  .course-card { display: grid; grid-template-columns: 62px 1fr; gap: 1rem; min-height: 270px; padding: 1.5rem; border: 1px solid var(--line); border-radius: 17px; background: var(--surface); color: inherit; text-decoration: none; transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+  .course-card:hover, .course-card:focus-visible { transform: translateY(-3px); border-color: currentColor; box-shadow: 0 18px 45px rgba(32,33,31,.08); outline: none; }
   .course-card[hidden] { display: none; }
   .course-number { color: var(--muted); font: 500 2.6rem/1 Georgia, serif; }
   .course-card.history .course-number, .course-card.history .course-track { color: var(--course-history); }
@@ -388,6 +409,9 @@ const pageDescription = isZh
   .course-tags li { border-radius: 999px; padding: .18rem .58rem; font-size: .73rem; }
   .history .course-tags li { background: var(--course-history-soft); color: var(--course-history); }
   .economy .course-tags li { background: var(--course-economy-soft); color: var(--course-economy); }
+  .course-read { display: inline-flex; align-items: center; gap: .35rem; margin-top: 1.1rem; color: var(--accent); font-size: .82rem; font-weight: 800; }
+  .course-read span { transition: transform .2s ease; }
+  .course-card:hover .course-read span, .course-card:focus-visible .course-read span { transform: translateX(4px); }
 
   .course-map {
     display: grid;

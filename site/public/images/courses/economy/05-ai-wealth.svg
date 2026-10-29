@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">AI新增财富的分配路径</title><desc id="desc">生产力增长通过利润、所有权和劳动能力分配给不同参与者。</desc>
+  <rect width="1200" height="675" fill="#183d42"/><text x="70" y="95" font-family="system-ui" font-size="40" font-weight="800" fill="#eef6f2">AI创造了财富，谁能留下它？</text>
+  <circle cx="600" cy="325" r="115" fill="#f0bd75"/><text x="600" y="315" text-anchor="middle" font-family="system-ui" font-size="52" font-weight="900" fill="#173f43">AI</text><text x="600" y="355" text-anchor="middle" font-family="system-ui" font-size="22" fill="#173f43">生产力</text>
+  <g fill="none" stroke="#86c3b7" stroke-width="7"><path d="M490 280L285 215"/><path d="M710 280l205-65"/><path d="M500 385L300 485"/><path d="M700 385l200 100"/></g>
+  <g font-family="system-ui" font-weight="800" text-anchor="middle"><rect x="105" y="145" width="235" height="120" rx="22" fill="#285f63"/><text x="222" y="218" font-size="28" fill="#fff">基础设施</text><rect x="860" y="145" width="235" height="120" rx="22" fill="#285f63"/><text x="977" y="218" font-size="28" fill="#fff">利润与股权</text><rect x="105" y="430" width="235" height="120" rx="22" fill="#477f76"/><text x="222" y="503" font-size="28" fill="#fff">劳动与技能</text><rect x="860" y="430" width="235" height="120" rx="22" fill="#c98c51"/><text x="977" y="503" font-size="28" fill="#fff">公众参与</text></g>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">美元世界的资金循环</title><desc id="desc">商品流向美国，美元通过债券和股票市场流回美国。</desc>
+  <rect width="1200" height="675" fill="#173f43"/><circle cx="600" cy="338" r="140" fill="#e8f0ec"/><text x="600" y="325" text-anchor="middle" font-family="system-ui" font-size="72" font-weight="800" fill="#285f63">USD</text><text x="600" y="375" text-anchor="middle" font-family="system-ui" font-size="25" fill="#285f63">美元金融体系</text>
+  <g fill="none" stroke="#8cc2b6" stroke-width="10" stroke-linecap="round"><path d="M170 205 C340 70 495 120 535 196"/><path d="M665 196 C735 95 920 90 1030 220"/><path d="M1025 455 C860 585 705 555 670 478"/><path d="M530 478 C450 570 275 565 165 450"/></g>
+  <g fill="#f4d6a5" font-family="system-ui" font-size="28" font-weight="700"><text x="95" y="190">全球商品</text><text x="910" y="190">美元收入</text><text x="900" y="510">美债 · 美股</text><text x="85" y="510">全球资本</text></g>
+  <g fill="#8cc2b6"><path d="M525 182l28 36-45-5z"/><path d="M1040 205l5 45-38-24z"/><path d="M681 493l-31-33 46 1z"/><path d="M155 467l1-46 39 22z"/></g>
+</svg>

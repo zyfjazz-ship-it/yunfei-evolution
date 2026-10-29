@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">资本寻找的四件事</title><desc id="desc">安全、流动性、收益和对未来财富的索取权。</desc>
+  <rect width="1200" height="675" fill="#e5eeea"/><text x="80" y="105" font-family="system-ui" font-size="42" font-weight="800" fill="#173f43">资本到底在寻找什么？</text>
+  <g font-family="system-ui" font-weight="800" text-anchor="middle"><rect x="80" y="180" width="245" height="330" rx="26" fill="#173f43"/><text x="202" y="325" font-size="38" fill="#fff">安全</text><text x="202" y="370" font-size="20" fill="#8cc2b6">Safety</text><rect x="345" y="180" width="245" height="330" rx="26" fill="#285f63"/><text x="467" y="325" font-size="38" fill="#fff">流动性</text><text x="467" y="370" font-size="20" fill="#b9ddd5">Liquidity</text><rect x="610" y="180" width="245" height="330" rx="26" fill="#477f76"/><text x="732" y="325" font-size="38" fill="#fff">收益</text><text x="732" y="370" font-size="20" fill="#d4ece6">Return</text><rect x="875" y="180" width="245" height="330" rx="26" fill="#c98c51"/><text x="997" y="310" font-size="34" fill="#fff">未来财富</text><text x="997" y="352" font-size="34" fill="#fff">索取权</text><text x="997" y="395" font-size="20" fill="#fff2df">Claim</text></g>
+  <path d="M115 555h970" stroke="#173f43" stroke-width="4"/><circle cx="600" cy="555" r="12" fill="#c98c51"/>
+</svg>

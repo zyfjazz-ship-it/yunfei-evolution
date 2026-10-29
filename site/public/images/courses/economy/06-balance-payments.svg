@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">贸易与资本的双向循环</title><desc id="desc">商品流入美国，美元流出；海外资本再购买美国资产。</desc>
+  <rect width="1200" height="675" fill="#e7efeb"/><text x="70" y="100" font-family="system-ui" font-size="42" font-weight="800" fill="#173f43">一笔跨境交易，两本账</text>
+  <g font-family="system-ui" font-weight="800" text-anchor="middle"><rect x="100" y="220" width="300" height="220" rx="28" fill="#173f43"/><text x="250" y="330" font-size="40" fill="#fff">世界</text><rect x="800" y="220" width="300" height="220" rx="28" fill="#285f63"/><text x="950" y="330" font-size="40" fill="#fff">美国</text></g>
+  <path d="M410 265C560 165 650 165 790 265" fill="none" stroke="#c98c51" stroke-width="12"/><path d="M775 240l25 30-40 5" fill="#c98c51"/><text x="600" y="185" text-anchor="middle" font-family="system-ui" font-size="27" fill="#915a27">商品与服务 →</text>
+  <path d="M790 390C650 505 545 505 410 390" fill="none" stroke="#477f76" stroke-width="12"/><path d="M425 365l-25 30 40 5" fill="#477f76"/><text x="600" y="525" text-anchor="middle" font-family="system-ui" font-size="27" fill="#285f63">← 美债、股票与资本</text><text x="600" y="340" text-anchor="middle" font-family="system-ui" font-size="31" font-weight="800" fill="#173f43">美元</text>
+</svg>
