@@ -15,6 +15,7 @@ const { work } = Astro.props;
 const { Content } = await render(work);
 const lang = work.data.lang as Language;
 const base = import.meta.env.BASE_URL;
+const assetHref = (path: string) => path.startsWith("/") ? `${base}${path.slice(1)}` : path;
 const blogPosts = await getCollection("blog", ({ data }) => data.lang === lang && !data.draft);
 const relatedPosts = work.data.relatedPosts
   .map((key: string) => blogPosts.find(({ data, id }) => data.translationKey === key || id === key))
@@ -22,16 +23,23 @@ const relatedPosts = work.data.relatedPosts
 const formattedDate = new Intl.DateTimeFormat(lang === "zh" ? "zh-CN" : "en", {
   year: "numeric", month: "long", day: "numeric",
 }).format(work.data.createdAt);
+const categoryLabels = {
+  book: lang === "zh" ? "著作" : "Book",
+  technology: lang === "zh" ? "技术项目" : "Technology",
+  video: lang === "zh" ? "视频" : "Video",
+  creative: lang === "zh" ? "创作" : "Creative",
+};
+const categoryLabel = work.data.category ? categoryLabels[work.data.category] : (lang === "zh" ? "作品" : "Work");
 ---
 
 <BaseLayout lang={lang} title={work.data.title} description={work.data.description} alternatePath="/works/">
   <article class="article work-detail shell">
     <header class="article-header">
-      <p class="eyebrow">{lang === "zh" ? "作品" : "Work"}</p>
+      <p class="eyebrow">{lang === "zh" ? `作品 · ${categoryLabel}` : `Work · ${categoryLabel}`}</p>
       <h1>{work.data.title}</h1>
       <p class="article-description">{work.data.description}</p>
       <p class="post-date">{lang === "zh" ? "创建时间" : "Created"}：<time datetime={work.data.createdAt.toISOString()}>{formattedDate}</time></p>
-      {work.data.cover && <img class="work-cover" src={work.data.cover} alt={work.data.coverAlt ?? ""} />}
+      {work.data.cover && <img class="work-cover" src={assetHref(work.data.cover)} alt={work.data.coverAlt ?? ""} />}
     </header>
     <div class="prose"><Content /></div>
     {relatedPosts.length > 0 && <section class="related-posts"><h2>{lang === "zh" ? "相关文章" : "Related posts"}</h2><ul>

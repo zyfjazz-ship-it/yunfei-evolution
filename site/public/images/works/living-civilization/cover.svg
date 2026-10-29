@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">《生命型文明》封面</title>
+  <desc id="desc">深绿色背景上，金色与浅绿色的生长轨迹连接多个节点，象征信息、反馈与持续进化。</desc>
+  <defs>
+    <radialGradient id="background" cx="30%" cy="20%" r="95%">
+      <stop offset="0" stop-color="#264f45"/>
+      <stop offset="0.52" stop-color="#173b35"/>
+      <stop offset="1" stop-color="#0d2926"/>
+    </radialGradient>
+    <linearGradient id="growth" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d9c88b"/>
+      <stop offset="1" stop-color="#7db89d"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#background)"/>
+  <g fill="none" stroke="url(#growth)" stroke-linecap="round">
+    <path d="M115 742C342 660 340 420 577 457c205 32 243 277 457 192 172-68 121-260 410-344" stroke-width="5" opacity=".9"/>
+    <path d="M164 783c244-54 302-256 477-214 177 43 213 216 405 165 200-54 169-267 418-318" stroke-width="2" opacity=".55"/>
+    <path d="M290 130c150 55 175 214 347 207 197-8 221-177 417-142 176 32 211 164 374 183" stroke-width="3" opacity=".45"/>
+    <circle cx="577" cy="457" r="132" stroke-width="2" opacity=".36"/>
+    <circle cx="577" cy="457" r="213" stroke-width="2" opacity=".19"/>
+  </g>
+  <g fill="#d9c88b" filter="url(#glow)">
+    <circle cx="115" cy="742" r="8"/>
+    <circle cx="577" cy="457" r="13"/>
+    <circle cx="1034" cy="649" r="9"/>
+    <circle cx="1444" cy="305" r="7"/>
+  </g>
+  <g fill="#f1ead2" font-family="'Noto Serif SC','Songti SC','STSong',serif">
+    <text x="150" y="245" font-size="34" letter-spacing="12" opacity=".78">持续生长的系统</text>
+    <text x="140" y="370" font-size="100" font-weight="700" letter-spacing="8">生命型文明</text>
+  </g>
+  <text x="148" y="435" fill="#a9cbb9" font-size="25" font-family="Inter,Arial,sans-serif" letter-spacing="7">INFORMATION · FEEDBACK · EVOLUTION</text>
+  <text x="1445" y="812" text-anchor="end" fill="#d9c88b" font-size="24" font-family="'Noto Sans SC','PingFang SC',sans-serif" letter-spacing="5">云非</text>
+</svg>
+

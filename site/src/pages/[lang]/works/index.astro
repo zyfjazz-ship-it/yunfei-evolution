@@ -12,6 +12,13 @@ const works = (await getCollection("works", ({ data }) => data.lang === lang && 
   .sort((a, b) => b.data.createdAt.valueOf() - a.data.createdAt.valueOf());
 const base = import.meta.env.BASE_URL;
 const prefix = `${lang}/`;
+const assetHref = (path: string) => path.startsWith("/") ? `${base}${path.slice(1)}` : path;
+const categoryLabels = {
+  book: lang === "zh" ? "著作" : "Book",
+  technology: lang === "zh" ? "技术项目" : "Technology",
+  video: lang === "zh" ? "视频" : "Video",
+  creative: lang === "zh" ? "创作" : "Creative",
+};
 const formatDate = (date: Date) => new Intl.DateTimeFormat(lang === "zh" ? "zh-CN" : "en", {
   year: "numeric", month: "long", day: "numeric",
 }).format(date);
@@ -21,13 +28,16 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat(lang === "zh" ? "zh-C
   <header class="page-heading shell">
     <p class="eyebrow">Works</p>
     <h1>{copy[lang].works}</h1>
-    <p>{lang === "zh" ? "这里将展示书籍、技术项目、视频作品与创造成果。" : "A future home for books, technology projects, videos, and creative work."}</p>
+    <p>{lang === "zh" ? "这里记录已经完成和仍在生长的著作、技术项目与创造成果。" : "A home for completed work and ideas that are still growing: books, technology projects, and creative practice."}</p>
   </header>
   <section class="works-grid shell" aria-label={copy[lang].works}>
     {works.length === 0 && <div class="empty-state"><p>{copy[lang].noWorks}</p></div>}
     {works.map((work) => <article class="work-card">
-      {work.data.cover && <img src={work.data.cover} alt={work.data.coverAlt ?? ""} />}
-      <time datetime={work.data.createdAt.toISOString()}>{formatDate(work.data.createdAt)}</time>
+      {work.data.cover && <img src={assetHref(work.data.cover)} alt={work.data.coverAlt ?? ""} />}
+      <div class="work-meta">
+        {work.data.category && <span>{categoryLabels[work.data.category]}</span>}
+        <time datetime={work.data.createdAt.toISOString()}>{formatDate(work.data.createdAt)}</time>
+      </div>
       <h2><a href={`${base}${lang}/works/${work.id.replace(prefix, "")}/`}>{work.data.title}</a></h2>
       <p>{work.data.description}</p>
     </article>)}
