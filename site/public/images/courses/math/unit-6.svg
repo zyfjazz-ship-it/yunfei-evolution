@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">规划与决策</title>
+  <desc id="desc">预算清单、旅行路线和决策勾选构成的生活数学插图</desc>
+  <rect width="1600" height="900" fill="#eee8dc"/>
+  <rect x="150" y="135" width="535" height="520" rx="30" fill="#fffdf7" stroke="#735d35" stroke-width="10"/>
+  <g fill="none" stroke="#b45d3f" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M225 245l24 24 48-60M225 365l24 24 48-60M225 485l24 24 48-60"/>
+  </g>
+  <path d="M340 235h260m-260 120h210m-210 120h250" stroke="#735d35" stroke-width="14" stroke-linecap="round"/>
+  <path d="M865 560c100-235 210-30 310-230s175-35 290-180" fill="none" stroke="#315f5a" stroke-width="24" stroke-linecap="round" stroke-dasharray="10 42"/>
+  <g fill="#d6a44f" stroke="#315f5a" stroke-width="9"><circle cx="865" cy="560" r="52"/><circle cx="1125" cy="390" r="52"/><circle cx="1465" cy="150" r="52"/></g>
+  <path d="M790 655h720" stroke="#315f5a" stroke-width="9"/>
+  <text x="145" y="790" fill="#41392b" font-family="Songti SC, STSong, serif" font-size="78">第六单元 · 规划与决策</text>
+</svg>

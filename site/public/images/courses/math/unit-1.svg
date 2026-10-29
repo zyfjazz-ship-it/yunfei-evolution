@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">数量与估算</title>
+  <desc id="desc">豆子、价格标签、时钟和数轴构成的生活数学插图</desc>
+  <rect width="1600" height="900" fill="#f5eddd"/>
+  <circle cx="1260" cy="170" r="210" fill="#ead8aa"/>
+  <rect x="150" y="185" width="690" height="510" rx="38" fill="#fffaf0" stroke="#7a6230" stroke-width="8"/>
+  <g fill="#bb6b45">
+    <circle cx="260" cy="315" r="34"/><circle cx="350" cy="315" r="34"/><circle cx="440" cy="315" r="34"/><circle cx="530" cy="315" r="34"/><circle cx="620" cy="315" r="34"/>
+    <circle cx="260" cy="410" r="34"/><circle cx="350" cy="410" r="34"/><circle cx="440" cy="410" r="34"/><circle cx="530" cy="410" r="34"/><circle cx="620" cy="410" r="34"/>
+  </g>
+  <path d="M230 535h500" stroke="#7a6230" stroke-width="12" stroke-linecap="round"/>
+  <path d="M270 505v60m110-60v60m110-60v60m110-60v60m110-60v60" stroke="#7a6230" stroke-width="8"/>
+  <circle cx="1180" cy="520" r="175" fill="#fffaf0" stroke="#315f5a" stroke-width="10"/>
+  <path d="M1180 520V405m0 115l85 50" stroke="#315f5a" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="1180" cy="520" r="18" fill="#315f5a"/>
+  <text x="145" y="790" fill="#3f392d" font-family="Songti SC, STSong, serif" font-size="78">第一单元 · 数量与估算</text>
+</svg>

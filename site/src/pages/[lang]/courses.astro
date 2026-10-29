@@ -135,8 +135,8 @@ const allCourses = [
 
 const pageTitle = isZh ? "公开课" : "Open Courses";
 const pageDescription = isZh
-  ? "沿着文明与经济两条主线，整理已经完成的16节公开课。"
-  : "Sixteen completed lessons across civilization and economics.";
+  ? "沿着文明与经济两条主线，整理已经完成的16节公开课；儿童数学课程另设 For Kids 板块。"
+  : "Sixteen completed lessons across civilization and economics, with a separate For Kids mathematics section.";
 const courseHref = (track: "history" | "economy", slug: string) =>
   `${base}zh/courses/${track}/${slug}/`;
 ---
@@ -222,6 +222,16 @@ const courseHref = (track: "history" | "economy", slug: string) =>
         </a>
       ))}
     </div>
+  </section>
+
+  <section class="kids-entry shell" aria-labelledby="kids-entry-title">
+    <div>
+      <p class="course-kicker">For Kids · 36 lessons</p>
+      <h2 id="kids-entry-title">{isZh ? "生活数学与逻辑思考" : "Practical mathematics and logical thinking"}</h2>
+      <p>{isZh ? "为孩子单独准备的公开课板块。36节课从购物、做饭、出行、测量和游戏等真实问题出发，适合8岁与11岁孩子同堂学习。" : "A separate open-course section for children. Thirty-six lessons begin with real problems in shopping, cooking, travel, measurement, and games."}</p>
+      <a href={`${base}${lang}/courses/kids/`}>{isZh ? "进入 For Kids 儿童公开课" : "Enter the For Kids courses"} <span aria-hidden="true">→</span></a>
+    </div>
+    <strong aria-hidden="true">36</strong>
   </section>
 
   <section class="course-map shell" aria-labelledby="course-map-title">
@@ -413,6 +423,21 @@ const courseHref = (track: "history" | "economy", slug: string) =>
   .course-read span { transition: transform .2s ease; }
   .course-card:hover .course-read span, .course-card:focus-visible .course-read span { transform: translateX(4px); }
 
+  .kids-entry {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 2rem;
+    align-items: end;
+    margin-top: clamp(5rem, 10vw, 8rem);
+    padding: clamp(2rem, 6vw, 4rem);
+    border-radius: 24px;
+    background: #eee4c8;
+  }
+  .kids-entry h2 { max-width: 760px; margin: 0; font-family: "Songti SC", "STSong", Georgia, serif; font-size: clamp(2.6rem, 6vw, 5rem); font-weight: 500; }
+  .kids-entry p:not(.course-kicker) { max-width: 720px; color: #635b49; font-size: 1.05rem; }
+  .kids-entry a { display: inline-flex; gap: .4rem; align-items: center; margin-top: 1rem; color: #5f4b1d; font-weight: 850; }
+  .kids-entry > strong { color: rgba(95,75,29,.16); font: 500 clamp(7rem, 18vw, 14rem)/.75 Georgia, serif; }
+
   .course-map {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -438,11 +463,12 @@ const courseHref = (track: "history" | "economy", slug: string) =>
   .course-note { margin-bottom: 5rem; color: var(--muted); font-size: .8rem; }
 
   @media (max-width: 760px) {
-    .course-hero, .course-section-head, .course-preface, .course-map { grid-template-columns: 1fr; }
+    .course-hero, .course-section-head, .course-preface, .course-map, .kids-entry { grid-template-columns: 1fr; }
     .course-grid, .course-next { grid-template-columns: 1fr; }
     .course-stats { grid-template-columns: 1fr; }
     .course-stats div + div { border-top: 1px solid var(--line); border-left: 0; }
     .course-concepts { grid-column: auto; }
+    .kids-entry > strong { display: none; }
   }
 
   @media (max-width: 480px) {

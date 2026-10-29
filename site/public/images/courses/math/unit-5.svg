@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">数据与概率</title>
+  <desc id="desc">条形图、折线图和随机抽取小球构成的生活数学插图</desc>
+  <rect width="1600" height="900" fill="#edf0e2"/>
+  <path d="M170 610V175m0 435h610" stroke="#355b55" stroke-width="12" stroke-linecap="round"/>
+  <rect x="240" y="430" width="90" height="180" rx="8" fill="#c96b45"/>
+  <rect x="375" y="325" width="90" height="285" rx="8" fill="#d9a74f"/>
+  <rect x="510" y="240" width="90" height="370" rx="8" fill="#6f9b88"/>
+  <rect x="645" y="375" width="90" height="235" rx="8" fill="#758aa0"/>
+  <path d="M925 250c105 115 200-20 305 90s150 25 235-115" fill="none" stroke="#355b55" stroke-width="18" stroke-linecap="round"/>
+  <g fill="#c96b45"><circle cx="925" cy="250" r="18"/><circle cx="1100" cy="305" r="18"/><circle cx="1230" cy="340" r="18"/><circle cx="1465" cy="225" r="18"/></g>
+  <path d="M990 430h380l-55 205H1045z" fill="#fffdf7" stroke="#355b55" stroke-width="10"/>
+  <g><circle cx="1090" cy="510" r="34" fill="#c96b45"/><circle cx="1180" cy="545" r="34" fill="#d9a74f"/><circle cx="1280" cy="500" r="34" fill="#6f9b88"/></g>
+  <text x="145" y="790" fill="#30423b" font-family="Songti SC, STSong, serif" font-size="78">第五单元 · 数据与概率</text>
+</svg>

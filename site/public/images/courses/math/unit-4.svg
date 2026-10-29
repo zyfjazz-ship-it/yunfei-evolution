@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">条件与推理</title>
+  <desc id="desc">线索卡片、路径节点和推理箭头构成的生活数学插图</desc>
+  <rect width="1600" height="900" fill="#e8edf3"/>
+  <g fill="#fffdf8" stroke="#3f5871" stroke-width="9">
+    <rect x="145" y="170" width="340" height="240" rx="25"/>
+    <rect x="205" y="430" width="340" height="210" rx="25"/>
+  </g>
+  <path d="M220 245h185m-185 58h120M280 500h185m-185 58h120" stroke="#b65b3f" stroke-width="15" stroke-linecap="round"/>
+  <g stroke="#3f5871" stroke-width="12" fill="#f5d9a1">
+    <circle cx="820" cy="230" r="50"/><circle cx="1080" cy="150" r="50"/><circle cx="1260" cy="360" r="50"/><circle cx="1030" cy="520" r="50"/><circle cx="1370" cy="615" r="50"/>
+    <path d="M865 215l165-50M1115 190l110 130M1220 390l-145 100M1075 535l245 65M845 265l150 220" fill="none"/>
+  </g>
+  <text x="145" y="790" fill="#293b4e" font-family="Songti SC, STSong, serif" font-size="78">第四单元 · 条件与推理</text>
+</svg>

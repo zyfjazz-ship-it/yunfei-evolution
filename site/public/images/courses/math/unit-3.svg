@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">比例与变化</title>
+  <desc id="desc">披萨分数、果汁比例和变化曲线构成的生活数学插图</desc>
+  <rect width="1600" height="900" fill="#f4e6e0"/>
+  <circle cx="420" cy="390" r="230" fill="#e8b85d" stroke="#814532" stroke-width="12"/>
+  <path d="M420 160v460M190 390h460M257 227l326 326M583 227L257 553" stroke="#fff8e8" stroke-width="10"/>
+  <circle cx="420" cy="390" r="34" fill="#bd5c3b"/><circle cx="330" cy="300" r="28" fill="#bd5c3b"/><circle cx="515" cy="310" r="28" fill="#bd5c3b"/><circle cx="510" cy="485" r="28" fill="#bd5c3b"/>
+  <path d="M820 615h610M845 590V175" stroke="#365d58" stroke-width="12" stroke-linecap="round"/>
+  <path d="M900 545c130-40 150-150 250-180s160-5 250-175" fill="none" stroke="#bd5c3b" stroke-width="22" stroke-linecap="round"/>
+  <circle cx="900" cy="545" r="18" fill="#bd5c3b"/><circle cx="1150" cy="365" r="18" fill="#bd5c3b"/><circle cx="1400" cy="190" r="18" fill="#bd5c3b"/>
+  <text x="145" y="790" fill="#4d332b" font-family="Songti SC, STSong, serif" font-size="78">第三单元 · 比例与变化</text>
+</svg>

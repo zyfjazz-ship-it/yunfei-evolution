@@ -1,0 +1,168 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import type { Language } from "../../../config/site";
+
+export function getStaticPaths() {
+  return ["zh", "en"].map((lang) => ({ params: { lang }, props: { lang } }));
+}
+
+const { lang } = Astro.props as { lang: Language };
+const isZh = lang === "zh";
+const base = import.meta.env.BASE_URL;
+const mathLessons = (await getCollection("courses", ({ data }) => data.lang === "zh" && data.track === "math"))
+  .sort((a, b) => a.data.lesson - b.data.lesson);
+
+const units = [
+  { no: 1, zh: "数量与估算", en: "Number sense and estimation", description: "从先估后算开始，把数感、四则运算、单位意识和时间规划放进每天都会遇到的选择。" },
+  { no: 2, zh: "测量与空间", en: "Measurement and space", description: "用路线、房间、容器和图形解决真实的测量问题，建立长度、周长、面积、容量和比例尺之间的联系。" },
+  { no: 3, zh: "比例与变化", en: "Ratio and change", description: "从分食、调配、折扣和速度出发，理解份数、比、百分数、单价和变化率。" },
+  { no: 4, zh: "条件与推理", en: "Conditions and reasoning", description: "学习分类、如果那么、真假判断、排程、路径与策略，让结论能够被证据支持。" },
+  { no: 5, zh: "数据与概率", en: "Data and probability", description: "经历收集、整理、表示、比较和质疑数据的完整过程，并用实验理解可能性和风险。" },
+  { no: 6, zh: "规划与决策", en: "Planning and decisions", description: "把前五单元的方法组合起来，在预算、菜单、物资、排队、安全和旅行项目中提出可执行方案。" },
+];
+
+const hrefFor = (id: string) => {
+  const [, track, ...slugParts] = id.split("/");
+  return `${base}zh/courses/${track}/${slugParts.join("/").replace(/\.md$/, "")}/`;
+};
+---
+
+<BaseLayout
+  lang={lang}
+  title={isZh ? "For Kids 儿童公开课" : "For Kids open courses"}
+  description={isZh ? "为孩子准备的36节生活数学与逻辑思考公开课。" : "Thirty-six practical mathematics and logical thinking lessons for children."}
+  alternatePath="/courses/kids/"
+>
+  <header class="kids-hero shell">
+    <a class="back-link" href={`${base}${lang}/courses/`}>← {isZh ? "返回历史与经济公开课" : "Back to history and economics"}</a>
+    <div class="hero-grid">
+      <div>
+        <p class="kicker">For Kids · Open courses</p>
+        <h1>{isZh ? "把数学放回生活里" : "Put mathematics back into everyday life"}</h1>
+        <p class="lead">{isZh ? "36节为孩子单独准备的公开课，从生活中的具体问题出发，建立数学思维、逻辑判断和独立学习的方法。" : "Thirty-six lessons created separately for children, using concrete everyday problems to build mathematical thinking, logical judgment, and independent learning."}</p>
+      </div>
+      <aside aria-label={isZh ? "儿童课程总数" : "Kids lesson count"}>
+        <span>{isZh ? "儿童公开课" : "For Kids"}</span>
+        <strong>36</strong>
+        <p>{isZh ? "6个单元 · 适合8岁与11岁" : "6 units · Ages 8 and 11"}</p>
+      </aside>
+    </div>
+  </header>
+
+  <div>
+    <section class="kids-preface shell" aria-labelledby="kids-preface-title">
+      <div>
+        <p class="kicker">Preface</p>
+        <h2 id="kids-preface-title">{isZh ? "数学不是分数，而是解决问题的方法" : "Mathematics is a way to solve problems, not a score"}</h2>
+      </div>
+      {isZh ? (
+        <div class="preface-copy">
+          <p>学习的本质，是学会自学。</p>
+          <p>它不是反复机械地练习，也不是死记概念和公式，而是先找到知识的结构，看见其中的规律，再形成解决问题的方法，并通过实践检验自己是否真正理解。</p>
+          <p>因此，这套数学公开课不从公式出发，而从生活中的具体问题出发。预算一顿晚餐、检查购物小票、分一张披萨、比较促销方案、安排一天的时间——每一个知识点，都要先回答：它在现实中解决什么问题？</p>
+          <p>数学应该是一种可以使用的工具，而不只是装点成绩单的分数。我们更关心孩子能不能把问题想明白、把方法说清楚，换一个情境仍然会用，而不是一时考了多少分。</p>
+          <p>这套课程遵循一个顺序：现实问题 → 独立思考 → 寻找规律 → 建立方法 → 实践验证。</p>
+          <p>我们看重的是实用，而不是分数；是理解，而不是记忆；是逐渐获得独立学习和解决问题的能力。</p>
+        </div>
+      ) : (
+        <div class="preface-copy">
+          <p>The essence of learning is learning how to teach yourself.</p>
+          <p>It is not mechanical repetition or memorizing definitions and formulas. It begins with finding the structure of knowledge, seeing its patterns, forming a method, and testing understanding through practice.</p>
+          <p>These lessons begin with concrete life problems: budgeting a meal, checking a receipt, sharing a pizza, comparing discounts, or planning a day. Every idea must first answer one question: what real problem does it help us solve?</p>
+          <p>Mathematics should be a usable tool, not decoration for a report card. We care whether a child can understand a problem, explain the method, and use it in a new situation—not only about a temporary score.</p>
+          <p>The sequence is: real problem → independent thinking → pattern → method → practical test.</p>
+          <p>We value usefulness over scores, understanding over memory, and the gradual ability to learn and solve problems independently.</p>
+        </div>
+      )}
+    </section>
+
+    <section class="units shell" aria-labelledby="kids-lessons-title">
+      <header class="section-head">
+        <div>
+          <p class="kicker">36 lessons</p>
+          <h2 id="kids-lessons-title">{isZh ? "六个单元，三十六个生活问题" : "Six units, thirty-six everyday problems"}</h2>
+        </div>
+        <p>{isZh ? "每一课都可以单独打开，包含生活情境、分层任务、数学推导、练习答案和课后实践。" : "Each lesson opens separately with a real-life situation, differentiated tasks, mathematical reasoning, answers, and at-home practice."}</p>
+      </header>
+
+      {units.map((unit) => {
+        const lessons = mathLessons.filter(({ data }) => Math.ceil(data.lesson / 6) === unit.no);
+        return (
+          <section class="unit" aria-labelledby={`unit-${unit.no}`}>
+            <header class="unit-head">
+              <span>{String(unit.no).padStart(2, "0")}</span>
+              <div>
+                <h3 id={`unit-${unit.no}`}>{isZh ? `第${unit.no}单元｜${unit.zh}` : `Unit ${unit.no} · ${unit.en}`}</h3>
+                <p>{isZh ? unit.description : unit.en}</p>
+              </div>
+            </header>
+            <div class="lesson-grid">
+              {lessons.map((lesson) => (
+                <a class="lesson-card" href={hrefFor(lesson.id)} aria-label={`${isZh ? "打开" : "Open"}：${lesson.data.title}`}>
+                  <span class="lesson-no">{String(lesson.data.lesson).padStart(2, "0")}</span>
+                  <div>
+                    <p>{isZh ? "生活数学与逻辑思考" : "Practical math and logic"}</p>
+                    <h4>{lesson.data.title.replace(/^第\d+课｜/, "")}</h4>
+                    <span class="description">{lesson.data.description}</span>
+                    <ul aria-label={isZh ? "关键词" : "Keywords"}>
+                      {lesson.data.tags.map((tag) => <li>{tag}</li>)}
+                    </ul>
+                    <strong>{isZh ? "打开本课" : "Read in Chinese"} →</strong>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+        );
+      })}
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  :global(:root) { --kids: #6f5b27; --kids-soft: #eee4c8; }
+  .kids-hero { padding-block: clamp(2.5rem, 6vw, 4rem) clamp(3.5rem, 8vw, 6rem); }
+  .back-link { color: var(--muted); font-size: .86rem; font-weight: 750; text-decoration: none; }
+  .back-link:hover { color: var(--kids); }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr); gap: clamp(2rem, 7vw, 6rem); align-items: end; margin-top: clamp(3rem, 8vw, 6rem); }
+  .kicker { margin: 0 0 .8rem; color: var(--kids); font-size: .76rem; font-weight: 850; letter-spacing: .15em; text-transform: uppercase; }
+  h1 { max-width: 860px; margin: 0; font-family: "Songti SC", "STSong", Georgia, serif; font-size: clamp(3.4rem, 8vw, 6.8rem); font-weight: 500; line-height: .98; }
+  .lead { max-width: 730px; margin: 1.6rem 0 0; color: var(--muted); font-size: clamp(1.08rem, 2vw, 1.4rem); }
+  .hero-grid aside { min-height: 245px; padding: 1.8rem; border-radius: 22px; background: var(--kids); color: white; }
+  .hero-grid aside span { color: #e9dfc4; font-size: .78rem; font-weight: 800; letter-spacing: .14em; }
+  .hero-grid aside strong { display: block; margin-top: .5rem; font: 500 5.8rem/1 Georgia, serif; }
+  .hero-grid aside p { margin: .8rem 0 0; color: #e9dfc4; }
+  .kids-preface { display: grid; grid-template-columns: minmax(220px, .55fr) minmax(0, 1.45fr); gap: clamp(2rem, 6vw, 5rem); padding: clamp(1.8rem, 5vw, 3.5rem); border-radius: 22px; background: var(--kids-soft); }
+  .kids-preface h2, .section-head h2 { margin: 0; font-family: "Songti SC", "STSong", Georgia, serif; font-size: clamp(2.4rem, 5vw, 4.6rem); font-weight: 500; line-height: 1.12; }
+  .preface-copy { max-width: 760px; }
+  .preface-copy p { margin: 0 0 1rem; }
+  .preface-copy p:last-child { margin-bottom: 0; color: var(--kids); font-weight: 750; }
+  .units { padding-block: clamp(5rem, 10vw, 8rem); }
+  .section-head { display: grid; grid-template-columns: 1fr minmax(280px, .55fr); gap: 3rem; align-items: end; margin-bottom: 4rem; }
+  .section-head > p { margin: 0; color: var(--muted); }
+  .unit { margin-top: clamp(4rem, 8vw, 7rem); }
+  .unit-head { display: grid; grid-template-columns: 70px minmax(0, 1fr); gap: 1.2rem; align-items: start; padding-bottom: 1.4rem; border-bottom: 1px solid var(--line); }
+  .unit-head > span { color: var(--kids); font: 500 2.8rem/1 Georgia, serif; }
+  .unit-head h3 { margin: 0; font-family: "Songti SC", "STSong", Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 500; }
+  .unit-head p { max-width: 760px; margin: .5rem 0 0; color: var(--muted); }
+  .lesson-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1rem; }
+  .lesson-card { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 1rem; min-height: 280px; padding: 1.5rem; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); color: inherit; text-decoration: none; transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+  .lesson-card:hover, .lesson-card:focus-visible { transform: translateY(-3px); border-color: var(--kids); box-shadow: 0 18px 45px rgba(32,33,31,.08); outline: none; }
+  .lesson-no { color: var(--kids); font: 500 2.6rem/1 Georgia, serif; }
+  .lesson-card p { margin: 0 0 .6rem; color: var(--kids); font-size: .7rem; font-weight: 850; letter-spacing: .11em; }
+  .lesson-card h4 { margin: 0; font-family: "Songti SC", "STSong", Georgia, serif; font-size: 1.45rem; }
+  .description { display: block; margin: .8rem 0 1rem; color: var(--muted); font-size: .9rem; }
+  .lesson-card ul { display: flex; flex-wrap: wrap; gap: .35rem; padding: 0; margin: 0; list-style: none; }
+  .lesson-card li { border-radius: 999px; background: var(--kids-soft); padding: .18rem .58rem; color: var(--kids); font-size: .72rem; }
+  .lesson-card strong { display: block; margin-top: 1rem; color: var(--kids); font-size: .82rem; }
+  @media (max-width: 760px) {
+    .hero-grid, .kids-preface, .section-head { grid-template-columns: 1fr; }
+    .lesson-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .unit-head { grid-template-columns: 48px minmax(0, 1fr); }
+    .lesson-card { grid-template-columns: 46px minmax(0, 1fr); padding: 1.1rem; }
+    .lesson-no { font-size: 2rem; }
+  }
+</style>

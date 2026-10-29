@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">测量与空间</title>
+  <desc id="desc">地图路线、房间比例图和测量刻度构成的生活数学插图</desc>
+  <rect width="1600" height="900" fill="#e8f0ea"/>
+  <path d="M80 650C290 460 320 200 590 245s270 350 520 280 235-300 430-350" fill="none" stroke="#b75b3d" stroke-width="28" stroke-linecap="round" stroke-dasharray="8 48"/>
+  <g fill="#fffdf6" stroke="#315f5a" stroke-width="9">
+    <circle cx="185" cy="570" r="55"/><circle cx="520" cy="250" r="55"/><circle cx="875" cy="530" r="55"/><circle cx="1370" cy="245" r="55"/>
+  </g>
+  <rect x="900" y="120" width="470" height="300" rx="22" fill="#fffdf6" stroke="#315f5a" stroke-width="10"/>
+  <rect x="960" y="175" width="190" height="105" fill="#d7b46a"/>
+  <rect x="1185" y="175" width="125" height="200" fill="#92b4a4"/>
+  <path d="M1010 420v85m80-85v85m80-85v85m80-85v85" stroke="#315f5a" stroke-width="7"/>
+  <path d="M920 505h410" stroke="#315f5a" stroke-width="12"/>
+  <text x="145" y="790" fill="#263f38" font-family="Songti SC, STSong, serif" font-size="78">第二单元 · 测量与空间</text>
+</svg>

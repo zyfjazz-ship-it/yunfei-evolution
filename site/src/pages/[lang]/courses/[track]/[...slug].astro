@@ -31,17 +31,27 @@ const lessonHref = (entry: typeof lesson) => {
 };
 const trackName = lesson.data.track === "history"
   ? (isZh ? "文明与历史" : "Civilization & history")
-  : (isZh ? "价值迁移与经济" : "Value migration & economics");
+  : lesson.data.track === "economy"
+    ? (isZh ? "价值迁移与经济" : "Value migration & economics")
+    : (isZh ? "生活数学与逻辑思考" : "Practical math & logical thinking");
 const lessonNumber = String(lesson.data.lesson).padStart(2, "0");
 const imageSrc = lesson.data.image.startsWith("http")
   ? lesson.data.image
   : `${base}${lesson.data.image.replace(/^\/+/, "")}`;
+const isKidsLesson = lesson.data.track === "math";
+const archiveHref = isKidsLesson ? `${base}${lang}/courses/kids/` : `${base}${lang}/courses/`;
+const archiveLabel = isKidsLesson
+  ? (isZh ? "返回 For Kids 儿童公开课" : "Back to For Kids courses")
+  : (isZh ? "返回公开课目录" : "Back to courses");
+const archiveCountLabel = isKidsLesson
+  ? (isZh ? "查看全部 36 节儿童公开课" : "View all 36 For Kids lessons")
+  : (isZh ? "查看全部 16 节公开课" : "View all 16 lessons");
 ---
 
 <BaseLayout lang={lang} title={lesson.data.title} description={lesson.data.description} alternatePath="/courses/">
   <article class:list={["course-lesson", lesson.data.track]}>
     <header class="lesson-header shell">
-      <a class="back-link" href={`${base}${lang}/courses/`}>← {isZh ? "返回公开课目录" : "Back to courses"}</a>
+      <a class="back-link" href={archiveHref}>← {archiveLabel}</a>
       <div class="lesson-heading-grid">
         <div>
           <p class="lesson-track">{trackName} · {lessonNumber}</p>
@@ -74,7 +84,7 @@ const imageSrc = lesson.data.image.startsWith("http")
     </div>
 
     <footer class="lesson-footer shell">
-      <a class="archive-link" href={`${base}${lang}/courses/`}>{isZh ? "查看全部 16 节公开课" : "View all 16 lessons"}</a>
+      <a class="archive-link" href={archiveHref}>{archiveCountLabel}</a>
       <nav class="lesson-navigation" aria-label={isZh ? "课程导航" : "Lesson navigation"}>
         <div>
           {previousLesson && <><span>{isZh ? "上一课" : "Previous"}</span><a href={lessonHref(previousLesson)}>{previousLesson.data.title}</a></>}
@@ -90,6 +100,7 @@ const imageSrc = lesson.data.image.startsWith("http")
 <style>
   .course-lesson { --track: #9a4b31; --track-soft: #f2dfd6; }
   .course-lesson.economy { --track: #285f63; --track-soft: #dcebea; }
+  .course-lesson.math { --track: #6f5b27; --track-soft: #eee4c8; }
   .lesson-header { padding-block: clamp(3.5rem, 8vw, 7rem) clamp(2rem, 5vw, 4rem); }
   .back-link { color: var(--muted); font-size: .86rem; font-weight: 700; text-decoration: none; }
   .back-link:hover { color: var(--track); }
