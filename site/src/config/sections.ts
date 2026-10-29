@@ -10,6 +10,16 @@ export const sections = [
     active: true,
   },
   {
+    id: "courses",
+    title: { zh: "公开课", en: "Open Courses" },
+    description: {
+      zh: "沿着文明与经济两条主线，整理已经完成的课程与下一步学习方向。",
+      en: "A growing archive of completed lessons across civilization and economics.",
+    },
+    href: "/courses/",
+    active: true,
+  },
+  {
     id: "works",
     title: { zh: "作品", en: "Works" },
     description: {

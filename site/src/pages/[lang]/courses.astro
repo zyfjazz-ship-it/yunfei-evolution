@@ -1,0 +1,380 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import type { Language } from "../../config/site";
+
+export function getStaticPaths() {
+  return ["zh", "en"].map((lang) => ({ params: { lang }, props: { lang } }));
+}
+
+const { lang } = Astro.props as { lang: Language };
+const isZh = lang === "zh";
+
+const history = [
+  {
+    no: "01",
+    title: { zh: "文明为什么会在两河流域出现？", en: "Why did civilization emerge in Mesopotamia?" },
+    description: { zh: "从农业、灌溉和剩余出发，看复杂社会为什么率先在大河边形成。", en: "Agriculture, irrigation, and surplus explain why complex societies first formed beside great rivers." },
+    tags: { zh: ["两河流域", "农业革命", "剩余"], en: ["Mesopotamia", "Agriculture", "Surplus"] },
+  },
+  {
+    no: "02",
+    title: { zh: "苏美尔：人类为什么开始建造城市？", en: "Sumer: Why did people begin building cities?" },
+    description: { zh: "乌鲁克不是一群房子的集合，而是灌溉、分工、粮仓和组织能力的共同产物。", en: "Uruk was not just a cluster of houses, but a product of irrigation, specialization, storage, and organization." },
+    tags: { zh: ["苏美尔", "乌鲁克", "城市"], en: ["Sumer", "Uruk", "Cities"] },
+  },
+  {
+    no: "03",
+    title: { zh: "城市如何组织财富、信仰与权力？", en: "How did cities organize wealth, belief, and power?" },
+    description: { zh: "神庙、文字和早期王权怎样把分散的人、粮食与承诺组织进同一套秩序。", en: "Temples, writing, and early kingship brought people, grain, and promises into a shared order." },
+    tags: { zh: ["神庙", "文字", "王权"], en: ["Temples", "Writing", "Kingship"] },
+  },
+  {
+    no: "04",
+    title: { zh: "从城邦到帝国：贸易、白银、战争与《吉尔伽美什》", en: "From city-states to empire: Trade, silver, war, and Gilgamesh" },
+    description: { zh: "城市为何走向远距离贸易、冲突与帝国，也第一次追问人在权力之外如何面对死亡。", en: "Why cities moved toward long-distance trade, conflict, and empire—and how people began to confront mortality." },
+    tags: { zh: ["阿卡德", "白银", "史诗"], en: ["Akkad", "Silver", "Epic"] },
+  },
+  {
+    no: "05",
+    title: { zh: "尼罗河如何“制造”了埃及", en: "How the Nile ‘made’ Egypt" },
+    description: { zh: "稳定的洪水、狭长的地理和征收—储存—再分配体系，如何支撑早期统一国家。", en: "Stable floods, a narrow geography, and redistribution supported an early unified state." },
+    tags: { zh: ["尼罗河", "法老", "金字塔"], en: ["Nile", "Pharaoh", "Pyramids"] },
+  },
+  {
+    no: "06",
+    title: { zh: "金字塔时代为什么会崩？", en: "Why did the pyramid age collapse?" },
+    description: { zh: "地方权力、财政分散与气候压力怎样叠加，让一台强大的国家机器逐渐失速。", en: "Local power, fragmented finances, and climate pressure gradually stalled a powerful state machine." },
+    tags: { zh: ["第一中间期", "财政", "国家周期"], en: ["First Intermediate Period", "Fiscal power", "State cycles"] },
+  },
+  {
+    no: "07",
+    title: { zh: "古埃及的第二次统一", en: "Ancient Egypt's second unification" },
+    description: { zh: "一个崩溃过的国家如何重建秩序，以及混乱如何改变人们对国王、神灵与人生的理解。", en: "How a collapsed state rebuilt order, and how turmoil changed views of kings, gods, and life." },
+    tags: { zh: ["中王国", "底比斯", "再统一"], en: ["Middle Kingdom", "Thebes", "Reunification"] },
+  },
+  {
+    no: "08",
+    title: { zh: "一场崩溃之后，古希腊文明为什么重新诞生？", en: "Why did Greek civilization re-emerge after collapse?" },
+    description: { zh: "青铜时代崩溃、迈锡尼宫殿消失与“黑暗时代”，为何反而孕育了城邦的新秩序。", en: "The Bronze Age collapse and the Greek Dark Age became the ground from which the polis emerged." },
+    tags: { zh: ["迈锡尼", "青铜时代崩溃", "城邦"], en: ["Mycenae", "Bronze Age collapse", "Polis"] },
+  },
+  {
+    no: "09",
+    title: { zh: "《伊利亚特》：一个英雄的愤怒，为什么能让一支军队陷入危机？", en: "The Iliad: How can one hero's anger endanger an army?" },
+    description: { zh: "借阿喀琉斯与阿伽门农的冲突，看荣誉、服从、联盟与权力边界。", en: "Achilles and Agamemnon reveal the tensions among honor, obedience, alliance, and authority." },
+    tags: { zh: ["荷马史诗", "特洛伊", "荣誉政治"], en: ["Homer", "Troy", "Honor politics"] },
+  },
+];
+
+const economy = [
+  {
+    no: "01",
+    title: { zh: "美元世界：美国凭什么吸引全世界的资本？", en: "The dollar world: Why does the United States attract global capital?" },
+    description: { zh: "把美元、美国国债与美国股票拆开，看全球资金为什么愿意进入同一个金融体系。", en: "Separate the dollar, Treasuries, and U.S. equities to understand the system attracting global capital." },
+    tags: { zh: ["美元", "美债", "美股"], en: ["Dollar", "Treasuries", "U.S. equities"] },
+  },
+  {
+    no: "02",
+    title: { zh: "资本到底在寻找什么？", en: "What is capital really looking for?" },
+    description: { zh: "资本并不只追逐涨幅，它同时寻找安全、流动性、收益与对未来财富的索取权。", en: "Capital seeks safety, liquidity, return, and claims on future wealth—not simply rising prices." },
+    tags: { zh: ["风险", "回报", "资产"], en: ["Risk", "Return", "Assets"] },
+  },
+  {
+    no: "03",
+    title: { zh: "利率：资本世界的“重力”", en: "Interest rates: The gravity of capital" },
+    description: { zh: "理解折现、债券价格和资产估值，看到利率怎样改变今天与未来之间的价格。", en: "Discounting, bond prices, and valuation show how rates price the distance between today and tomorrow." },
+    tags: { zh: ["利率", "债券", "折现"], en: ["Rates", "Bonds", "Discounting"] },
+  },
+  {
+    no: "04",
+    title: { zh: "银行到底在干什么？钱是怎么被创造出来的？", en: "What do banks do, and how is money created?" },
+    description: { zh: "商业银行放贷如何同时创造存款，以及信用扩张为何会推高资产，也会在收缩时反噬经济。", en: "Bank lending creates deposits; credit expansion lifts assets and can reverse sharply during contraction." },
+    tags: { zh: ["银行", "货币创造", "信用周期"], en: ["Banks", "Money creation", "Credit cycle"] },
+  },
+  {
+    no: "05",
+    title: { zh: "AI时代，普通人怎样参与新增财富的分配？", en: "How can ordinary people share in new wealth created by AI?" },
+    description: { zh: "产业增长不等于投资回报；真正要找的是能保留利润并把它转化为股东回报的环节。", en: "Industry growth is not investment return; the key is finding who can retain profit and reward owners." },
+    tags: { zh: ["AI", "估值", "财富分配"], en: ["AI", "Valuation", "Wealth distribution"] },
+  },
+  {
+    no: "06",
+    title: { zh: "国际收支：为什么美国买全球商品，全球资本却又流向美国？", en: "Balance of payments: Why does capital return to the U.S.?" },
+    description: { zh: "从一笔跨境交易出发，看贸易逆差、资本流入和全球资产配置如何同时发生。", en: "A cross-border transaction connects trade deficits, capital inflows, and global asset allocation." },
+    tags: { zh: ["国际收支", "贸易", "资本流动"], en: ["Balance of payments", "Trade", "Capital flows"] },
+  },
+  {
+    no: "07",
+    title: { zh: "汇率：一国货币升值，究竟是谁变富了？", en: "Exchange rates: Who gets richer when a currency rises?" },
+    description: { zh: "同样的升值，对出口企业、进口消费者、海外投资者和国家资产负债表意味着不同结果。", en: "The same appreciation affects exporters, consumers, overseas investors, and national balance sheets differently." },
+    tags: { zh: ["汇率", "人民币", "购买力"], en: ["FX", "Renminbi", "Purchasing power"] },
+  },
+];
+
+const allCourses = [
+  ...history.map((course) => ({ ...course, track: "history" as const })),
+  ...economy.map((course) => ({ ...course, track: "economy" as const })),
+];
+
+const pageTitle = isZh ? "公开课" : "Open Courses";
+const pageDescription = isZh
+  ? "沿着文明与经济两条主线，整理已经完成的16节公开课。"
+  : "Sixteen completed lessons across civilization and economics.";
+---
+
+<BaseLayout lang={lang} title={pageTitle} description={pageDescription} alternatePath="/courses/">
+  <section class="course-hero shell">
+    <div>
+      <p class="course-kicker">Course archive · 2026</p>
+      <h1>{isZh ? "理解世界，从两条线开始。" : "Understand the world through two lines of inquiry."}</h1>
+      <p class="course-lead">
+        {isZh
+          ? "一条回到文明的源头，追问人类怎样组织粮食、信仰与权力；一条进入现代经济，追问货币、资本与财富怎样流动。"
+          : "One line returns to the origins of civilization; the other follows money, capital, and wealth through the modern economy."}
+      </p>
+    </div>
+    <aside class="course-total" aria-label={isZh ? "课程总数" : "Lesson count"}>
+      <span>{isZh ? "已完成" : "Completed"}</span>
+      <strong>16</strong>
+      <p>{isZh ? "9节历史 · 7节经济" : "9 history · 7 economics"}</p>
+    </aside>
+  </section>
+
+  <section class="course-stats shell" aria-label={isZh ? "学习进度" : "Progress"}>
+    <div><strong>09</strong><span>{isZh ? "文明与历史" : "Civilization & history"}</span></div>
+    <div><strong>07</strong><span>{isZh ? "价值迁移与经济" : "Value migration & economics"}</span></div>
+    <div><strong>02</strong><span>{isZh ? "长期学习主线" : "Long-term tracks"}</span></div>
+  </section>
+
+  <section class="course-archive shell" aria-labelledby="course-archive-title">
+    <header class="course-section-head">
+      <div>
+        <p class="course-kicker">Archive</p>
+        <h2 id="course-archive-title">{isZh ? "课程档案" : "Lesson archive"}</h2>
+      </div>
+      <p>{isZh ? "根据过往真实授课记录整理。可按主线筛选，快速看清已经走过的路径。" : "Organized from completed lessons. Filter by track to see the path so far."}</p>
+    </header>
+
+    <div class="course-filters" role="group" aria-label={isZh ? "筛选课程" : "Filter lessons"}>
+      <button class="active" type="button" data-filter="all" aria-pressed="true">{isZh ? "全部 16" : "All 16"}</button>
+      <button type="button" data-filter="history" aria-pressed="false">{isZh ? "历史 9" : "History 9"}</button>
+      <button type="button" data-filter="economy" aria-pressed="false">{isZh ? "经济 7" : "Economics 7"}</button>
+    </div>
+
+    <div class="course-grid">
+      {allCourses.map((course) => (
+        <article class:list={["course-card", course.track]} data-track={course.track}>
+          <div class="course-number">{course.no}</div>
+          <div>
+            <p class="course-track">{course.track === "history" ? (isZh ? "文明与历史" : "Civilization & history") : (isZh ? "价值迁移与经济" : "Value migration & economics")}</p>
+            <h3>{course.title[lang]}</h3>
+            <p class="course-description">{course.description[lang]}</p>
+            <ul class="course-tags" aria-label={isZh ? "关键词" : "Keywords"}>
+              {course.tags[lang].map((tag) => <li>{tag}</li>)}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="course-map shell" aria-labelledby="course-map-title">
+    <div>
+      <p class="course-kicker">A connected model</p>
+      <h2 id="course-map-title">{isZh ? "这16节课，已经连成一张图。" : "These 16 lessons now form one map."}</h2>
+    </div>
+    <p>
+      {isZh
+        ? "古代文明研究如何集中和分配粮食，现代经济研究如何创造和分配信用。相隔五千年，底层问题仍然相通：谁能组织资源，谁就拥有塑造秩序的能力。"
+        : "Ancient civilization asks how grain was concentrated and distributed; modern economics asks the same of credit. Five thousand years apart, both study the power to organize resources."}
+    </p>
+    <div class="course-concepts">
+      {(isZh
+        ? ["农业剩余", "城市与国家", "文字与契约", "贸易与帝国", "国家周期", "荷马史诗", "美元体系", "美国国债", "利率与债券", "银行信用", "国际收支", "汇率与购买力"]
+        : ["Surplus", "Cities & states", "Writing & contracts", "Trade & empire", "State cycles", "Homer", "Dollar system", "U.S. Treasuries", "Rates & bonds", "Bank credit", "Balance of payments", "FX & purchasing power"]
+      ).map((concept) => <span>{concept}</span>)}
+    </div>
+  </section>
+
+  <section class="course-next shell" aria-label={isZh ? "下一课方向" : "Next lessons"}>
+    <article class="history">
+      <p>{isZh ? "历史 · 下一站" : "History · Next"}</p>
+      <h2>{isZh ? "希腊城邦为什么会出现？" : "Why did the Greek polis emerge?"}</h2>
+      <span>{isZh ? "当普通公民承担战争成本，他们会不会要求参与决定法律、战争与财富的分配？" : "When citizens bear the cost of war, will they demand a voice in law, war, and distribution?"}</span>
+    </article>
+    <article class="economy">
+      <p>{isZh ? "经济 · 下一站" : "Economics · Next"}</p>
+      <h2>{isZh ? "把国债、货币与资产价格放进同一张周期地图" : "Place sovereign debt, money, and asset prices on one cycle map"}</h2>
+      <span>{isZh ? "继续追问国家如何借钱、央行如何影响流动性，以及变化怎样传导到家庭与企业。" : "Follow how states borrow, central banks shape liquidity, and those changes reach households and firms."}</span>
+    </article>
+  </section>
+
+  <p class="course-note shell">{isZh ? "根据过往聊天中的真实课程记录整理；个别早期标题按实际内容统一命名。" : "Compiled from completed lesson records; a few early titles were normalized to match their content."}</p>
+</BaseLayout>
+
+<script>
+  const filterButtons = document.querySelectorAll<HTMLButtonElement>(".course-filters button");
+  const courseCards = document.querySelectorAll<HTMLElement>(".course-card");
+
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const filter = button.dataset.filter;
+      filterButtons.forEach((item) => {
+        const selected = item === button;
+        item.classList.toggle("active", selected);
+        item.setAttribute("aria-pressed", String(selected));
+      });
+      courseCards.forEach((card) => {
+        card.hidden = filter !== "all" && card.dataset.track !== filter;
+      });
+    });
+  });
+</script>
+
+<style>
+  :global(:root) {
+    --course-history: #9a4b31;
+    --course-history-soft: #f2dfd6;
+    --course-economy: #285f63;
+    --course-economy-soft: #dcebea;
+  }
+
+  .course-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr);
+    gap: clamp(2rem, 7vw, 6rem);
+    align-items: end;
+    padding-block: clamp(4.5rem, 10vw, 8rem) clamp(3.5rem, 8vw, 6rem);
+  }
+
+  .course-kicker {
+    margin: 0 0 .8rem;
+    color: var(--course-history);
+    font-size: .76rem;
+    font-weight: 800;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+  }
+
+  .course-hero h1 {
+    max-width: 760px;
+    margin: 0;
+    font-family: "Songti SC", "STSong", Georgia, serif;
+    font-size: clamp(3.3rem, 8vw, 6.8rem);
+    font-weight: 500;
+    line-height: .98;
+  }
+
+  .course-lead { max-width: 700px; margin: 1.7rem 0 0; color: var(--muted); font-size: clamp(1.1rem, 2.1vw, 1.45rem); }
+
+  .course-total {
+    position: relative;
+    overflow: hidden;
+    min-height: 245px;
+    padding: 1.8rem;
+    border-radius: 22px;
+    background: var(--ink);
+    color: var(--surface);
+  }
+
+  .course-total::after {
+    content: "";
+    position: absolute;
+    right: -62px;
+    bottom: -72px;
+    width: 190px;
+    height: 190px;
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 50%;
+    box-shadow: 0 0 0 24px rgba(255,255,255,.035), 0 0 0 48px rgba(255,255,255,.025);
+  }
+
+  .course-total span { color: #c6c7c1; font-size: .78rem; font-weight: 700; letter-spacing: .14em; }
+  .course-total strong { display: block; margin-top: .5rem; font: 500 5.8rem/1 Georgia, serif; }
+  .course-total p { margin: .8rem 0 0; color: #c6c7c1; }
+
+  .course-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: clamp(5rem, 10vw, 8rem);
+    border-block: 1px solid var(--line);
+  }
+
+  .course-stats div { padding: 1.5rem; }
+  .course-stats div + div { border-left: 1px solid var(--line); }
+  .course-stats strong { display: block; font: 500 2.2rem/1.1 Georgia, serif; }
+  .course-stats span { color: var(--muted); font-size: .86rem; }
+
+  .course-section-head {
+    display: grid;
+    grid-template-columns: 1fr minmax(280px, .55fr);
+    gap: 3rem;
+    align-items: end;
+  }
+
+  .course-section-head h2,
+  .course-map h2 {
+    margin: 0;
+    font-family: "Songti SC", "STSong", Georgia, serif;
+    font-size: clamp(2.6rem, 6vw, 5rem);
+    font-weight: 500;
+  }
+
+  .course-section-head > p { margin: 0 0 .35rem; color: var(--muted); }
+  .course-filters { display: flex; flex-wrap: wrap; gap: .6rem; margin: 2rem 0; }
+  .course-filters button { border: 1px solid var(--line); border-radius: 999px; background: var(--surface); padding: .6rem 1rem; color: var(--ink); font: inherit; cursor: pointer; }
+  .course-filters button:hover, .course-filters button:focus-visible { border-color: var(--ink); }
+  .course-filters button.active { border-color: var(--ink); background: var(--ink); color: white; }
+
+  .course-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .course-card { display: grid; grid-template-columns: 62px 1fr; gap: 1rem; min-height: 235px; padding: 1.5rem; border: 1px solid var(--line); border-radius: 17px; background: var(--surface); }
+  .course-card[hidden] { display: none; }
+  .course-number { color: var(--muted); font: 500 2.6rem/1 Georgia, serif; }
+  .course-card.history .course-number, .course-card.history .course-track { color: var(--course-history); }
+  .course-card.economy .course-number, .course-card.economy .course-track { color: var(--course-economy); }
+  .course-track { margin: 0 0 .65rem; font-size: .7rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+  .course-card h3 { margin: 0; font-family: "Songti SC", "STSong", Georgia, serif; font-size: 1.45rem; }
+  .course-description { margin: .8rem 0 1rem; color: var(--muted); font-size: .92rem; }
+  .course-tags { display: flex; flex-wrap: wrap; gap: .4rem; padding: 0; margin: 0; list-style: none; }
+  .course-tags li { border-radius: 999px; padding: .18rem .58rem; font-size: .73rem; }
+  .history .course-tags li { background: var(--course-history-soft); color: var(--course-history); }
+  .economy .course-tags li { background: var(--course-economy-soft); color: var(--course-economy); }
+
+  .course-map {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 4rem;
+    margin-top: clamp(5rem, 10vw, 8rem);
+    padding: clamp(2rem, 5vw, 3.5rem);
+    border-radius: 22px;
+    background: var(--ink);
+    color: var(--surface);
+  }
+
+  .course-map > p { align-self: end; margin: 0; color: #c7cbc7; }
+  .course-concepts { display: flex; grid-column: 1 / -1; flex-wrap: wrap; gap: .55rem; }
+  .course-concepts span { border: 1px solid rgba(255,255,255,.17); border-radius: 999px; padding: .5rem .75rem; color: #e7e9e6; font-size: .82rem; }
+
+  .course-next { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-block: 1rem 4rem; }
+  .course-next article { min-height: 250px; padding: 2rem; border-radius: 20px; }
+  .course-next article.history { background: var(--course-history-soft); }
+  .course-next article.economy { background: var(--course-economy-soft); }
+  .course-next p { margin: 0 0 1.8rem; font-size: .75rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+  .course-next h2 { margin: 0 0 .8rem; font-family: "Songti SC", "STSong", Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.5rem); }
+  .course-next span { color: var(--muted); }
+  .course-note { margin-bottom: 5rem; color: var(--muted); font-size: .8rem; }
+
+  @media (max-width: 760px) {
+    .course-hero, .course-section-head, .course-map { grid-template-columns: 1fr; }
+    .course-grid, .course-next { grid-template-columns: 1fr; }
+    .course-stats { grid-template-columns: 1fr; }
+    .course-stats div + div { border-top: 1px solid var(--line); border-left: 0; }
+    .course-concepts { grid-column: auto; }
+  }
+
+  @media (max-width: 480px) {
+    .course-card { grid-template-columns: 48px 1fr; padding: 1.1rem; }
+    .course-number { font-size: 2rem; }
+    .course-card h3 { font-size: 1.25rem; }
+  }
+</style>
