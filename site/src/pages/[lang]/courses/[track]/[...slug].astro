@@ -39,13 +39,13 @@ const imageSrc = lesson.data.image.startsWith("http")
   ? lesson.data.image
   : `${base}${lesson.data.image.replace(/^\/+/, "")}`;
 const isKidsLesson = lesson.data.track === "math";
-const archiveHref = isKidsLesson ? `${base}${lang}/courses/kids/` : `${base}${lang}/courses/`;
+const archiveHref = isKidsLesson ? `${base}${lang}/courses/kids/` : `${base}${lang}/courses/${lesson.data.track}/`;
 const archiveLabel = isKidsLesson
   ? (isZh ? "返回 For Kids 儿童公开课" : "Back to For Kids courses")
-  : (isZh ? "返回公开课目录" : "Back to courses");
+  : (isZh ? `返回${trackName}目录` : `Back to ${trackName}`);
 const archiveCountLabel = isKidsLesson
   ? (isZh ? "查看全部 36 节儿童公开课" : "View all 36 For Kids lessons")
-  : (isZh ? "查看全部 16 节公开课" : "View all 16 lessons");
+  : (isZh ? `查看全部 ${trackLessons.length} 节${trackName}公开课` : `View all ${trackLessons.length} lessons`);
 ---
 
 <BaseLayout lang={lang} title={lesson.data.title} description={lesson.data.description} alternatePath="/courses/">

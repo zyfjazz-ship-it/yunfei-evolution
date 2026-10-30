@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
-import BlogCard from "../../../components/BlogCard.astro";
 import { copy, type Language } from "../../../config/site";
 import { sortPosts } from "../../../utils/blog";
 
@@ -10,43 +9,120 @@ export function getStaticPaths() {
 }
 
 const { lang } = Astro.props as { lang: Language };
+const isZh = lang === "zh";
 const posts = sortPosts(await getCollection("blog", ({ data }) => data.lang === lang && !data.draft));
 const featuredPosts = posts.filter(({ data }) => data.featured);
-const regularPosts = posts.filter(({ data }) => !data.featured);
 const base = import.meta.env.BASE_URL;
 const languagePrefix = `${lang}/`;
 const hrefFor = (id: string) => `${base}${lang}/blog/${id.replace(languagePrefix, "")}/`;
+const formatDate = (date: Date) => new Intl.DateTimeFormat(isZh ? "zh-CN" : "en", { year: "numeric", month: "long", day: "numeric" }).format(date);
+const groupDefinitions = isZh ? [
+  { id: "evolution", title: "云非的进化", label: "Evolution", description: "记录个人网站、AI协作系统与认知方式怎样在真实行动中持续变化。", match: (post: any) => post.data.tags.includes("云非的进化") },
+  { id: "value", title: "在被看见之外", label: "Long-term value", description: "从流量的幻觉出发，重新寻找能够穿越时间的作品、判断、信任与影响力。", match: (post: any) => post.data.tags.includes("在被看见之外") },
+  { id: "ai", title: "中年AI再就业计划", label: "AI learning", description: "从建立AI助手和工作环境开始，一步步完成网站、工作流与新的创造方式。", match: (post: any) => post.data.tags.includes("中年AI再就业计划") },
+] : [];
+const usedIds = new Set(featuredPosts.map(({ id }) => id));
+const groups = groupDefinitions.map((group) => {
+  const entries = posts.filter((post) => !usedIds.has(post.id) && group.match(post));
+  entries.forEach(({ id }) => usedIds.add(id));
+  return { ...group, entries };
+}).filter(({ entries }) => entries.length > 0);
+const otherPosts = posts.filter(({ id }) => !usedIds.has(id));
+if (otherPosts.length > 0) groups.push({
+  id: "notes",
+  title: isZh ? "独立文章" : "Latest notes",
+  label: "Notes",
+  description: isZh ? "不属于固定系列，但同样记录真实学习、实践和复盘的文章。" : "Independent notes on learning, practice, and reflection.",
+  match: () => false,
+  entries: otherPosts,
+});
 ---
 
 <BaseLayout lang={lang} title={copy[lang].allPosts} alternatePath="/blog/">
-  <header class="page-heading shell">
-    <p class="eyebrow">{copy[lang].blog}</p>
-    <h1>{copy[lang].allPosts}</h1>
+  <header class="blog-hero shell">
+    <div>
+      <p class="kicker">Writing · Thinking · Practice</p>
+      <h1>{isZh ? "把思考写下来，让它接受时间的检验。" : "Write ideas down, then let time test them."}</h1>
+      <p class="lead">{isZh ? "这里记录学习、实践与复盘，也记录一个普通人如何在变化中重建自己的判断、工具与行动方式。" : "Notes on learning, practice, reflection, and the ongoing work of rebuilding judgment and action in a changing world."}</p>
+    </div>
+    <aside>
+      <span>{isZh ? "已发布文章" : "Published"}</span>
+      <strong>{String(posts.length).padStart(2, "0")}</strong>
+      <p>{isZh ? `${groups.length} 条持续生长的写作线` : `${Math.max(groups.length, 1)} growing lines of thought`}</p>
+    </aside>
   </header>
 
-  {featuredPosts.length > 0 && <section class="post-list shell" aria-labelledby="featured-heading">
-    <h2 id="featured-heading" class="list-heading">{lang === "zh" ? "置顶文章" : "Featured posts"}</h2>
-    {featuredPosts.map((post) => (
-      <BlogCard title={post.data.title} description={post.data.description} date={post.data.date}
-        tags={post.data.tags} href={hrefFor(post.id)} readMore={copy[lang].readMore}
-        locale={lang} base={base} featured />
-    ))}
+  {featuredPosts.length > 0 && <section class="start-here shell" aria-labelledby="start-here-title">
+    <div><p class="kicker">Start here</p><h2 id="start-here-title">{isZh ? "从这里开始" : "Start here"}</h2></div>
+    {featuredPosts.map((post) => <a class="start-card" href={hrefFor(post.id)}>
+      <div><time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time><h3>{post.data.title}</h3><p>{post.data.description}</p></div>
+      <span aria-hidden="true">→</span>
+    </a>)}
   </section>}
 
-  <section class="post-list shell" aria-labelledby="regular-heading">
-    <h2 id="regular-heading" class="list-heading">{lang === "zh" ? "普通文章" : "Latest posts"}</h2>
+  <section class="blog-archive shell" aria-labelledby="blog-archive-title">
+    <header class="archive-head">
+      <div><p class="kicker">Article archive</p><h2 id="blog-archive-title">{isZh ? "按主题阅读" : "Read by theme"}</h2></div>
+      <p>{isZh ? "文章不再只是按时间堆在一起，而是按持续发展的思考主线整理。" : "Articles are organized as evolving lines of thought, not only by date."}</p>
+    </header>
+
     {posts.length === 0 && <p>{copy[lang].noPosts}</p>}
-    {regularPosts.map((post) => (
-      <BlogCard
-        title={post.data.title}
-        description={post.data.description}
-        date={post.data.date}
-        tags={post.data.tags}
-        href={hrefFor(post.id)}
-        readMore={copy[lang].readMore}
-        locale={lang}
-        base={base}
-      />
-    ))}
+    {groups.map((group) => <section class="article-group" aria-labelledby={`group-${group.id}`}>
+      <header class="group-head">
+        <span>{String(group.entries.length).padStart(2, "0")}</span>
+        <div><p>{group.label}</p><h3 id={`group-${group.id}`}>{group.title}</h3><strong>{group.description}</strong></div>
+      </header>
+      <div class="article-grid">
+        {group.entries.map((post, index) => <a class="article-card" href={hrefFor(post.id)}>
+          <span class="article-no">{String(index + 1).padStart(2, "0")}</span>
+          <div>
+            <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+            <h4>{post.data.title}</h4>
+            <p>{post.data.description}</p>
+            <ul>{post.data.tags.slice(0, 3).map((tag) => <li>{tag}</li>)}</ul>
+            <strong>{copy[lang].readMore} →</strong>
+          </div>
+        </a>)}
+      </div>
+    </section>)}
   </section>
 </BaseLayout>
+
+<style>
+  .blog-hero { display: grid; grid-template-columns: minmax(0,1.35fr) minmax(260px,.65fr); gap: clamp(2rem,7vw,6rem); align-items: end; padding-block: clamp(4.5rem,10vw,8rem); }
+  .kicker { margin: 0 0 .8rem; color: var(--accent); font-size: .76rem; font-weight: 850; letter-spacing: .15em; text-transform: uppercase; }
+  h1, h2, h3, h4 { font-family: "Songti SC", "STSong", Georgia, serif; font-weight: 500; }
+  h1 { max-width: 880px; margin: 0; font-size: clamp(3.3rem,8vw,6.8rem); line-height: .98; }
+  .lead { max-width: 730px; margin: 1.7rem 0 0; color: var(--muted); font-size: clamp(1.1rem,2.1vw,1.42rem); }
+  .blog-hero aside { min-height: 245px; padding: 1.8rem; border-radius: 22px; background: var(--accent); color: white; }
+  .blog-hero aside span { color: rgba(255,255,255,.72); font-size: .78rem; font-weight: 800; letter-spacing: .14em; }
+  .blog-hero aside strong { display: block; margin-top: .5rem; font: 500 5.8rem/1 Georgia, serif; }
+  .blog-hero aside p { color: rgba(255,255,255,.72); }
+  .start-here { display: grid; grid-template-columns: minmax(220px,.45fr) minmax(0,1.55fr); gap: clamp(2rem,6vw,5rem); padding: clamp(2rem,5vw,3.5rem); border-radius: 22px; background: var(--accent-soft); }
+  .start-here h2, .archive-head h2 { margin: 0; font-size: clamp(2.5rem,5.5vw,4.8rem); line-height: 1.08; }
+  .start-card { display: flex; align-items: end; justify-content: space-between; gap: 2rem; color: inherit; text-decoration: none; }
+  .start-card time, .article-card time { color: var(--muted); font-size: .78rem; }
+  .start-card h3 { margin: .4rem 0 .7rem; font-size: clamp(1.8rem,4vw,2.8rem); }
+  .start-card p { max-width: 720px; margin-bottom: 0; color: var(--muted); }
+  .start-card > span { color: var(--accent); font: 500 3rem/1 Georgia,serif; }
+  .blog-archive { padding-block: clamp(5rem,10vw,8rem); }
+  .archive-head { display: grid; grid-template-columns: 1fr minmax(280px,.55fr); gap: 3rem; align-items: end; }
+  .archive-head > p { margin: 0; color: var(--muted); }
+  .article-group { margin-top: clamp(4rem,8vw,7rem); }
+  .group-head { display: grid; grid-template-columns: 70px minmax(0,1fr); gap: 1.2rem; align-items: start; padding-bottom: 1.4rem; border-bottom: 1px solid var(--line); }
+  .group-head > span { color: var(--accent); font: 500 2.8rem/1 Georgia,serif; }
+  .group-head p { margin: 0; color: var(--accent); font-size: .72rem; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
+  .group-head h3 { margin: .2rem 0 .45rem; font-size: clamp(2rem,4vw,3rem); }
+  .group-head strong { display: block; max-width: 760px; color: var(--muted); font-weight: 400; }
+  .article-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; margin-top: 1rem; }
+  .article-card { display: grid; grid-template-columns: 54px minmax(0,1fr); gap: 1rem; min-height: 290px; padding: 1.5rem; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); color: inherit; text-decoration: none; transition: transform .2s ease,border-color .2s ease,box-shadow .2s ease; }
+  .article-card:hover, .article-card:focus-visible { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 18px 45px rgba(32,33,31,.08); outline: none; }
+  .article-no { color: var(--accent); font: 500 2.4rem/1 Georgia,serif; }
+  .article-card h4 { margin: .35rem 0 0; font-size: 1.42rem; }
+  .article-card p { margin: .8rem 0 1rem; color: var(--muted); font-size: .9rem; }
+  .article-card ul { display: flex; flex-wrap: wrap; gap: .35rem; padding: 0; margin: 0; list-style: none; }
+  .article-card li { border-radius: 999px; background: var(--accent-soft); padding: .18rem .58rem; color: var(--accent); font-size: .72rem; }
+  .article-card strong { display: block; margin-top: 1rem; color: var(--accent); font-size: .82rem; }
+  @media (max-width:760px) { .blog-hero,.start-here,.archive-head { grid-template-columns:1fr; } .article-grid { grid-template-columns:1fr; } }
+  @media (max-width:480px) { .article-card { grid-template-columns:44px minmax(0,1fr); padding:1.1rem; } .article-no { font-size:1.9rem; } .group-head { grid-template-columns:50px minmax(0,1fr); } }
+</style>

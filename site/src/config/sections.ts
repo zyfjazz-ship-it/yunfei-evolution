@@ -13,8 +13,8 @@ export const sections = [
     id: "courses",
     title: { zh: "公开课", en: "Open Courses" },
     description: {
-      zh: "沿着文明与经济两条主线，整理已经完成的课程与下一步学习方向。",
-      en: "A growing archive of completed lessons across civilization and economics.",
+      zh: "历史、经济与 For Kids 三个独立板块，整理已经完成的课程与持续学习路径。",
+      en: "Three independent learning tracks across history, economics, and For Kids.",
     },
     href: "/courses/",
     active: true,

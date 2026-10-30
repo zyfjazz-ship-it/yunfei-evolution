@@ -1,0 +1,108 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import type { Language } from "../../../config/site";
+
+export function getStaticPaths() {
+  return ["zh", "en"].flatMap((lang) => ["history", "economy"].map((track) => ({ params: { lang, track }, props: { lang, track } })));
+}
+
+const { lang, track } = Astro.props as { lang: Language; track: "history" | "economy" };
+const isZh = lang === "zh";
+const base = import.meta.env.BASE_URL;
+const lessons = (await getCollection("courses", ({ data }) => data.lang === "zh" && data.track === track))
+  .sort((a, b) => a.data.lesson - b.data.lesson);
+const config = track === "history" ? {
+  label: isZh ? "文明与历史" : "Civilization & history",
+  title: isZh ? "沿着文明的骨架，看见人类如何走到今天" : "Follow the structure of civilization to see how humanity arrived here",
+  lead: isZh ? "从两河流域、古埃及到爱琴海与荷马史诗，不只记人物和年代，而是把环境、技术、经济、组织与艺术放回同一条发展线。" : "From Mesopotamia and Egypt to the Aegean and Homer, connect environment, technology, economics, organization, and art.",
+  introTitle: isZh ? "历史不是故事的堆积，而是结构的演化" : "History is the evolution of structures, not a pile of stories",
+  intro: isZh ? "每一课都从一个具体问题出发：粮食怎样产生城市，河流怎样塑造国家，权力为什么集中，旧秩序为何崩溃，新秩序又怎样从废墟中生长。" : "Each lesson begins with a concrete question about surplus, cities, states, collapse, and renewal.",
+} : {
+  label: isZh ? "价值迁移与经济" : "Value migration & economics",
+  title: isZh ? "沿着货币与资本的流动，看懂现代世界" : "Follow money and capital to understand the modern world",
+  lead: isZh ? "从美元、美债与利率开始，逐步连接银行信用、国际收支、汇率、资产价格和财富分配。" : "Begin with the dollar, Treasuries, and rates, then connect credit, capital flows, exchange rates, prices, and wealth.",
+  introTitle: isZh ? "经济不是数字游戏，而是资源与选择" : "Economics is about resources and choices, not only numbers",
+  intro: isZh ? "每一课都把抽象概念放回真实关系：谁在借钱，谁在承担风险，资本为什么移动，一种政策变化又会怎样传导到企业、家庭与个人。" : "Each lesson returns abstract ideas to real relationships: who borrows, who bears risk, why capital moves, and how policy reaches people.",
+};
+const lessonHref = (id: string) => {
+  const [, entryTrack, ...slugParts] = id.split("/");
+  return `${base}zh/courses/${entryTrack}/${slugParts.join("/").replace(/\.md$/, "")}/`;
+};
+---
+
+<BaseLayout lang={lang} title={config.label} description={config.lead} alternatePath={`/courses/${track}/`}>
+  <header class:list={["track-hero", "shell", track]}>
+    <a class="back-link" href={`${base}${lang}/courses/`}>← {isZh ? "返回公开课首页" : "Back to open courses"}</a>
+    <div class="hero-grid">
+      <div>
+        <p class="kicker">{config.label} · Open courses</p>
+        <h1>{config.title}</h1>
+        <p class="lead">{config.lead}</p>
+      </div>
+      <aside><span>{config.label}</span><strong>{String(lessons.length).padStart(2, "0")}</strong><p>{isZh ? "每课可独立阅读" : "Individually readable lessons"}</p></aside>
+    </div>
+  </header>
+
+  <section class:list={["track-preface", "shell", track]}>
+    <div><p class="kicker">Learning line</p><h2>{config.introTitle}</h2></div>
+    <p>{config.intro}</p>
+  </section>
+
+  <section class="track-lessons shell" aria-labelledby="track-lessons-title">
+    <header class="section-head">
+      <div><p class="kicker">{lessons.length} lessons</p><h2 id="track-lessons-title">{isZh ? "课程目录" : "Lesson archive"}</h2></div>
+      <p>{isZh ? "按学习顺序排列。每一课包含核心问题、概念推导、图片和前后课程导航。" : "Arranged in learning order. Each lesson includes a central question, explanation, images, and navigation."}</p>
+    </header>
+    <div class="lesson-grid">
+      {lessons.map((lesson) => <a class:list={["lesson-card", track]} href={lessonHref(lesson.id)}>
+        <span class="lesson-no">{String(lesson.data.lesson).padStart(2, "0")}</span>
+        <div>
+          <p>{config.label}</p>
+          <h3>{lesson.data.title}</h3>
+          <span class="description">{lesson.data.description}</span>
+          <ul>{lesson.data.tags.map((tag) => <li>{tag}</li>)}</ul>
+          <strong>{isZh ? "打开本课" : "Read in Chinese"} →</strong>
+        </div>
+      </a>)}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  :global(:root) { --history: #9a4b31; --history-soft: #f2dfd6; --economy: #285f63; --economy-soft: #dcebea; }
+  .track-hero { --track: var(--history); --soft: var(--history-soft); padding-block: clamp(2.5rem, 6vw, 4rem) clamp(3.5rem, 8vw, 6rem); }
+  .track-hero.economy, .track-preface.economy { --track: var(--economy); --soft: var(--economy-soft); }
+  .back-link { color: var(--muted); font-size: .86rem; font-weight: 750; text-decoration: none; }
+  .back-link:hover { color: var(--track); }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr); gap: clamp(2rem, 7vw, 6rem); align-items: end; margin-top: clamp(3rem, 8vw, 6rem); }
+  .kicker { margin: 0 0 .8rem; color: var(--track, var(--accent)); font-size: .76rem; font-weight: 850; letter-spacing: .15em; text-transform: uppercase; }
+  h1, h2, h3 { font-family: "Songti SC", "STSong", Georgia, serif; font-weight: 500; }
+  h1 { max-width: 900px; margin: 0; font-size: clamp(3.2rem, 8vw, 6.5rem); line-height: .98; }
+  .lead { max-width: 760px; margin: 1.6rem 0 0; color: var(--muted); font-size: clamp(1.08rem, 2vw, 1.4rem); }
+  .hero-grid aside { min-height: 245px; padding: 1.8rem; border-radius: 22px; background: var(--track); color: white; }
+  .hero-grid aside span { color: rgba(255,255,255,.72); font-size: .78rem; font-weight: 800; letter-spacing: .12em; }
+  .hero-grid aside strong { display: block; margin-top: .5rem; font: 500 5.8rem/1 Georgia, serif; }
+  .hero-grid aside p { color: rgba(255,255,255,.72); }
+  .track-preface { --track: var(--history); --soft: var(--history-soft); display: grid; grid-template-columns: minmax(260px,.8fr) minmax(0,1.2fr); gap: clamp(2rem,6vw,5rem); padding: clamp(2rem,5vw,3.5rem); border-radius: 22px; background: var(--soft); }
+  .track-preface h2 { margin: 0; font-size: clamp(2.2rem,5vw,4rem); line-height: 1.12; }
+  .track-preface > p { align-self: end; margin: 0; color: var(--muted); font-size: 1.05rem; }
+  .track-lessons { padding-block: clamp(5rem,10vw,8rem); }
+  .section-head { display: grid; grid-template-columns: 1fr minmax(280px,.55fr); gap: 3rem; align-items: end; margin-bottom: 3rem; }
+  .section-head h2 { margin: 0; font-size: clamp(2.6rem,6vw,5rem); }
+  .section-head > p { margin: 0; color: var(--muted); }
+  .lesson-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; }
+  .lesson-card { --track: var(--history); --soft: var(--history-soft); display: grid; grid-template-columns: 58px minmax(0,1fr); gap: 1rem; min-height: 290px; padding: 1.5rem; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); color: inherit; text-decoration: none; transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+  .lesson-card.economy { --track: var(--economy); --soft: var(--economy-soft); }
+  .lesson-card:hover, .lesson-card:focus-visible { transform: translateY(-3px); border-color: var(--track); box-shadow: 0 18px 45px rgba(32,33,31,.08); outline: none; }
+  .lesson-no { color: var(--track); font: 500 2.6rem/1 Georgia, serif; }
+  .lesson-card p { margin: 0 0 .6rem; color: var(--track); font-size: .7rem; font-weight: 850; letter-spacing: .11em; }
+  .lesson-card h3 { margin: 0; font-size: 1.45rem; }
+  .description { display: block; margin: .8rem 0 1rem; color: var(--muted); font-size: .9rem; }
+  .lesson-card ul { display: flex; flex-wrap: wrap; gap: .35rem; padding: 0; margin: 0; list-style: none; }
+  .lesson-card li { border-radius: 999px; background: var(--soft); padding: .18rem .58rem; color: var(--track); font-size: .72rem; }
+  .lesson-card strong { display: block; margin-top: 1rem; color: var(--track); font-size: .82rem; }
+  @media (max-width:760px) { .hero-grid, .track-preface, .section-head { grid-template-columns:1fr; } .lesson-grid { grid-template-columns:1fr; } }
+  @media (max-width:480px) { .lesson-card { grid-template-columns:46px minmax(0,1fr); padding:1.1rem; } .lesson-no { font-size:2rem; } }
+</style>
+

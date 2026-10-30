@@ -29,18 +29,32 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat(lang === "zh" ? "zh-C
 ---
 
 <BaseLayout lang={lang} title={`${lang === "zh" ? "标签" : "Tag"}: ${tag}`} alternatePath="/blog/">
-  <header class="page-heading shell">
-    <p class="eyebrow">{lang === "zh" ? "标签" : "Tag"}</p>
+  <header class="tag-heading shell">
+    <a href={`${base}${lang}/blog/`}>← {copy[lang].allPosts}</a>
+    <p>{lang === "zh" ? "文章标签" : "Article tag"}</p>
     <h1>#{tag}</h1>
-    <p>{lang === "zh" ? `${posts.length} 篇相关文章` : `${posts.length} related ${posts.length === 1 ? "post" : "posts"}`}</p>
+    <strong>{lang === "zh" ? `${posts.length} 篇相关文章` : `${posts.length} related ${posts.length === 1 ? "post" : "posts"}`}</strong>
   </header>
-  <section class="tag-posts shell">
-    <ul>
-      {posts.map((post) => <li>
-        <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
-        <h2><a href={`${base}${lang}/blog/${postSlug(post)}/`}>{post.data.title}</a></h2>
-      </li>)}
-    </ul>
-    <a class="text-link" href={`${base}${lang}/blog/`}>← {copy[lang].allPosts}</a>
+  <section class="tag-grid shell">
+    {posts.map((post, index) => <a class="tag-card" href={`${base}${lang}/blog/${postSlug(post)}/`}>
+      <span>{String(index + 1).padStart(2, "0")}</span>
+      <div><time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time><h2>{post.data.title}</h2><p>{post.data.description}</p><strong>{copy[lang].readMore} →</strong></div>
+    </a>)}
   </section>
 </BaseLayout>
+
+<style>
+  .tag-heading { padding-block:clamp(3.5rem,8vw,7rem); }
+  .tag-heading > a { color:var(--muted); font-size:.86rem; font-weight:750; text-decoration:none; }
+  .tag-heading > p { margin:3rem 0 .6rem; color:var(--accent); font-size:.76rem; font-weight:850; letter-spacing:.14em; text-transform:uppercase; }
+  .tag-heading h1 { margin:0; font-family:"Songti SC","STSong",Georgia,serif; font-size:clamp(3.5rem,9vw,7rem); font-weight:500; }
+  .tag-heading > strong { color:var(--muted); font-weight:400; }
+  .tag-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; padding-bottom:6rem; }
+  .tag-card { display:grid; grid-template-columns:52px minmax(0,1fr); gap:1rem; min-height:260px; padding:1.5rem; border:1px solid var(--line); border-radius:18px; background:var(--surface); color:inherit; text-decoration:none; }
+  .tag-card > span { color:var(--accent); font:500 2.3rem/1 Georgia,serif; }
+  .tag-card time { color:var(--muted); font-size:.78rem; }
+  .tag-card h2 { margin:.4rem 0 .7rem; font-family:"Songti SC","STSong",Georgia,serif; font-size:1.45rem; font-weight:500; }
+  .tag-card p { color:var(--muted); font-size:.9rem; }
+  .tag-card strong { display:block; margin-top:1rem; color:var(--accent); font-size:.82rem; }
+  @media(max-width:760px) { .tag-grid { grid-template-columns:1fr; } }
+</style>

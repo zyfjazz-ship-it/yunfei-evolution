@@ -67,27 +67,39 @@ const relatedPosts = posts
   })
   .slice(0, 3);
 const topicTag = post.data.tags[0];
+const articleLine = post.data.series ?? topicTag ?? (lang === "zh" ? "独立文章" : "Independent note");
+const publicationYear = post.data.date.getFullYear();
 ---
 
 <BaseLayout lang={lang} title={post.data.title} description={post.data.description} alternatePath={alternatePath}>
-  <article class="article shell">
-    <header class="article-header">
-      <h1>{post.data.title}</h1>
-      <p class="article-description">{post.data.description}</p>
-      <dl class="article-meta">
-        <div><dt>{lang === "zh" ? "作者" : "Author"}</dt><dd>{site.author}</dd></div>
-        <div><dt>{lang === "zh" ? "发布时间" : "Published"}</dt><dd><time datetime={post.data.date.toISOString()}>{formattedDate}</time></dd></div>
-        <div><dt>{lang === "zh" ? "阅读量" : "Views"}</dt><dd><ViewCount contentId={post.id} lang={lang} /></dd></div>
-      </dl>
-      <p class="meta-label">{lang === "zh" ? "标签" : "Tags"}</p>
-      <ul class="tag-list" aria-label="Tags">
-        {post.data.tags.map((tag: string) => <li><a href={tagHref(tag)}>#{tag}</a></li>)}
-      </ul>
+  <article class="blog-article">
+    <header class="blog-header shell">
+      <a class="back-link" href={`${base}${lang}/blog/`}>← {lang === "zh" ? "返回 Blog" : "Back to Blog"}</a>
+      <div class="blog-heading-grid">
+        <div>
+          <p class="blog-kicker">{articleLine}</p>
+          <h1>{post.data.title}</h1>
+          <p class="blog-description">{post.data.description}</p>
+          <dl class="blog-meta">
+            <div><dt>{lang === "zh" ? "作者" : "Author"}</dt><dd>{site.author}</dd></div>
+            <div><dt>{lang === "zh" ? "发布时间" : "Published"}</dt><dd><time datetime={post.data.date.toISOString()}>{formattedDate}</time></dd></div>
+            <div><dt>{lang === "zh" ? "阅读量" : "Views"}</dt><dd><ViewCount contentId={post.id} lang={lang} /></dd></div>
+          </dl>
+        </div>
+        <span class="blog-year" aria-hidden="true">{publicationYear}</span>
+      </div>
     </header>
-    <div class="prose">
-      <Content />
+
+    <div class="blog-body shell">
+      <aside class="blog-note">
+        <p>{lang === "zh" ? "文章标签" : "Article tags"}</p>
+        <ul>{post.data.tags.map((tag: string) => <li><a href={tagHref(tag)}>#{tag}</a></li>)}</ul>
+        {post.data.series && <div><span>{lang === "zh" ? "所属系列" : "Series"}</span><strong>{post.data.series}</strong></div>}
+      </aside>
+      <div class="prose blog-prose"><Content /></div>
     </div>
-    <footer class="article-footer">
+
+    <footer class="blog-footer shell">
       {topicTag && <a class="topic-link" href={tagHref(topicTag)}>← {lang === "zh" ? `返回专题页面：《${topicTag}》` : `Back to topic: ${topicTag}`}</a>}
       <nav class="post-navigation" aria-label={lang === "zh" ? "文章导航" : "Post navigation"}>
         <div>{previousPost && <><span>{lang === "zh" ? "上一篇" : "Previous"}</span><a href={postHref(previousPost)}>{previousPost.data.title}</a></>}</div>
@@ -100,3 +112,38 @@ const topicTag = post.data.tags[0];
     </footer>
   </article>
 </BaseLayout>
+
+<style>
+  .blog-header { padding-block: clamp(3.5rem,8vw,7rem) clamp(2rem,5vw,4rem); }
+  .back-link { color: var(--muted); font-size: .86rem; font-weight: 750; text-decoration: none; }
+  .back-link:hover { color: var(--accent); }
+  .blog-heading-grid { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 2rem; align-items: end; margin-top: 2rem; }
+  .blog-kicker { margin: 0 0 .8rem; color: var(--accent); font-size: .76rem; font-weight: 850; letter-spacing: .14em; text-transform: uppercase; }
+  .blog-header h1 { max-width: 940px; margin: 0; font-family: "Songti SC","STSong",Georgia,serif; font-size: clamp(2.9rem,7vw,5.8rem); font-weight: 500; line-height: 1.04; }
+  .blog-description { max-width: 760px; margin: 1.4rem 0 0; color: var(--muted); font-size: clamp(1.05rem,2vw,1.3rem); }
+  .blog-year { color: var(--accent-soft); font: 500 clamp(4rem,11vw,8rem)/.8 Georgia,serif; writing-mode: vertical-rl; }
+  .blog-meta { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; margin: 1.5rem 0 0; color: var(--muted); font-size: .88rem; }
+  .blog-meta div { display: flex; gap: .35rem; }
+  .blog-meta dt { color: var(--ink); font-weight: 750; }
+  .blog-meta dd { margin: 0; }
+  .blog-body { display: grid; grid-template-columns: 210px minmax(0,720px); justify-content: center; gap: clamp(2rem,6vw,5rem); padding-block: clamp(3rem,8vw,6rem); border-top: 1px solid var(--line); }
+  .blog-note { align-self: start; position: sticky; top: 100px; border-top: 3px solid var(--accent); padding-top: .8rem; }
+  .blog-note > p, .blog-note span { margin: 0 0 .55rem; color: var(--accent); font-size: .72rem; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
+  .blog-note ul { display: flex; flex-wrap: wrap; gap: .35rem; padding: 0; margin: 0; list-style: none; }
+  .blog-note li { border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: .72rem; }
+  .blog-note li a { display: block; padding: .18rem .55rem; text-decoration: none; }
+  .blog-note div { margin-top: 1.4rem; }
+  .blog-note span, .blog-note strong { display: block; }
+  .blog-note strong { color: var(--muted); font-size: .8rem; }
+  .blog-prose { padding-top: 0; font-family: "Songti SC","STSong",Georgia,serif; font-size: 1.12rem; line-height: 1.95; }
+  .blog-prose > :global(h1:first-child) { display: none; }
+  .blog-prose :global(h2) { margin: 3.2rem 0 1rem; color: var(--accent); font-family: Inter,ui-sans-serif,system-ui,sans-serif; font-size: clamp(1.65rem,3vw,2.2rem); }
+  .blog-prose :global(h3) { margin-top: 2rem; font-family: Inter,ui-sans-serif,system-ui,sans-serif; font-size: 1.2rem; }
+  .blog-prose :global(blockquote) { margin: 2rem 0; border-left: 4px solid var(--accent); background: var(--accent-soft); padding: 1rem 1.3rem; font-size: 1.2rem; }
+  .blog-prose :global(blockquote p) { margin: 0; }
+  .blog-prose :global(strong) { color: var(--accent); }
+  .blog-prose :global(hr) { margin: 3rem 0; border: 0; border-top: 1px solid var(--line); }
+  .blog-footer { max-width: 980px; padding-bottom: 6rem; }
+  .blog-footer .post-navigation div { background: var(--surface); }
+  @media (max-width:760px) { .blog-heading-grid { grid-template-columns:1fr; } .blog-year { display:none; } .blog-body { grid-template-columns:1fr; } .blog-note { position:static; } }
+</style>
