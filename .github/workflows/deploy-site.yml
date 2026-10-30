@@ -36,8 +36,8 @@ jobs:
         run: npm run build
         working-directory: site
         env:
-          BASE_PATH: /yunfei-evolution/
-          SITE_URL: https://${{ github.repository_owner }}.github.io
+          BASE_PATH: /
+          SITE_URL: https://yunfeilab.com
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

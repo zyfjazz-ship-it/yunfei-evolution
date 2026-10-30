@@ -19,7 +19,7 @@ relatedPosts: []
 
 方案由此提出一个问题：能不能让一份能源在同一条链条中创造多次价值，而不是只完成一次发电和用电？
 
-<img src="/yunfei-evolution/images/works/bridger-2024-central-asia/resource-map.jpg" alt="中亚地区能源资源分布与项目背景分析" loading="lazy">
+<img src="/images/works/bridger-2024-central-asia/resource-map.jpg" alt="中亚地区能源资源分布与项目背景分析" loading="lazy">
 
 ## 复合发展模式
 
@@ -32,13 +32,13 @@ relatedPosts: []
 
 这里所说的边缘算力，包括方案中的比特币算力设施。算力不是系统的终点，而是能源价值与农业价值之间的连接器。
 
-<img src="/yunfei-evolution/images/works/bridger-2024-central-asia/integrated-model.jpg" alt="清洁能源、算力与现代农业的一体化发展模型" loading="lazy">
+<img src="/images/works/bridger-2024-central-asia/integrated-model.jpg" alt="清洁能源、算力与现代农业的一体化发展模型" loading="lazy">
 
 ## 从电到热，再回到土地
 
 传统算力设施产生的热量往往被当作负担排走。这个方案尝试把它重新看作一种可利用的生产资料：电力先支持计算，计算产生的热能再进入温室，让同一份能源同时服务数字基础设施和农业生产。
 
-<img src="/yunfei-evolution/images/works/bridger-2024-central-asia/waste-heat-model.jpg" alt="计算设施余热回收并服务温室农业的结构示意" loading="lazy">
+<img src="/images/works/bridger-2024-central-asia/waste-heat-model.jpg" alt="计算设施余热回收并服务温室农业的结构示意" loading="lazy">
 
 ## 10MW 参考模型
 
@@ -46,7 +46,7 @@ relatedPosts: []
 
 这些数字是 2024 年方案中的情境测算，用于比较结构与可行性，并不构成收益承诺。真正落地时，还需要根据当地电价、气候、热能输送距离、设备效率、农产品市场与合规条件重新计算。
 
-<img src="/yunfei-evolution/images/works/bridger-2024-central-asia/reference-model.jpg" alt="10MW 算力设施与四万平方米温室的参考模型" loading="lazy">
+<img src="/images/works/bridger-2024-central-asia/reference-model.jpg" alt="10MW 算力设施与四万平方米温室的参考模型" loading="lazy">
 
 ## 这项工作的价值
 
