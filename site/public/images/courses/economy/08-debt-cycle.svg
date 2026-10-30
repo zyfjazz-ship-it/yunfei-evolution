@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">债务周期的扩张与收缩</title>
+  <desc id="desc">信用、支出、收入、资产价格和抵押品在繁荣期相互加强，在去杠杆期反向收缩。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#102f34"/>
+      <stop offset="1" stop-color="#285f63"/>
+    </linearGradient>
+    <marker id="arrowGold" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0l10 5-10 5z" fill="#efb96f"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0l10 5-10 5z" fill="#9dcfc6"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <circle cx="600" cy="365" r="235" fill="none" stroke="#46777a" stroke-width="2" stroke-dasharray="8 12"/>
+  <text x="70" y="86" font-family="system-ui, sans-serif" font-size="42" font-weight="800" fill="#f2f7f4">债务周期</text>
+  <text x="70" y="128" font-family="system-ui, sans-serif" font-size="22" fill="#b8d2ce">繁荣与危机，是同一套反馈机制的两个方向</text>
+
+  <path d="M350 235C455 120 745 120 850 235" fill="none" stroke="#efb96f" stroke-width="10" stroke-linecap="round" marker-end="url(#arrowGold)"/>
+  <text x="600" y="176" text-anchor="middle" font-family="system-ui, sans-serif" font-size="25" font-weight="700" fill="#efb96f">信用扩张</text>
+  <path d="M850 495C745 610 455 610 350 495" fill="none" stroke="#9dcfc6" stroke-width="10" stroke-linecap="round" marker-end="url(#arrowBlue)"/>
+  <text x="600" y="585" text-anchor="middle" font-family="system-ui, sans-serif" font-size="25" font-weight="700" fill="#bde4dd">去杠杆</text>
+
+  <g font-family="system-ui, sans-serif" text-anchor="middle">
+    <circle cx="330" cy="365" r="92" fill="#c98c51"/>
+    <text x="330" y="355" font-size="30" font-weight="800" fill="#fff">更多贷款</text>
+    <text x="330" y="392" font-size="18" fill="#fff3e3">未来购买力来到今天</text>
+
+    <circle cx="600" cy="365" r="104" fill="#f2e3c8"/>
+    <text x="600" y="348" font-size="32" font-weight="900" fill="#234f52">收入与资产</text>
+    <text x="600" y="388" font-size="21" fill="#527174">上涨时强化信心</text>
+    <text x="600" y="418" font-size="21" fill="#527174">下跌时放大压力</text>
+
+    <circle cx="870" cy="365" r="92" fill="#477f76"/>
+    <text x="870" y="355" font-size="30" font-weight="800" fill="#fff">更多抵押</text>
+    <text x="870" y="392" font-size="18" fill="#d8eee9">上涨支持再次借款</text>
+  </g>
+
+  <path d="M425 365h55" stroke="#efb96f" stroke-width="8" stroke-linecap="round" marker-end="url(#arrowGold)"/>
+  <path d="M705 365h55" stroke="#efb96f" stroke-width="8" stroke-linecap="round" marker-end="url(#arrowGold)"/>
+  <text x="600" y="650" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" fill="#d7e7e3">关键不是债务有多大，而是收入能否跟上偿债速度</text>
+</svg>
