@@ -13,15 +13,36 @@ const { lang } = Astro.props as { lang: Language };
   <section class="subscribe-page shell">
     <p class="eyebrow">Newsletter</p>
     <h1>{lang === "zh" ? "订阅云非的进化论" : "Subscribe to Yunfei's Evolution"}</h1>
-    <p>{lang === "zh" ? "未来可通过邮件接收最新文章、作品与成长记录。当前订阅服务尚未启用。" : "Receive future articles, works, and growth notes by email. The newsletter service is not connected yet."}</p>
-    <form class="subscribe-form" data-newsletter-form data-provider="none">
+    <p>{lang === "zh" ? "未来可通过邮件接收最新文章、作品与成长记录。输入功能已经开放，正式邮件服务仍在接入中。" : "Receive future articles, works, and growth notes by email. Email entry is available now, while the newsletter service is still being connected."}</p>
+    <form
+      class="subscribe-form"
+      data-newsletter-form
+      data-provider="none"
+      data-pending-message={lang === "zh" ? "邮箱格式正确。当前网站还没有连接邮件服务，因此这次不会上传或保存你的邮箱；接入服务后即可正式订阅。" : "The email address is valid. No newsletter provider is connected yet, so this address has not been uploaded or saved. Subscription will become active once the service is connected."}
+    >
       <label for="subscriber-email">{lang === "zh" ? "邮箱地址" : "Email address"}</label>
       <div>
-        <input id="subscriber-email" name="email" type="email" autocomplete="email" placeholder={lang === "zh" ? "name@example.com" : "name@example.com"} disabled />
-        <button type="button" disabled>{lang === "zh" ? "订阅" : "Subscribe"}</button>
+        <input id="subscriber-email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required />
+        <button type="submit">{lang === "zh" ? "检查并订阅" : "Check & subscribe"}</button>
       </div>
-      <p class="form-note">{lang === "zh" ? "订阅功能即将开放，不会收集或发送当前输入的信息。" : "Subscriptions are coming soon. No information is currently collected or sent."}</p>
+      <p class="form-note">{lang === "zh" ? "目前只检查邮箱格式，不会把地址上传到任何第三方，也不会显示虚假的“订阅成功”。" : "For now, this only checks the email format. Nothing is uploaded to a third party, and no false success confirmation is shown."}</p>
+      <p class="form-status" data-form-status role="status" aria-live="polite" hidden></p>
     </form>
   </section>
 </BaseLayout>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>("[data-newsletter-form]").forEach((form) => {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+
+      const status = form.querySelector<HTMLElement>("[data-form-status]");
+      if (!status) return;
+
+      status.textContent = form.dataset.pendingMessage ?? "";
+      status.hidden = false;
+    });
+  });
+</script>
 

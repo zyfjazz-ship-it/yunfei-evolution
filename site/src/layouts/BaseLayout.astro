@@ -31,7 +31,7 @@ const path = (value: string) => `${base}${value.replace(/^\//, "")}`;
     <header class="site-header">
       <div class="shell header-inner">
         <a class="brand" href={path(`${lang}/`)}>{site.name}</a>
-        <nav aria-label={lang === "zh" ? "主导航" : "Main navigation"}>
+        <nav class="primary-nav" aria-label={lang === "zh" ? "主导航" : "Main navigation"}>
           <a href={path(`${lang}/blog/`)}>Blog</a>
           <a href={path(`${lang}/courses/`)}>{copy[lang].courses}</a>
           <a href={path(`${lang}/works/`)}>{copy[lang].works}</a>
