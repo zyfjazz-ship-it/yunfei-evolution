@@ -30,6 +30,25 @@ const works = defineCollection({
     translationKey: z.string(),
     relatedPosts: z.array(z.string()).default([]),
     category: z.enum(["book", "technology", "video", "creative"]).optional(),
+    bookKey: z.string().optional(),
+  }),
+});
+
+const bookPages = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/books" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    bookTitle: z.string(),
+    bookKey: z.string(),
+    lang: z.enum(["zh", "en"]),
+    volume: z.number().int().nonnegative(),
+    volumeTitle: z.string(),
+    chapter: z.number().int().nonnegative(),
+    order: z.number().int().nonnegative(),
+    slug: z.string(),
+    draft: z.boolean().default(false),
+    sourceVersion: z.string(),
   }),
 });
 
@@ -50,4 +69,4 @@ const courses = defineCollection({
   }),
 });
 
-export const collections = { blog, works, courses };
+export const collections = { blog, works, bookPages, courses };

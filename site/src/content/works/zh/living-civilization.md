@@ -1,6 +1,6 @@
 ---
 title: "《生命型文明》"
-description: "一部持续写作中的思想著作：从信息、反馈与进化出发，理解个人、技术与文明如何形成具有生命力的系统。"
+description: "2026年夏完成的全书初稿：从信息、反馈与进化出发，理解个人、技术与文明如何形成具有生命力的系统。"
 createdAt: 2026-07-28
 cover: "/images/works/living-civilization/cover.svg"
 coverAlt: "《生命型文明》作品封面，以生长的同心轨迹与相互连接的节点象征反馈和进化"
@@ -8,6 +8,7 @@ lang: zh
 draft: false
 translationKey: work-living-civilization
 category: book
+bookKey: living-civilization
 relatedPosts:
   - yunfei-evolution-01-two-migrations
 ---
@@ -33,7 +34,9 @@ relatedPosts:
 
 在人与 AI 的长期协作中，碳基生命负责感受、选择和承担，硅基智能负责连接、放大和协助执行。两者通过现实反馈形成循环，才可能成为一个不断进化的整体。
 
-## 当前状态
+## 全书初稿
 
-《生命型文明》仍在写作和实践中。这个页面先记录它的核心命题，以及它怎样在我的真实行动中逐渐成形；后续章节、案例和结构会继续补充。
+2026 年夏完成的全书初稿现已完整收录在网站中，包括前言、四卷与全部现有章节。读者可以从前言开始，也可以按卷选择章节阅读。
+
+这仍然是一部会继续接受现实检验的著作。后续章节、案例和结构会在实践中继续修正与生长。
 

@@ -16,6 +16,20 @@ const { Content } = await render(work);
 const lang = work.data.lang as Language;
 const base = import.meta.env.BASE_URL;
 const assetHref = (path: string) => path.startsWith("/") ? `${base}${path.slice(1)}` : path;
+const bookPages = work.data.bookKey
+  ? (await getCollection("bookPages", ({ data }) => data.bookKey === work.data.bookKey && data.lang === lang && !data.draft))
+      .sort((a, b) => a.data.order - b.data.order)
+  : [];
+const bookVolumes = bookPages.reduce((groups: any[], page: any) => {
+  let group = groups.find(({ volume }) => volume === page.data.volume);
+  if (!group) {
+    group = { volume: page.data.volume, title: page.data.volumeTitle, pages: [] };
+    groups.push(group);
+  }
+  group.pages.push(page);
+  return groups;
+}, []);
+const bookPageHref = (page: any) => `${base}${lang}/works/${work.data.bookKey}/read/${page.data.slug}/`;
 const blogPosts = await getCollection("blog", ({ data }) => data.lang === lang && !data.draft);
 const relatedPosts = work.data.relatedPosts
   .map((key: string) => blogPosts.find(({ data, id }) => data.translationKey === key || id === key))
@@ -42,6 +56,22 @@ const categoryLabel = work.data.category ? categoryLabels[work.data.category] : 
       {work.data.cover && <img class="work-cover" src={assetHref(work.data.cover)} alt={work.data.coverAlt ?? ""} />}
     </header>
     <div class="prose"><Content /></div>
+    {bookPages.length > 0 && <section class="book-entry" aria-labelledby="book-entry-title">
+      <div class="book-entry-intro">
+        <p class="eyebrow">{lang === "zh" ? "全文阅读" : "Read the book"}</p>
+        <h2 id="book-entry-title">{lang === "zh" ? "完整初稿" : "Complete draft"}</h2>
+        <p>{lang === "zh" ? "本版收录前言、四卷与全部现有正文。可以从头阅读，也可以按卷进入。" : "This edition includes the preface, four volumes, and the complete available manuscript."}</p>
+        <a class="button-link" href={bookPageHref(bookPages[0])}>{lang === "zh" ? "从前言开始阅读 →" : "Start with the preface →"}</a>
+      </div>
+      <div class="book-volume-list">
+        {bookVolumes.map((group: any) => <section class="book-volume">
+          <h3>{group.volume === 0 ? (lang === "zh" ? "前言" : "Preface") : `${lang === "zh" ? `第${["", "一", "二", "三", "四"][group.volume]}卷` : `Volume ${group.volume}`} · ${group.title}`}</h3>
+          <ol>
+            {group.pages.map((page: any) => <li><a href={bookPageHref(page)}>{page.data.title}</a></li>)}
+          </ol>
+        </section>)}
+      </div>
+    </section>}
     {relatedPosts.length > 0 && <section class="related-posts"><h2>{lang === "zh" ? "相关文章" : "Related posts"}</h2><ul>
       {relatedPosts.map((post: any) => <li><a href={`${base}${lang}/blog/${post.id.replace(`${lang}/`, "")}/`}>{post.data.title}</a></li>)}
     </ul></section>}

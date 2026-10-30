@@ -1,0 +1,90 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../../../../layouts/BaseLayout.astro";
+import type { Language } from "../../../../../config/site";
+
+export async function getStaticPaths() {
+  const pages = await getCollection("bookPages", ({ data }) => data.bookKey === "living-civilization" && !data.draft);
+  return pages.map((page) => ({
+    params: { lang: page.data.lang, page: page.data.slug },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+const lang = page.data.lang as Language;
+const base = import.meta.env.BASE_URL;
+const pages = (await getCollection("bookPages", ({ data }) =>
+  data.bookKey === page.data.bookKey && data.lang === lang && !data.draft
+)).sort((a, b) => a.data.order - b.data.order);
+const currentIndex = pages.findIndex(({ id }) => id === page.id);
+const previousPage = currentIndex > 0 ? pages[currentIndex - 1] : undefined;
+const nextPage = currentIndex < pages.length - 1 ? pages[currentIndex + 1] : undefined;
+const pageHref = (entry: any) => `${base}${lang}/works/living-civilization/read/${entry.data.slug}/`;
+const workHref = `${base}${lang}/works/living-civilization/`;
+const worksHref = `${base}${lang}/works/`;
+const volumeLabel = (volume: number, title: string) => volume === 0
+  ? (lang === "zh" ? "序" : "Preface")
+  : `${lang === "zh" ? `第${["", "一", "二", "三", "四"][volume]}卷` : `Volume ${volume}`} · ${title}`;
+const volumeGroups = pages.reduce((groups: any[], entry: any) => {
+  let group = groups.find(({ volume }) => volume === entry.data.volume);
+  if (!group) {
+    group = { volume: entry.data.volume, title: entry.data.volumeTitle, pages: [] };
+    groups.push(group);
+  }
+  group.pages.push(entry);
+  return groups;
+}, []);
+---
+
+<BaseLayout lang={lang} title={`${page.data.title} · 《生命型文明》`} description={page.data.description} alternatePath="/works/living-civilization/">
+  <div class="book-reader shell">
+    <nav class="book-breadcrumb" aria-label={lang === "zh" ? "面包屑导航" : "Breadcrumb"}>
+      <a href={worksHref}>{lang === "zh" ? "作品" : "Works"}</a>
+      <span aria-hidden="true">/</span>
+      <a href={workHref}>《{page.data.bookTitle}》</a>
+      <span aria-hidden="true">/</span>
+      <span>{page.data.title}</span>
+    </nav>
+
+    <details class="book-mobile-toc">
+      <summary>{lang === "zh" ? "打开全书目录" : "Open table of contents"}</summary>
+      <div class="book-toc-content">
+        {volumeGroups.map((group: any) => <section>
+          <h2>{volumeLabel(group.volume, group.title)}</h2>
+          <ol>{group.pages.map((entry: any) => <li><a href={pageHref(entry)} aria-current={entry.id === page.id ? "page" : undefined}>{entry.data.title}</a></li>)}</ol>
+        </section>)}
+      </div>
+    </details>
+
+    <div class="book-reader-grid">
+      <article class="book-page">
+        <header class="book-page-header">
+          <p class="eyebrow">{volumeLabel(page.data.volume, page.data.volumeTitle)} · {page.data.sourceVersion}</p>
+          <h1>{page.data.title}</h1>
+          <p>{page.data.description}</p>
+        </header>
+        <div class="prose book-prose"><Content /></div>
+        <nav class="book-page-navigation" aria-label={lang === "zh" ? "章节导航" : "Chapter navigation"}>
+          <div>{previousPage && <><span>{lang === "zh" ? "上一章" : "Previous"}</span><a href={pageHref(previousPage)}>{previousPage.data.title}</a></>}</div>
+          <div>{nextPage && <><span>{lang === "zh" ? "下一章" : "Next"}</span><a href={pageHref(nextPage)}>{nextPage.data.title}</a></>}</div>
+        </nav>
+      </article>
+
+      <aside class="book-sidebar" aria-label={lang === "zh" ? "全书目录" : "Table of contents"}>
+        <div class="book-sidebar-inner">
+          <p class="eyebrow">{lang === "zh" ? "全书目录" : "Contents"}</p>
+          <a class="book-sidebar-title" href={workHref}>《{page.data.bookTitle}》</a>
+          <div class="book-toc-content">
+            {volumeGroups.map((group: any) => <section>
+              <h2>{volumeLabel(group.volume, group.title)}</h2>
+              <ol>{group.pages.map((entry: any) => <li><a href={pageHref(entry)} aria-current={entry.id === page.id ? "page" : undefined}>{entry.data.title}</a></li>)}</ol>
+            </section>)}
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>
+
