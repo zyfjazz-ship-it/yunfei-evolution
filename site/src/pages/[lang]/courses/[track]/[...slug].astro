@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import CourseQuiz from "../../../../components/CourseQuiz.astro";
 import type { Language } from "../../../../config/site";
 
 export async function getStaticPaths() {
@@ -80,6 +81,7 @@ const archiveCountLabel = isKidsLesson
       </aside>
       <div class="prose course-prose">
         <Content />
+        {lesson.data.quiz && <CourseQuiz quiz={lesson.data.quiz} lang={lang} />}
       </div>
     </div>
 

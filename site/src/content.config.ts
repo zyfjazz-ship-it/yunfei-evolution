@@ -66,6 +66,16 @@ const courses = defineCollection({
     imageCaption: z.string(),
     imageCreditUrl: z.string().url().optional(),
     sourceNote: z.string().default("根据过往公开课聊天记录整理"),
+    quiz: z.object({
+      questions: z.array(z.object({
+        prompt: z.string(),
+        options: z.array(z.string()).min(2),
+        answer: z.number().int().nonnegative(),
+        explanation: z.string(),
+      })).min(1),
+      reflectionPrompt: z.string(),
+      submitLabel: z.string().optional(),
+    }).optional(),
   }),
 });
 

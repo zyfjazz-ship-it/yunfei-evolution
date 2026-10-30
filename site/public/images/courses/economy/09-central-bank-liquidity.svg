@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">央行流动性的三条传导路径</title>
+  <desc id="desc">央行创造的基础货币经过银行风险判断、借款需求和财政渠道后，可能稳定支付系统、推高资产价格或形成实体经济需求。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#102f34"/>
+      <stop offset="1" stop-color="#285f63"/>
+    </linearGradient>
+    <marker id="arrowGold" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0l10 5-10 5z" fill="#efb96f"/>
+    </marker>
+    <marker id="arrowMint" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0l10 5-10 5z" fill="#9dcfc6"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <text x="70" y="82" font-family="system-ui, sans-serif" font-size="42" font-weight="800" fill="#f2f7f4">央行放水</text>
+  <text x="70" y="124" font-family="system-ui, sans-serif" font-size="22" fill="#b8d2ce">创造货币条件，不等于直接创造居民收入</text>
+
+  <rect x="420" y="160" width="360" height="106" rx="28" fill="#f2e3c8"/>
+  <text x="600" y="205" text-anchor="middle" font-family="system-ui, sans-serif" font-size="29" font-weight="850" fill="#234f52">基础货币与低利率</text>
+  <text x="600" y="239" text-anchor="middle" font-family="system-ui, sans-serif" font-size="19" fill="#527174">降息 · 流动性支持 · 购买债券</text>
+
+  <path d="M600 268v78" stroke="#efb96f" stroke-width="8" stroke-linecap="round" marker-end="url(#arrowGold)"/>
+  <rect x="355" y="350" width="490" height="86" rx="23" fill="#c98c51"/>
+  <text x="600" y="387" text-anchor="middle" font-family="system-ui, sans-serif" font-size="26" font-weight="800" fill="#fff">传导之门</text>
+  <text x="600" y="416" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" fill="#fff3e3">银行愿贷 · 借款人愿借 · 政府是否支出</text>
+
+  <path d="M505 438C430 475 325 465 245 520" fill="none" stroke="#9dcfc6" stroke-width="7" stroke-linecap="round" marker-end="url(#arrowMint)"/>
+  <path d="M600 438v82" fill="none" stroke="#efb96f" stroke-width="7" stroke-linecap="round" marker-end="url(#arrowGold)"/>
+  <path d="M695 438C770 475 875 465 955 520" fill="none" stroke="#9dcfc6" stroke-width="7" stroke-linecap="round" marker-end="url(#arrowMint)"/>
+
+  <g font-family="system-ui, sans-serif" text-anchor="middle">
+    <rect x="90" y="525" width="290" height="106" rx="24" fill="#477f76"/>
+    <text x="235" y="568" font-size="25" font-weight="800" fill="#fff">支付系统稳定</text>
+    <text x="235" y="603" font-size="17" fill="#d8eee9">银行不断裂，交易能继续</text>
+
+    <rect x="455" y="525" width="290" height="106" rx="24" fill="#c98c51"/>
+    <text x="600" y="568" font-size="25" font-weight="800" fill="#fff">资产价格变化</text>
+    <text x="600" y="603" font-size="17" fill="#fff3e3">债券、股票和房产可能先动</text>
+
+    <rect x="820" y="525" width="290" height="106" rx="24" fill="#477f76"/>
+    <text x="965" y="568" font-size="25" font-weight="800" fill="#fff">实体经济需求</text>
+    <text x="965" y="603" font-size="17" fill="#d8eee9">消费、投资、收入与就业</text>
+  </g>
+  <text x="1115" y="82" text-anchor="end" font-family="Georgia, serif" font-size="88" fill="#46777a">09</text>
+</svg>
