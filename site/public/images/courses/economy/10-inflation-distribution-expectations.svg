@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">通胀的四股共同力量</title>
+  <desc id="desc">需求、供给、分配和预期共同作用，分别影响消费价格、资产价格与生产者利润。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#102f34"/>
+      <stop offset="1" stop-color="#285f63"/>
+    </linearGradient>
+    <marker id="arrowGold" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0l10 5-10 5z" fill="#efb96f"/>
+    </marker>
+    <marker id="arrowMint" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0l10 5-10 5z" fill="#9dcfc6"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <text x="70" y="82" font-family="system-ui, sans-serif" font-size="42" font-weight="800" fill="#f2f7f4">通胀如何形成</text>
+  <text x="70" y="124" font-family="system-ui, sans-serif" font-size="22" fill="#b8d2ce">价格结果，来自多股力量的共同作用</text>
+  <text x="1115" y="82" text-anchor="end" font-family="Georgia, serif" font-size="88" fill="#46777a">10</text>
+
+  <g font-family="system-ui, sans-serif" text-anchor="middle">
+    <rect x="100" y="185" width="235" height="105" rx="25" fill="#c98c51"/>
+    <text x="218" y="228" font-size="28" font-weight="850" fill="#fff">需求</text>
+    <text x="218" y="262" font-size="18" fill="#fff3e3">收入 · 信用 · 支出</text>
+
+    <rect x="865" y="185" width="235" height="105" rx="25" fill="#477f76"/>
+    <text x="983" y="228" font-size="28" font-weight="850" fill="#fff">供给</text>
+    <text x="983" y="262" font-size="18" fill="#d8eee9">产能 · 成本 · 效率</text>
+
+    <rect x="100" y="385" width="235" height="105" rx="25" fill="#477f76"/>
+    <text x="218" y="428" font-size="28" font-weight="850" fill="#fff">分配</text>
+    <text x="218" y="462" font-size="18" fill="#d8eee9">钱先到谁的手里</text>
+
+    <rect x="865" y="385" width="235" height="105" rx="25" fill="#c98c51"/>
+    <text x="983" y="428" font-size="28" font-weight="850" fill="#fff">预期</text>
+    <text x="983" y="462" font-size="18" fill="#fff3e3">提前买 · 推迟买</text>
+
+    <circle cx="600" cy="338" r="142" fill="#f2e3c8"/>
+    <text x="600" y="315" font-size="34" font-weight="900" fill="#234f52">价格结果</text>
+    <text x="600" y="360" font-size="20" fill="#527174">不是所有价格一起变化</text>
+    <text x="600" y="393" font-size="20" fill="#527174">也不是所有人感受相同</text>
+  </g>
+
+  <path d="M340 240C420 245 440 270 475 292" fill="none" stroke="#efb96f" stroke-width="8" stroke-linecap="round" marker-end="url(#arrowGold)"/>
+  <path d="M860 240C780 245 760 270 725 292" fill="none" stroke="#9dcfc6" stroke-width="8" stroke-linecap="round" marker-end="url(#arrowMint)"/>
+  <path d="M340 438C420 430 440 405 475 385" fill="none" stroke="#9dcfc6" stroke-width="8" stroke-linecap="round" marker-end="url(#arrowMint)"/>
+  <path d="M860 438C780 430 760 405 725 385" fill="none" stroke="#efb96f" stroke-width="8" stroke-linecap="round" marker-end="url(#arrowGold)"/>
+
+  <g font-family="system-ui, sans-serif" text-anchor="middle">
+    <rect x="100" y="557" width="300" height="72" rx="20" fill="#214b4f" stroke="#477f76" stroke-width="2"/>
+    <text x="250" y="602" font-size="23" font-weight="750" fill="#d8eee9">消费价格</text>
+    <rect x="450" y="557" width="300" height="72" rx="20" fill="#6e5538" stroke="#c98c51" stroke-width="2"/>
+    <text x="600" y="602" font-size="23" font-weight="750" fill="#fff3e3">生产者利润</text>
+    <rect x="800" y="557" width="300" height="72" rx="20" fill="#214b4f" stroke="#477f76" stroke-width="2"/>
+    <text x="950" y="602" font-size="23" font-weight="750" fill="#d8eee9">资产价格</text>
+  </g>
+</svg>
