@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
+import LessonOrder from "../../../components/LessonOrder.astro";
 import type { Language } from "../../../config/site";
 
 export function getStaticPaths() {
@@ -49,13 +50,14 @@ const lessonHref = (id: string) => {
     <p>{config.intro}</p>
   </section>
 
-  <section class="track-lessons shell" aria-labelledby="track-lessons-title">
+  <section class="track-lessons shell" aria-labelledby="track-lessons-title" data-order-section>
     <header class="section-head">
       <div><p class="kicker">{lessons.length} lessons</p><h2 id="track-lessons-title">{isZh ? "课程目录" : "Lesson archive"}</h2></div>
       <p>{isZh ? "按学习顺序排列。每一课包含核心问题、概念推导、图片和前后课程导航。" : "Arranged in learning order. Each lesson includes a central question, explanation, images, and navigation."}</p>
     </header>
-    <div class="lesson-grid">
-      {lessons.map((lesson) => <a class:list={["lesson-card", track]} href={lessonHref(lesson.id)}>
+    <LessonOrder isZh={isZh} />
+    <div class="lesson-grid" data-sort-container>
+      {lessons.map((lesson) => <a data-sort-key={lesson.data.lesson} class:list={["lesson-card", track]} href={lessonHref(lesson.id)}>
         <span class="lesson-no">{String(lesson.data.lesson).padStart(2, "0")}</span>
         <div>
           <p>{config.label}</p>

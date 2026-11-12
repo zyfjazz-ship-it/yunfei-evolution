@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
+import LessonOrder from "../../../components/LessonOrder.astro";
 import type { Language } from "../../../config/site";
 
 export function getStaticPaths() {
@@ -77,7 +78,7 @@ const hrefFor = (id: string) => {
       )}
     </section>
 
-    <section class="units shell" aria-labelledby="kids-lessons-title">
+    <section class="units shell" aria-labelledby="kids-lessons-title" data-order-section>
       <header class="section-head">
         <div>
           <p class="kicker">36 lessons</p>
@@ -86,10 +87,12 @@ const hrefFor = (id: string) => {
         <p>{isZh ? "每一课都可以单独打开，包含生活情境、分层任务、数学推导、练习答案和课后实践。" : "Each lesson opens separately with a real-life situation, differentiated tasks, mathematical reasoning, answers, and at-home practice."}</p>
       </header>
 
+      <LessonOrder isZh={isZh} />
+      <div data-sort-container>
       {units.map((unit) => {
         const lessons = mathLessons.filter(({ data }) => Math.ceil(data.lesson / 6) === unit.no);
         return (
-          <section class="unit" aria-labelledby={`unit-${unit.no}`}>
+          <section class="unit" aria-labelledby={`unit-${unit.no}`} data-sort-key={unit.no}>
             <header class="unit-head">
               <span>{String(unit.no).padStart(2, "0")}</span>
               <div>
@@ -97,9 +100,9 @@ const hrefFor = (id: string) => {
                 <p>{isZh ? unit.description : unit.en}</p>
               </div>
             </header>
-            <div class="lesson-grid">
+            <div class="lesson-grid" data-sort-container>
               {lessons.map((lesson) => (
-                <a class="lesson-card" href={hrefFor(lesson.id)} aria-label={`${isZh ? "打开" : "Open"}：${lesson.data.title}`}>
+                <a class="lesson-card" data-sort-key={lesson.data.lesson} href={hrefFor(lesson.id)} aria-label={`${isZh ? "打开" : "Open"}：${lesson.data.title}`}>
                   <span class="lesson-no">{String(lesson.data.lesson).padStart(2, "0")}</span>
                   <div>
                     <p>{isZh ? "生活数学与逻辑思考" : "Practical math and logic"}</p>
@@ -116,6 +119,7 @@ const hrefFor = (id: string) => {
           </section>
         );
       })}
+      </div>
     </section>
   </div>
 </BaseLayout>

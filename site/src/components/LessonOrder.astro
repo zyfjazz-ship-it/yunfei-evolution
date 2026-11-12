@@ -1,0 +1,40 @@
+---
+const { isZh } = Astro.props as { isZh: boolean };
+---
+<div class="lesson-order" data-lesson-order hidden role="group" aria-label={isZh ? "课程排序" : "Lesson order"}>
+  <span>{isZh ? "课程排序" : "Lesson order"}</span>
+  <button type="button" data-order="ascending" aria-pressed="true">{isZh ? "正序 1→新" : "Oldest first"}</button>
+  <button type="button" data-order="descending" aria-pressed="false">{isZh ? "倒序 新→1" : "Newest first"}</button>
+</div>
+<script>
+  const key = "open-course-lesson-order";
+  document.querySelectorAll<HTMLElement>("[data-lesson-order]").forEach((controls) => {
+    const section = controls.closest<HTMLElement>("[data-order-section]");
+    if (!section) return;
+    const buttons = controls.querySelectorAll<HTMLButtonElement>("button[data-order]");
+    const apply = (order: string) => {
+      section.querySelectorAll<HTMLElement>("[data-sort-container]").forEach((container) => {
+        const items = Array.from(container.children).filter((child): child is HTMLElement => child instanceof HTMLElement && child.hasAttribute("data-sort-key"));
+        items.sort((a, b) => (Number(a.dataset.sortKey) - Number(b.dataset.sortKey)) * (order === "descending" ? -1 : 1));
+        items.forEach((item) => container.appendChild(item));
+      });
+      buttons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.order === order)));
+    };
+    let saved = "ascending";
+    try { saved = localStorage.getItem(key) === "descending" ? "descending" : "ascending"; } catch { /* Storage may be unavailable. */ }
+    apply(saved);
+    controls.hidden = false;
+    buttons.forEach((button) => button.addEventListener("click", () => {
+      const order = button.dataset.order === "descending" ? "descending" : "ascending";
+      apply(order);
+      try { localStorage.setItem(key, order); } catch { /* Sorting still works without storage. */ }
+    }));
+  });
+</script>
+<style>
+  .lesson-order { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: -1.5rem 0 2rem; color: var(--muted); font-size: .9rem; }
+  .lesson-order[hidden] { display: none; }
+  button { font: inherit; color: inherit; padding: .45rem .85rem; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); cursor: pointer; }
+  button[aria-pressed="true"] { color: white; background: #654d39; border-color: #654d39; }
+  button:focus-visible { outline: 3px solid #b9815e; outline-offset: 3px; }
+</style>
