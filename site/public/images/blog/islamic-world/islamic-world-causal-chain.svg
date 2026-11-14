@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">伊斯兰世界冲突的多因素因果链</title>
+  <desc id="desc">历史冲击与资源约束、权力借用宗教合法性、制度失衡与冲突升级、贫穷失序与复仇动员相互影响；约束权力、多元共存和生活机会可以把社会带向另一条道路。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7efe2"/>
+      <stop offset="1" stop-color="#ead8c1"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#4b2e29" flood-opacity=".13"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#9b4b3e"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="675" rx="30" fill="url(#bg)"/>
+  <text x="70" y="78" fill="#492e2a" font-family="system-ui, sans-serif" font-size="38" font-weight="750">宗教从来不是单独起作用的变量</text>
+  <text x="70" y="119" fill="#79645b" font-family="system-ui, sans-serif" font-size="20">真正决定社会走向的，是宗教怎样与权力、资源、制度和战争连在一起</text>
+
+  <g filter="url(#shadow)" font-family="system-ui, sans-serif">
+    <rect x="70" y="185" width="235" height="215" rx="22" fill="#fffaf2"/>
+    <circle cx="112" cy="228" r="24" fill="#d8a34b"/>
+    <text x="112" y="236" text-anchor="middle" fill="#fff" font-size="21" font-weight="800">1</text>
+    <text x="94" y="286" fill="#492e2a" font-size="25" font-weight="760">历史冲击</text>
+    <text x="94" y="322" fill="#6e5b52" font-size="18">长期战争</text>
+    <text x="94" y="351" fill="#6e5b52" font-size="18">资源与外部压力</text>
+    <text x="94" y="380" fill="#6e5b52" font-size="18">社会内部裂缝</text>
+
+    <rect x="365" y="185" width="235" height="215" rx="22" fill="#fffaf2"/>
+    <circle cx="407" cy="228" r="24" fill="#a95443"/>
+    <text x="407" y="236" text-anchor="middle" fill="#fff" font-size="21" font-weight="800">2</text>
+    <text x="389" y="286" fill="#492e2a" font-size="25" font-weight="760">权力选择</text>
+    <text x="389" y="322" fill="#6e5b52" font-size="18">谁解释宗教</text>
+    <text x="389" y="351" fill="#6e5b52" font-size="18">谁掌握国家机器</text>
+    <text x="389" y="380" fill="#6e5b52" font-size="18">如何制造合法性</text>
+
+    <rect x="660" y="185" width="235" height="215" rx="22" fill="#fffaf2"/>
+    <circle cx="702" cy="228" r="24" fill="#82443b"/>
+    <text x="702" y="236" text-anchor="middle" fill="#fff" font-size="21" font-weight="800">3</text>
+    <text x="684" y="286" fill="#492e2a" font-size="25" font-weight="760">制度结果</text>
+    <text x="684" y="322" fill="#6e5b52" font-size="18">权力是否受约束</text>
+    <text x="684" y="351" fill="#6e5b52" font-size="18">财富怎样分配</text>
+    <text x="684" y="380" fill="#6e5b52" font-size="18">异见能否共存</text>
+
+    <rect x="955" y="185" width="175" height="215" rx="22" fill="#fffaf2"/>
+    <circle cx="997" cy="228" r="24" fill="#63362f"/>
+    <text x="997" y="236" text-anchor="middle" fill="#fff" font-size="21" font-weight="800">4</text>
+    <text x="979" y="286" fill="#492e2a" font-size="25" font-weight="760">社会走向</text>
+    <text x="979" y="322" fill="#6e5b52" font-size="18">冲突或适应</text>
+    <text x="979" y="351" fill="#6e5b52" font-size="18">贫穷或发展</text>
+    <text x="979" y="380" fill="#6e5b52" font-size="18">复仇或共存</text>
+  </g>
+
+  <g stroke="#9b4b3e" stroke-width="5" fill="none" marker-end="url(#arrow)">
+    <path d="M315 293H350"/>
+    <path d="M610 293H645"/>
+    <path d="M905 293H940"/>
+  </g>
+
+  <rect x="70" y="474" width="1060" height="128" rx="22" fill="#3f665e"/>
+  <text x="100" y="522" fill="#d8f0e9" font-family="system-ui, sans-serif" font-size="18" font-weight="700">另一条道路</text>
+  <text x="100" y="563" fill="#ffffff" font-family="system-ui, sans-serif" font-size="27" font-weight="760">约束权力　＋　允许不同信仰共存　＋　给普通人真实的生活机会</text>
+  <text x="100" y="590" fill="#c7ded8" font-family="system-ui, sans-serif" font-size="17">同一种宗教背景，也可能因为制度与资源组织方式不同，走向完全不同的社会。</text>
+</svg>

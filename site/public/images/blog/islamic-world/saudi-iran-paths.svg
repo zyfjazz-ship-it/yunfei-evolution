@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">沙特与伊朗的不同权力道路</title>
+  <desc id="desc">沙特由王室与宗教力量结盟建国，后来由王室限制部分宗教机构权力；伊朗由王权推动自上而下现代化并压制反对，革命后宗教政治力量取得主导。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7efe3"/>
+      <stop offset="1" stop-color="#ead5bd"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#855044"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="675" rx="30" fill="url(#bg)"/>
+  <text x="70" y="72" fill="#492e2a" font-family="system-ui, sans-serif" font-size="36" font-weight="760">同一种宗教背景，为什么走出两条不同的路？</text>
+  <text x="70" y="110" fill="#756158" font-family="system-ui, sans-serif" font-size="19">关键不只在教义，还在权力联盟、改革方式和制度能否吸收冲突</text>
+
+  <rect x="390" y="142" width="420" height="74" rx="18" fill="#6e4b40"/>
+  <text x="600" y="175" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="23" font-weight="740">共同背景：伊斯兰传统深刻影响国家</text>
+  <text x="600" y="202" text-anchor="middle" fill="#eadcd5" font-family="system-ui, sans-serif" font-size="16">但谁控制权力、谁解释宗教，并不相同</text>
+
+  <g stroke="#855044" stroke-width="4" fill="none" marker-end="url(#arrow)">
+    <path d="M520 216C470 240 350 246 310 275"/>
+    <path d="M680 216C730 240 850 246 890 275"/>
+  </g>
+
+  <g font-family="system-ui, sans-serif">
+    <text x="300" y="278" text-anchor="middle" fill="#8d4439" font-size="29" font-weight="800">沙特</text>
+    <rect x="90" y="300" width="420" height="78" rx="18" fill="#fffaf3" stroke="#d2a087" stroke-width="2"/>
+    <text x="300" y="333" text-anchor="middle" fill="#492e2a" font-size="21" font-weight="730">王室 ＋ 宗教改革力量结盟</text>
+    <text x="300" y="360" text-anchor="middle" fill="#715e55" font-size="16">宗教为建国与统治提供合法性</text>
+    <path d="M300 381V411" stroke="#855044" stroke-width="4" marker-end="url(#arrow)"/>
+    <rect x="90" y="420" width="420" height="78" rx="18" fill="#fffaf3" stroke="#d2a087" stroke-width="2"/>
+    <text x="300" y="453" text-anchor="middle" fill="#492e2a" font-size="21" font-weight="730">政治权力长期集中于王室</text>
+    <text x="300" y="480" text-anchor="middle" fill="#715e55" font-size="16">没有政教分离，也没有开放政治竞争</text>
+    <path d="M300 501V531" stroke="#855044" stroke-width="4" marker-end="url(#arrow)"/>
+    <rect x="90" y="540" width="420" height="86" rx="18" fill="#3f665e"/>
+    <text x="300" y="576" text-anchor="middle" fill="#fff" font-size="21" font-weight="730">王室主动限制部分宗教机构</text>
+    <text x="300" y="604" text-anchor="middle" fill="#d4e6e1" font-size="16">社会开放与经济改革，但政治权力仍集中</text>
+
+    <text x="900" y="278" text-anchor="middle" fill="#6f3b57" font-size="29" font-weight="800">伊朗</text>
+    <rect x="690" y="300" width="420" height="78" rx="18" fill="#fffaf3" stroke="#b995aa" stroke-width="2"/>
+    <text x="900" y="333" text-anchor="middle" fill="#492e2a" font-size="21" font-weight="730">王权推动自上而下现代化</text>
+    <text x="900" y="360" text-anchor="middle" fill="#715e55" font-size="16">工业、教育改革与削弱宗教机构并行</text>
+    <path d="M900 381V411" stroke="#855044" stroke-width="4" marker-end="url(#arrow)"/>
+    <rect x="690" y="420" width="420" height="78" rx="18" fill="#fffaf3" stroke="#b995aa" stroke-width="2"/>
+    <text x="900" y="453" text-anchor="middle" fill="#492e2a" font-size="21" font-weight="730">压制异议，矛盾进入革命联盟</text>
+    <text x="900" y="480" text-anchor="middle" fill="#715e55" font-size="16">宗教、自由派、民族主义者与左翼共同反王权</text>
+    <path d="M900 501V531" stroke="#855044" stroke-width="4" marker-end="url(#arrow)"/>
+    <rect x="690" y="540" width="420" height="86" rx="18" fill="#70445a"/>
+    <text x="900" y="576" text-anchor="middle" fill="#fff" font-size="21" font-weight="730">宗教政治力量在革命后取得主导</text>
+    <text x="900" y="604" text-anchor="middle" fill="#ead9e2" font-size="16">最高宗教领袖进入国家权力中心</text>
+  </g>
+</svg>

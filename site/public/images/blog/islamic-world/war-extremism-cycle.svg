@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">战争、贫穷、失序与极端主义的循环</title>
+  <desc id="desc">战争与国家失序破坏经济、教育和安全，累积不满与身份危机，极端组织用简单的敌我解释招募成员，新的暴力又延续战争。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f5ecdf"/>
+      <stop offset="1" stop-color="#e7d1bc"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto">
+      <path d="M0 0L11 5.5L0 11Z" fill="#9a4b3f"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="675" rx="30" fill="url(#bg)"/>
+  <text x="70" y="72" fill="#492e2a" font-family="system-ui, sans-serif" font-size="37" font-weight="760">极端主义为什么会变成自我延续的循环？</text>
+  <text x="70" y="111" fill="#746158" font-family="system-ui, sans-serif" font-size="19">贫穷不是唯一原因，宗教解释也不是唯一原因；危险发生在多种力量接上以后</text>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="430" y="155" width="340" height="92" rx="22" fill="#7d4238"/>
+    <text x="600" y="193" text-anchor="middle" fill="#fff" font-size="25" font-weight="760">战争与国家失序</text>
+    <text x="600" y="222" text-anchor="middle" fill="#f0d9d2" font-size="16">安全、法律和公共服务崩坏</text>
+
+    <rect x="806" y="290" width="320" height="106" rx="22" fill="#b47445"/>
+    <text x="966" y="332" text-anchor="middle" fill="#fff" font-size="23" font-weight="760">生活机会消失</text>
+    <text x="966" y="361" text-anchor="middle" fill="#f7e5d8" font-size="16">经济、教育与家庭保障受损</text>
+
+    <rect x="430" y="461" width="340" height="106" rx="22" fill="#6f465a"/>
+    <text x="600" y="503" text-anchor="middle" fill="#fff" font-size="23" font-weight="760">不满与身份危机</text>
+    <text x="600" y="532" text-anchor="middle" fill="#eadce4" font-size="16">苦难需要解释，也需要一个敌人</text>
+
+    <rect x="74" y="290" width="320" height="106" rx="22" fill="#3f665e"/>
+    <text x="234" y="332" text-anchor="middle" fill="#fff" font-size="23" font-weight="760">极端组织动员</text>
+    <text x="234" y="361" text-anchor="middle" fill="#d8e8e4" font-size="16">意识形态指认敌人，组织暴力行动</text>
+
+    <circle cx="600" cy="350" r="105" fill="#fffaf3" stroke="#c89f7b" stroke-width="3"/>
+    <text x="600" y="334" text-anchor="middle" fill="#8c4439" font-size="24" font-weight="800">恶性循环</text>
+    <text x="600" y="367" text-anchor="middle" fill="#5e4d46" font-size="17">每一轮暴力</text>
+    <text x="600" y="392" text-anchor="middle" fill="#5e4d46" font-size="17">都为下一轮准备条件</text>
+  </g>
+
+  <g stroke="#9a4b3f" stroke-width="5" fill="none" marker-end="url(#arrow)">
+    <path d="M775 202C900 210 966 232 976 276"/>
+    <path d="M966 405C944 470 854 510 787 512"/>
+    <path d="M417 512C330 503 247 459 234 410"/>
+    <path d="M224 276C247 216 334 196 416 198"/>
+  </g>
+
+  <text x="600" y="630" text-anchor="middle" fill="#5f4e47" font-family="system-ui, sans-serif" font-size="18">打破循环，要同时恢复安全、约束权力、增加机会，并削弱把暴力神圣化的解释。</text>
+</svg>
