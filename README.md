@@ -22,6 +22,8 @@
 
 ## 内容导航
 
+- [`open-courses/life-math-36/`](open-courses/life-math-36/)：《生活数学与逻辑思考》36 课开源协作入口
+- [`site/`](site/)：“云非的进化论”网站与公开课网页版
 - `logs/`：每日学习日志与阶段复盘
 - `tutorials/`：经过实践验证的系统教程
 - `projects/`：可运行、可展示的实战项目
@@ -50,8 +52,8 @@
 
 ## 如何参与
 
-项目处于早期建设阶段。后续将补充问题反馈、内容纠错和共同实践的参与方式。
+《生活数学与逻辑思考》36 课已经开放 Issue 与 Pull Request。请先阅读[课程导读](open-courses/life-math-36/README.md)和[投稿说明](open-courses/life-math-36/CONTRIBUTING.md)。公开 Pull Request 需要维护者审核并合并，不会直接修改官方主分支。
 
 ## 开源协议
 
-开源许可证将在正式发布 GitHub 仓库前确定。
+生活数学 36 课的文字、教师用书和指定插图采用单独的课程内容许可，范围见[课程授权说明](open-courses/life-math-36/LICENSE.md)。网站代码、其他课程和仓库其他内容不自动包含在该许可中。

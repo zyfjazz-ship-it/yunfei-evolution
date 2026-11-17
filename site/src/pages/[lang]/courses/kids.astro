@@ -78,6 +78,18 @@ const hrefFor = (id: string) => {
       )}
     </section>
 
+    <section class="kids-open shell" aria-labelledby="kids-open-title">
+      <div>
+        <p class="kicker">Open course</p>
+        <h2 id="kids-open-title">{isZh ? "下载教师用书，一起把课程改得更好" : "Download the teacher guide and help improve the course"}</h2>
+        <p>{isZh ? "99页可编辑教师用书包含36课完整流程、分龄任务、练习答案、任务卡和评价表。你也可以在 GitHub 提交纠错与改进建议；所有进入官方版本的修改都需要维护者审核。" : "The editable 99-page teacher guide includes all 36 lessons, differentiated tasks, answers, worksheets, and assessment forms. Corrections and improvements are welcome on GitHub and are reviewed before entering the official version."}</p>
+      </div>
+      <div class="open-actions">
+        <a class="primary-action" href={`${base}downloads/life-math-and-logical-thinking-36-teacher-guide.docx`} download>{isZh ? "下载教师用书 DOCX" : "Download teacher guide DOCX"}</a>
+        <a class="secondary-action" href="https://github.com/zyfjazz-ship-it/yunfei-evolution/tree/main/open-courses/life-math-36">{isZh ? "在 GitHub 参与改进" : "Improve it on GitHub"}</a>
+      </div>
+    </section>
+
     <section class="units shell" aria-labelledby="kids-lessons-title" data-order-section>
       <header class="section-head">
         <div>
@@ -142,6 +154,14 @@ const hrefFor = (id: string) => {
   .preface-copy { max-width: 760px; }
   .preface-copy p { margin: 0 0 1rem; }
   .preface-copy p:last-child { margin-bottom: 0; color: var(--kids); font-weight: 750; }
+  .kids-open { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(250px, .6fr); gap: clamp(2rem, 6vw, 5rem); align-items: end; padding-block: clamp(4rem, 8vw, 6rem); }
+  .kids-open h2 { max-width: 820px; margin: 0; font-family: "Songti SC", "STSong", Georgia, serif; font-size: clamp(2.2rem, 4.5vw, 4rem); font-weight: 500; line-height: 1.12; }
+  .kids-open > div > p:last-child { max-width: 780px; margin: 1.2rem 0 0; color: var(--muted); }
+  .open-actions { display: grid; gap: .75rem; }
+  .open-actions a { display: block; padding: .9rem 1.1rem; border: 1px solid var(--kids); border-radius: 999px; font-size: .88rem; font-weight: 800; text-align: center; text-decoration: none; }
+  .primary-action { background: var(--kids); color: white; }
+  .secondary-action { color: var(--kids); }
+  .open-actions a:hover, .open-actions a:focus-visible { transform: translateY(-2px); outline: none; box-shadow: 0 12px 28px rgba(32,33,31,.09); }
   .units { padding-block: clamp(5rem, 10vw, 8rem); }
   .section-head { display: grid; grid-template-columns: 1fr minmax(280px, .55fr); gap: 3rem; align-items: end; margin-bottom: 4rem; }
   .section-head > p { margin: 0; color: var(--muted); }
@@ -161,7 +181,7 @@ const hrefFor = (id: string) => {
   .lesson-card li { border-radius: 999px; background: var(--kids-soft); padding: .18rem .58rem; color: var(--kids); font-size: .72rem; }
   .lesson-card strong { display: block; margin-top: 1rem; color: var(--kids); font-size: .82rem; }
   @media (max-width: 760px) {
-    .hero-grid, .kids-preface, .section-head { grid-template-columns: 1fr; }
+    .hero-grid, .kids-preface, .kids-open, .section-head { grid-template-columns: 1fr; }
     .lesson-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 480px) {
