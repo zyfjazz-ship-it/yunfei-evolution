@@ -81,11 +81,12 @@ const hrefFor = (id: string) => {
     <section class="kids-open shell" aria-labelledby="kids-open-title">
       <div>
         <p class="kicker">Open course</p>
-        <h2 id="kids-open-title">{isZh ? "下载教师用书，一起把课程改得更好" : "Download the teacher guide and help improve the course"}</h2>
-        <p>{isZh ? "99页可编辑教师用书包含36课完整流程、分龄任务、练习答案、任务卡和评价表。你也可以在 GitHub 提交纠错与改进建议；所有进入官方版本的修改都需要维护者审核。" : "The editable 99-page teacher guide includes all 36 lessons, differentiated tasks, answers, worksheets, and assessment forms. Corrections and improvements are welcome on GitHub and are reviewed before entering the official version."}</p>
+        <h2 id="kids-open-title">{isZh ? "下载教师用书，也一起把课程改得更好" : "Download the teacher guide and help improve the course"}</h2>
+        <p>{isZh ? "完整教师用书包含36课流程、分龄任务、练习答案、任务卡和评价表。PDF 适合直接阅读和打印，DOCX 方便教师继续编辑。你也可以在 GitHub 提交纠错与改进建议；所有进入官方版本的修改都需要维护者审核。" : "The complete teacher guide includes all 36 lessons, differentiated tasks, answers, worksheets, and assessment forms. Use the PDF for reading and printing or the DOCX for editing. Corrections and improvements are welcome on GitHub and are reviewed before entering the official version."}</p>
       </div>
       <div class="open-actions">
-        <a class="primary-action" href={`${base}downloads/life-math-and-logical-thinking-36-teacher-guide.docx`} download>{isZh ? "下载教师用书 DOCX" : "Download teacher guide DOCX"}</a>
+        <a class="primary-action" href={`${base}downloads/life-math-and-logical-thinking-36-teacher-guide.pdf`}>{isZh ? "下载教师用书 PDF" : "Download teacher guide PDF"}</a>
+        <a class="secondary-action" href={`${base}downloads/life-math-and-logical-thinking-36-teacher-guide.docx`} download>{isZh ? "下载可编辑 DOCX" : "Download editable DOCX"}</a>
         <a class="secondary-action" href="https://github.com/zyfjazz-ship-it/yunfei-evolution/tree/main/open-courses/life-math-36">{isZh ? "在 GitHub 参与改进" : "Improve it on GitHub"}</a>
       </div>
     </section>

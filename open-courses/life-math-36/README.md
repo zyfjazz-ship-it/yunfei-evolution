@@ -7,11 +7,12 @@
 ## 直接使用
 
 - [网页版课程](https://yunfeilab.com/zh/courses/kids/)
-- [下载可编辑教师用书](https://yunfeilab.com/downloads/life-math-and-logical-thinking-36-teacher-guide.docx)
+- [下载教师用书 PDF](https://yunfeilab.com/downloads/life-math-and-logical-thinking-36-teacher-guide.pdf)：适合直接阅读和打印
+- [下载可编辑教师用书 DOCX](https://yunfeilab.com/downloads/life-math-and-logical-thinking-36-teacher-guide.docx)：方便教师继续修改
 - [查看 36 节课程源文件](../../site/src/content/courses/zh/math/)
 - [查看六个单元插图](../../site/public/images/courses/math/)
 
-教师用书共 99 页，包含课程总表、42 分钟课堂流程、分龄任务、追问、练习答案、课后实践、达标标准、任务卡和评价表。公开副本已移除个人及设备元数据。
+教师用书 PDF 共 170 页，包含课程总表、42 分钟课堂流程、分龄任务、追问、练习答案、课后实践、达标标准、任务卡和评价表。DOCX 提供相同课程的可编辑版本，公开副本已移除个人及设备元数据。
 
 ## 课程索引
 
@@ -46,6 +47,7 @@
 
 - `site/src/content/courses/zh/math/`：36 节网页版课程正文
 - `site/public/images/courses/math/`：六个单元插图
+- `site/public/downloads/life-math-and-logical-thinking-36-teacher-guide.pdf`：教师用书 PDF 阅读打印版
 - `site/public/downloads/life-math-and-logical-thinking-36-teacher-guide.docx`：可编辑教师用书
 - `open-courses/life-math-36/CONTRIBUTING.md`：投稿流程
 - `open-courses/life-math-36/LICENSE.md`：课程授权范围

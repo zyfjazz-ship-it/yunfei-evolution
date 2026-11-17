@@ -5,6 +5,7 @@
 除非具体文件另有说明，下列内容采用 Creative Commons 署名 4.0 国际许可协议（CC BY 4.0）：
 
 - `site/src/content/courses/zh/math/` 中第 01–36 课课程正文；
+- `site/public/downloads/life-math-and-logical-thinking-36-teacher-guide.pdf`；
 - `site/public/downloads/life-math-and-logical-thinking-36-teacher-guide.docx`；
 - `site/public/images/courses/math/unit-1.svg` 至 `unit-6.svg`；
 - `open-courses/life-math-36/` 下的课程导读与协作文档。
