@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">罗马倒下后，谁接过了欧洲？</title>
+  <desc id="desc">时间线标出800年罗马的加冕、1077年卡诺莎的求和与1204年君士坦丁堡遭到洗劫。</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#452326"/><stop offset="1" stop-color="#85452f"/></linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <g font-family="system-ui, sans-serif">
+    <text x="74" y="92" fill="#efd7b6" font-size="28">文明与历史</text>
+    <text x="73" y="193" fill="#fff3df" font-size="56" font-family="'Songti SC','STSong',serif">罗马倒下后，谁接过了欧洲？</text>
+    <text x="75" y="249" fill="#f2d7b8" font-size="29">国王、教皇与十字军东征的故事</text>
+    <text x="1120" y="108" text-anchor="end" fill="#e7b68e" font-family="Georgia,serif" font-size="78">17</text>
+    <path d="M201 437 H995" stroke="#d5ac80" stroke-width="3"/>
+    <g fill="#f3d0a0" text-anchor="middle" font-family="Georgia,serif" font-size="55">
+      <text x="200" y="402">800</text><text x="600" y="402">1077</text><text x="995" y="402">1204</text>
+    </g>
+    <g fill="#f4dfbd" stroke="#78432f" stroke-width="4">
+      <circle cx="200" cy="437" r="11"/><circle cx="600" cy="437" r="11"/><circle cx="995" cy="437" r="11"/>
+    </g>
+    <g text-anchor="middle" fill="#fff5e9" font-size="36">
+      <text x="200" y="505">罗马</text><text x="600" y="505">卡诺莎</text><text x="995" y="505">君士坦丁堡</text>
+    </g>
+    <g text-anchor="middle" fill="#f3d5b9" font-size="26">
+      <text x="200" y="559">教皇为查理曼加冕</text><text x="600" y="559">亨利四世寻求宽恕</text><text x="995" y="559">十字军洗劫东罗马都城</text>
+    </g>
+  </g>
+</svg>
