@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">经济是怎样运行的？</title><desc id="desc">从交易、信用和债务周期理解经济活动与收入之间的联系。</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#102f34"/><stop offset="1" stop-color="#285f63"/></linearGradient></defs><rect width="1200" height="675" fill="url(#bg)"/>
+<g font-family="system-ui, sans-serif"><text x="72" y="105" fill="#f2f7f4" font-size="49" font-weight="700">经济是怎样运行的？</text><text x="75" y="155" fill="#b8d2ce" font-size="26">从一笔交易，走进信用与债务周期</text><text x="1040" y="110" fill="#f2f7f4" font-family="Georgia, serif" font-size="74">12</text>
+<rect x="70" y="243" width="300" height="190" rx="24" fill="#f2e3c8"/><text x="105" y="310" fill="#173d3e" font-size="35" font-weight="700">交易</text><text x="105" y="360" fill="#426b66" font-size="25">支出成为收入</text>
+<rect x="450" y="243" width="300" height="190" rx="24" fill="#477f76"/><text x="485" y="310" fill="#f2f7f4" font-size="35" font-weight="700">信用</text><text x="485" y="360" fill="#e1f1eb" font-size="25">借钱带来债务</text>
+<rect x="830" y="243" width="300" height="190" rx="24" fill="#c98c51"/><text x="865" y="310" fill="#173d3e" font-size="35" font-weight="700">周期</text><text x="865" y="360" fill="#173d3e" font-size="25">扩张也会放缓</text>
+<g stroke="#efb96f" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M389 338h42m-13-13 13 13-13 13M769 338h42m-13-13 13 13-13 13"/></g><text x="75" y="543" fill="#b8d2ce" font-size="25">看清钱从哪里来、流向哪里，以及未来怎样偿还。</text></g></svg>

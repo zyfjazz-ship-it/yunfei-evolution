@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+<title id="title">同一笔贷款的两面</title><desc id="desc">借款人欠银行十万元，银行拥有向借款人收回十万元的权利。同一笔本金还清后，两边的债务和贷款债权结清。</desc>
+<rect width="1200" height="620" rx="24" fill="#f1e5d0"/><g font-family="system-ui, sans-serif"><text x="65" y="84" fill="#183d3e" font-size="42" font-weight="700">一笔贷款，两本账</text><text x="65" y="130" fill="#426762" font-size="25">同一笔借款，从不同人的账本看</text>
+<rect x="65" y="180" width="430" height="215" rx="22" fill="#18494b"/><text x="100" y="235" fill="#b8d2ce" font-size="26">借款人</text><text x="100" y="300" fill="#fff9ed" font-size="37" font-weight="700">欠银行 10 万元</text><text x="100" y="355" fill="#f4c781" font-size="26">这是债务</text>
+<rect x="705" y="180" width="430" height="215" rx="22" fill="#477f76"/><text x="740" y="235" fill="#d5ebe5" font-size="26">银行</text><text x="740" y="300" fill="#fff9ed" font-size="32" font-weight="700">有权收回 10 万元</text><text x="740" y="355" fill="#f4d197" font-size="26">这是贷款资产</text>
+<path d="M520 270h160m-150-13-13 13 13 13m140-26 13 13-13 13" stroke="#ba7d3f" stroke-width="6" fill="none"/><text x="600" y="235" text-anchor="middle" fill="#845b37" font-size="21">同一笔</text>
+<rect x="65" y="440" width="1070" height="110" rx="18" fill="#fffaf0"/><text x="100" y="489" fill="#183d3e" font-size="27" font-weight="700">本金还清后：</text><text x="300" y="489" fill="#183d3e" font-size="27">借款人的债务与银行对应的贷款债权结清</text><text x="100" y="529" fill="#52736d" font-size="21">示意不包含利息，也不代表银行的所有资产都是贷款。</text></g></svg>
