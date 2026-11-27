@@ -60,6 +60,7 @@ const courses = defineCollection({
     lang: z.enum(["zh", "en"]),
     track: z.enum(["history", "economy", "math"]),
     lesson: z.number().int().positive(),
+    publishedAt: z.string().datetime({ offset: true }).optional(),
     tags: z.array(z.string()).default([]),
     image: z.string(),
     imageAlt: z.string(),

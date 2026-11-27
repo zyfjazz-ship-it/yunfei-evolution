@@ -1,0 +1,56 @@
+---
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+
+interface Props { lang: 'zh' | 'en'; }
+const { lang } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const methods = [
+  { name: lang === 'zh' ? '微信' : 'WeChat Pay', file: 'wechat.jpg' },
+  { name: lang === 'zh' ? '支付宝' : 'Alipay', file: 'alipay.jpg' },
+].filter(({ file }) => existsSync(join(process.cwd(), 'public', 'images', 'support', file)));
+---
+
+{methods.length > 0 && <section class="author-support" aria-labelledby="support-title">
+  <details class="support-toggle">
+    <summary id="support-title">{lang === 'zh' ? '支持作者' : 'Support the author'}</summary>
+    <p>{lang === 'zh' ? '如果这节课对你有帮助，欢迎随心支持。感谢你和我一起学习。' : 'If you found this lesson useful, you are welcome to support the author.'}</p>
+    <fieldset class="support-amounts" aria-describedby="amount-hint">
+      <legend>{lang === 'zh' ? '选择支持金额' : 'Choose an amount'}</legend>
+      <div class="amount-options">
+        {[5, 10, 20, 50, 100, 200].map((amount) => <label>
+          <input type="radio" name="support-amount" value={amount} />
+          <span>¥{amount}</span>
+        </label>)}
+      </div>
+      <p id="amount-hint">{lang === 'zh' ? '选择金额后，请在微信或支付宝付款时自行填写。' : 'Please enter the selected amount when paying.'}</p>
+    </fieldset>
+    <div class="support-methods">
+      {methods.map(({ name, file }) => <details class="payment-method">
+        <summary>{lang === 'zh' ? `${name}收款码` : name}</summary>
+        <img src={`${base}images/support/${file}`} alt={lang === 'zh' ? `${name}收款码` : `${name} payment QR code`} loading="lazy" />
+      </details>)}
+    </div>
+    <p class="support-hint">{lang === 'zh' ? '金额由你自行填写。请使用对应 App 扫码；手机浏览时可保存图片后在 App 内识别。' : 'Choose your own amount and scan with the corresponding app.'}</p>
+  </details>
+</section>}
+
+<style>
+  .author-support { margin-top: 3rem; padding: 1.5rem; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+  .support-toggle > summary { cursor: pointer; color: var(--track); font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-size: 1.25rem; font-weight: 700; }
+  .author-support p { font-size: .96rem; }
+  .support-amounts { margin: 1.3rem 0; padding: 0; border: 0; }
+  .support-amounts legend { color: var(--track); font-weight: 700; }
+  .amount-options { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .7rem; }
+  .amount-options label { cursor: pointer; }
+  .amount-options input { position: absolute; opacity: 0; }
+  .amount-options span { display: block; min-width: 4.1rem; padding: .4rem .8rem; border: 1px solid var(--line); border-radius: 9px; text-align: center; }
+  .amount-options input:checked + span { border-color: var(--track); background: var(--track-soft); color: var(--track); font-weight: 700; }
+  .amount-options input:focus-visible + span { outline: 2px solid var(--track); outline-offset: 3px; }
+  #amount-hint { margin: .6rem 0 0; color: var(--muted); font-size: .85rem; }
+  .support-methods { display: flex; flex-wrap: wrap; gap: 1rem; }
+  .payment-method { width: min(100%, 240px); }
+  .payment-method summary { cursor: pointer; padding: .5rem .8rem; border: 1px solid var(--line); border-radius: 10px; color: var(--track); font-weight: 700; }
+  .payment-method img { display: block; width: 100%; height: auto; margin-top: .7rem; background: white; }
+  .support-hint { color: var(--muted); }
+</style>

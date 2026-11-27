@@ -1,0 +1,45 @@
+---
+interface Props {
+  lang: "zh" | "en";
+}
+const { lang } = Astro.props;
+const serverURL = import.meta.env.PUBLIC_WALINE_SERVER_URL?.trim();
+const isZh = lang === "zh";
+---
+
+<section class="course-comments" aria-labelledby="course-comments-title">
+  <h2 id="course-comments-title">{isZh ? "留言交流" : "Discussion"}</h2>
+  {serverURL ? (
+    <>
+      <p>{isZh ? "欢迎留下你的想法，无需登录。" : "Share your thoughts; no sign-in is required."}</p>
+      <link rel="stylesheet" href="https://unpkg.com/@waline/client@3/dist/waline.css" />
+      <div id="course-comments-widget" data-server-url={serverURL} data-lang={lang}>
+        <p>{isZh ? "留言区加载中；如果没有显示，请稍后再试。" : "Loading comments; please try again later if unavailable."}</p>
+      </div>
+      <script>
+        const el = document.querySelector<HTMLElement>("#course-comments-widget");
+        if (el?.dataset.serverUrl) {
+          import(/* @vite-ignore */ "https://unpkg.com/@waline/client@3/dist/waline.js")
+            .then(({ init }) => init({
+              el,
+              serverURL: el.dataset.serverUrl,
+              lang: el.dataset.lang === "zh" ? "zh-CN" : "en",
+              path: window.location.pathname.replace(/\/$/, ""),
+              login: "disable",
+              meta: ["nick"],
+              requiredMeta: ["nick"],
+              imageUploader: false,
+            }))
+            .catch(() => { el.textContent = "留言区暂时无法加载，请稍后再试。"; });
+        }
+      </script>
+      <noscript>{isZh ? "留言需要启用浏览器的 JavaScript。" : "Please enable JavaScript to use comments."}</noscript>
+    </>
+  ) : <p>{isZh ? "留言区正在准备中。" : "Comments are not available yet."}</p>}
+</section>
+
+<style>
+  .course-comments { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+  .course-comments h2 { color: var(--track); font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-size: 1.6rem; }
+  .course-comments > p { color: var(--muted); font-size: .95rem; }
+</style>
