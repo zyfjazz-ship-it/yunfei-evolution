@@ -66,17 +66,17 @@ quiz:
 
 咖啡店收到钱后，拿出一部分给店员发工资。店员又拿工资去买早餐。
 
-```text
-你买咖啡
-   ↓
-咖啡店获得收入
-   ↓
-咖啡店给员工发工资
-   ↓
-员工去买早餐
-   ↓
-早餐店获得收入
-```
+<div class="course-flow">
+<div>你买咖啡</div>
+<div class="flow-arrow" aria-hidden="true">↓</div>
+<div>咖啡店获得收入</div>
+<div class="flow-arrow" aria-hidden="true">↓</div>
+<div>咖啡店给员工发工资</div>
+<div class="flow-arrow" aria-hidden="true">↓</div>
+<div>员工去买早餐</div>
+<div class="flow-arrow" aria-hidden="true">↓</div>
+<div>早餐店获得收入</div>
+</div>
 
 一个人的支出，成为另一个人的收入。
 
@@ -98,17 +98,17 @@ quiz:
 
 于是，你现在就买到了车。
 
-```text
-你有10万 + 银行借10万
-           ↓
-      买到20万的车
-           ↓
-车商现在获得收入
-
-与此同时：
-你欠银行10万 → 这是你的债务
-银行有权收回10万 → 这是银行的资产
-```
+<div class="course-flow">
+<div>你有10万 + 银行借10万</div>
+<div class="flow-arrow" aria-hidden="true">↓</div>
+<div>买到20万的车</div>
+<div class="flow-arrow" aria-hidden="true">↓</div>
+<div>车商现在获得收入</div>
+<div class="flow-gap" aria-hidden="true"></div>
+<div>与此同时：</div>
+<div>你欠银行10万 → 这是你的债务</div>
+<div>银行有权收回10万 → 这是银行的资产</div>
+</div>
 
 ![一笔贷款的两面：借款人的债务和银行的贷款资产](/images/courses/economy/12-loan-two-sides.svg)
 
@@ -211,19 +211,19 @@ quiz:
 
 借钱便宜了，部分家庭和企业可能愿意增加支出，经济也可能慢慢恢复。
 
-```text
-经济过热、物价上涨压力大
-          ↓
-央行可能提高利率
-          ↓
-借钱成本上升，部分需求降温
-
-经济疲弱、支出不足
-          ↓
-央行可能降低利率
-          ↓
-借钱成本下降，部分需求可能恢复
-```
+<div class="course-flow">
+<div>经济过热、物价上涨压力大</div>
+<div class="flow-arrow" aria-hidden="true">↓</div>
+<div>央行可能提高利率</div>
+<div class="flow-arrow" aria-hidden="true">↓</div>
+<div>借钱成本上升，部分需求降温</div>
+<div class="flow-gap" aria-hidden="true"></div>
+<div>经济疲弱、支出不足</div>
+<div class="flow-arrow" aria-hidden="true">↓</div>
+<div>央行可能降低利率</div>
+<div class="flow-arrow" aria-hidden="true">↓</div>
+<div>借钱成本下降，部分需求可能恢复</div>
+</div>
 
 但还记得我们上一课说的吗？
 
@@ -245,11 +245,17 @@ quiz:
 
 过一段时间，条件改善，新一轮扩张可能开始。
 
-```text
-借钱、消费增加 → 经济变热 → 借贷放慢 → 经济变冷
-      ↑                                  ↓
-      └──────── 条件改善，重新扩张 ────────┘
-```
+<div class="course-flow">
+<div>借钱、消费增加</div>
+<div class="flow-arrow" aria-hidden="true">↓</div>
+<div>经济变热</div>
+<div class="flow-arrow" aria-hidden="true">↓</div>
+<div>借贷放慢</div>
+<div class="flow-arrow" aria-hidden="true">↓</div>
+<div>经济变冷</div>
+<div class="flow-arrow" aria-hidden="true">↓</div>
+<div>条件改善，重新扩张 ↻</div>
+</div>
 
 这是视频中说的**短期债务周期**。
 
@@ -261,13 +267,13 @@ quiz:
 
 一轮、两轮、三轮之后，整个社会的债务负担可能越来越重。
 
-```text
-短周期①：借钱 ↑ → 放慢 ↓
-短周期②：借钱 ↑↑ → 放慢 ↓
-短周期③：借钱 ↑↑↑ → 放慢 ↓
-
-长期看：债务可能在多次起伏中逐步积累
-```
+<div class="course-flow">
+<div>短周期①：借钱 ↑ → 放慢 ↓</div>
+<div>短周期②：借钱 ↑↑ → 放慢 ↓</div>
+<div>短周期③：借钱 ↑↑↑ → 放慢 ↓</div>
+<div class="flow-gap" aria-hidden="true"></div>
+<div>长期看：债务可能在多次起伏中逐步积累</div>
+</div>
 
 ![短期周期起伏与长期债务负担积累的关系示意图](/images/courses/economy/12-debt-cycles.svg)
 
@@ -328,17 +334,17 @@ quiz:
 
 生产力，就是用同样的时间、劳动和资源，能生产出多少东西、提供多少有用的服务。
 
-```text
-借钱买设备
-    ↓
-生产效率提高
-    ↓
-产品或服务增加
-    ↓
-如果有足够需求，收入可能提高
-    ↓
-更有能力还债
-```
+<div class="course-flow">
+<div>借钱买设备</div>
+<div class="flow-arrow" aria-hidden="true">↓</div>
+<div>生产效率提高</div>
+<div class="flow-arrow" aria-hidden="true">↓</div>
+<div>产品或服务增加</div>
+<div class="flow-arrow" aria-hidden="true">↓</div>
+<div>如果有足够需求，收入可能提高</div>
+<div class="flow-arrow" aria-hidden="true">↓</div>
+<div>更有能力还债</div>
+</div>
 
 但如果小李借钱买了一台用不上的机器，机器闲着，债务却仍然要还。
 
